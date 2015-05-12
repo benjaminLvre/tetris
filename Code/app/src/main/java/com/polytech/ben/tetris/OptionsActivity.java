@@ -3,7 +3,6 @@ package com.polytech.ben.tetris;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ public class OptionsActivity extends Activity {
 
     private RadioGroup themeGroup;
     private RadioGroup modeGroup;
-    private RadioGroup vitGroup;
+    private RadioGroup vitesseGroup;
     private RadioGroup accelGroup;
 
     @Override
@@ -27,21 +26,36 @@ public class OptionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        // checkBox theme
-        RadioButton theme = (RadioButton)findViewById(R.id.themePolytech);
-        // checkBox mode
+        // Radio theme
+        RadioButton theme = (RadioButton)findViewById(R.id.themeClassique);
+        // Radio mode
         RadioButton modeClassique = (RadioButton)findViewById(R.id.modeClassique);
-        // checkBox vitesse
+        // Radio vitesse
         RadioButton vit1 = (RadioButton)findViewById(R.id.vit1);
-        // checkBox acceleration
+        // Radio acceleration
         RadioButton accel0 = (RadioButton)findViewById(R.id.accel0);
 
         themeGroup = (RadioGroup)findViewById(R.id.themeGroup);
         modeGroup = (RadioGroup)findViewById(R.id.modeGroup);
-        vitGroup = (RadioGroup)findViewById(R.id.vitGroup);
+        vitesseGroup = (RadioGroup)findViewById(R.id.vitGroup);
         accelGroup = (RadioGroup)findViewById(R.id.accelGroup);
 
 
+        // Mise a jour des paramètre selon les choix précedent
+        /*
+        if(theme != R.id.themeClassique && themeGroup.getCheckedRadioButtonId() == R.id.themeClassique){
+            themeGroup.check(theme);
+        }
+        if(mode != R.id.modeClassique && modeGroup.getCheckedRadioButtonId() == R.id.modeClassique){
+            modeGroup.check(mode);
+        }
+        if(vitesse != R.id.vit1 && vitesseGroup.getCheckedRadioButtonId() == R.id.vit1){
+            vitGroup.check(vitesse);
+        }
+        if(accel != R.id.accel0 && accelGroup.getCheckedRadioButtonId() == R.id.accel0){
+            accelGroup.check(accel);
+        }
+         */
 
     }
 
@@ -55,7 +69,7 @@ public class OptionsActivity extends Activity {
     }
     public void changeVitesse(View view){
         Toast.makeText(OptionsActivity.this, "Vitesse modifiee", Toast.LENGTH_SHORT).show();
-        //Jeu.vitesse = vitGroup.getCheckedRadioButtonId();
+        //Jeu.vitesse = vitesseGroup.getCheckedRadioButtonId();
     }
     public void changeAcceleration(View view){
         Toast.makeText(OptionsActivity.this, "Acceleration modifiee", Toast.LENGTH_SHORT).show();
