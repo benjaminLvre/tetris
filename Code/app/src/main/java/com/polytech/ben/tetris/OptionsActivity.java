@@ -3,6 +3,7 @@ package com.polytech.ben.tetris;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -40,24 +41,24 @@ public class OptionsActivity extends Activity {
         vitGroup = (RadioGroup)findViewById(R.id.vitGroup);
         accelGroup = (RadioGroup)findViewById(R.id.accelGroup);
 
-        
+
 
     }
 
     public void changeTheme(View view){
-        Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
+        Toast.makeText(OptionsActivity.this, "Theme modifie", Toast.LENGTH_SHORT).show();
         //Jeu.theme = themeGroup.getCheckedRadioButtonId();
     }
     public void changeMode(View view){
-        Toast.makeText(OptionsActivity.this, "Mode modifié" + String.valueOf(modeGroup.getCheckedRadioButtonId()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(OptionsActivity.this, "Mode modifie", Toast.LENGTH_SHORT).show();
         //Jeu.mode = modeGroup.getCheckedRadioButtonId();
     }
     public void changeVitesse(View view){
-        Toast.makeText(OptionsActivity.this, "Vitesse modifiée" + String.valueOf(vitGroup.getCheckedRadioButtonId()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(OptionsActivity.this, "Vitesse modifiee", Toast.LENGTH_SHORT).show();
         //Jeu.vitesse = vitGroup.getCheckedRadioButtonId();
     }
     public void changeAcceleration(View view){
-        Toast.makeText(OptionsActivity.this, "Accelération modifiée" + String.valueOf(accelGroup.getCheckedRadioButtonId()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(OptionsActivity.this, "Acceleration modifiee", Toast.LENGTH_SHORT).show();
         //Jeu.accel = accelGroup.getCheckedRadioButtonId();
     }
 
