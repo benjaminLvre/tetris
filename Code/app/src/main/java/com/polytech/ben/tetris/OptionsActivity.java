@@ -7,9 +7,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-
 public class OptionsActivity extends Activity {
-
 
     // private int theme = Jeu.theme;
     // private int vitesse = Jeu.vitesse;
@@ -21,6 +19,10 @@ public class OptionsActivity extends Activity {
     private RadioGroup vitesseGroup;
     private RadioGroup accelGroup;
 
+    /**
+     * Mise en place des composants de l'interface lors de son ouverture
+     * @param savedInstanceState    Etat de l'activité
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,21 +61,39 @@ public class OptionsActivity extends Activity {
 
     }
 
+    /**
+     * Modifie la variable concernant le theme de l'application dans le class Jeu
+     * @param view  Le radioButton sélectionné
+     */
     public void changeTheme(View view){
         Toast.makeText(OptionsActivity.this, "Theme modifie", Toast.LENGTH_SHORT).show();
-        //Jeu.theme = themeGroup.getCheckedRadioButtonId();
+        // Jeu.THEME = view.getId();
     }
+    /**
+     * Modifie la variable concernant le mode de l'application dans le class Jeu
+     * @param view  Le radioButton cliqué
+     */
     public void changeMode(View view){
         Toast.makeText(OptionsActivity.this, "Mode modifie", Toast.LENGTH_SHORT).show();
-        //Jeu.mode = modeGroup.getCheckedRadioButtonId();
+        //Jeu.mode = view.getId();
     }
+
+    /**
+     * Modifie la variable concernant la vitesse de l'application dans le class Jeu
+     * @param view  Le radioButton cliqué
+     */
     public void changeVitesse(View view){
         Toast.makeText(OptionsActivity.this, "Vitesse modifiee", Toast.LENGTH_SHORT).show();
-        //Jeu.vitesse = vitesseGroup.getCheckedRadioButtonId();
+        //Jeu.vitesse = view.getId();
     }
+
+    /**
+     * Modifie la variable concernant l'accélaration de l'application dans le class Jeu
+     * @param view  Le radioButton cliqué
+     */
     public void changeAcceleration(View view){
         Toast.makeText(OptionsActivity.this, "Acceleration modifiee", Toast.LENGTH_SHORT).show();
-        //Jeu.accel = accelGroup.getCheckedRadioButtonId();
+        //Jeu.accel = view.getId();
     }
 
     public void openMusic(View view){
