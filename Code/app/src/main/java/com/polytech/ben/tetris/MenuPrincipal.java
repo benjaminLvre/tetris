@@ -20,21 +20,25 @@ public class MenuPrincipal extends Activity {
         setContentView(R.layout.activity_main);
     }
 
+    public void launchGame(View view){
+        Intent gameActivity = new Intent(MenuPrincipal.this, GameActivity.class);
+        startActivity(gameActivity);
+    }
     /**
      * Ouvre l'activité permettant de lire les instructions de jeu
      * @param view  Le bouton cliqué
      */
     public void seeInstructions(View view){
-        Intent instructionsActivite = new Intent(MenuPrincipal.this, InstructionsActivity.class);
-        startActivity(instructionsActivite);
+        Intent instructionsActivity = new Intent(MenuPrincipal.this, InstructionsActivity.class);
+        startActivity(instructionsActivity);
     }
     /**
      * Ouvre l'activité permettant de modifier les options de l'application
      * @param view  Le bouton cliqué
      */
     public void changeOptions(View view){
-        Intent optionsActivite = new Intent(MenuPrincipal.this, OptionsActivity.class);
-        startActivity(optionsActivite);
+        Intent optionsActivity = new Intent(MenuPrincipal.this, OptionsActivity.class);
+        startActivity(optionsActivity);
 
     }
 

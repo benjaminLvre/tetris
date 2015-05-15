@@ -34,6 +34,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.polytech.ben.tetris.MenuPrincipal" />
         </activity>
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game"
+            android:parentActivityName=".MenuPrincipal" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.polytech.ben.tetris.MenuPrincipal" />
+        </activity>
     </application>
 
 </manifest>

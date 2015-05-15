@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Tetris</string>
 
-    <string name="jouer">Jouer</string>
+
+    <string name="title_activity_game">Jouer</string>
+        <string name="score">Score : </string>
 
 
     <string name="title_activity_page_intructions">Instructions</string>
@@ -43,5 +45,7 @@
     <string name="highscores">Meilleurs scores</string>
     
     <string name="action_settings">Settings</string>
+
+
 
 </resources>
