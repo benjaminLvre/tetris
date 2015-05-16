@@ -1,6 +1,7 @@
 package com.polytech.ben.tetris;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -97,6 +98,8 @@ public class OptionsActivity extends Activity {
     }
 
     public void openMusic(View view){
+        Intent musicApp = new Intent("android.intent.action.MUSIC_PLAYER");
+        startActivity(musicApp);
 
     }
 }

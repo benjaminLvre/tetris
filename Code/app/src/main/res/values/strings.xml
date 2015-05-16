@@ -4,6 +4,8 @@
 
     <string name="title_activity_game">Jouer</string>
         <string name="score">Score : </string>
+        <string name="textPause">Que voulez vous faire ? </string>
+        <string name="restart">Rejouer </string>
 
 
     <string name="title_activity_page_intructions">Instructions</string>
@@ -43,8 +45,12 @@
 
 
     <string name="highscores">Meilleurs scores</string>
+
     
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Mettre en pause</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 

@@ -1,5 +1,8 @@
 package com.polytech.ben.tetris;
 
+
+import android.app.FragmentManager;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,13 +35,16 @@ public class GameActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-            
-
-
+            this.showPauseDialog();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showPauseDialog() {
+        FragmentManager fm = getFragmentManager();
+        PauseDialog pauseDialog = new PauseDialog();
+        pauseDialog.show(fm,"salut");
     }
 }
