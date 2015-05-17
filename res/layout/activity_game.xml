@@ -1,0 +1,17 @@
+<LinearLayoutLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.polytech.stfu.ihm.GameActivity">
+    <TextView
+        android:id="@+id/playerScore"
+        android:text="@string/score"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#000"
+        android:textColor="#FFF"
+        android:gravity="center_vertical" />
+
+
+</LinearLayoutLayout>
