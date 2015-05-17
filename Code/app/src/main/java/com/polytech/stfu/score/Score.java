@@ -1,4 +1,5 @@
 package com.polytech.stfu.score;
+
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -13,10 +14,10 @@ public abstract class Score {
 	 * @param mode Le mode de jeu voulu
 	 * @return L'ensemble des 5 meilleurs scores
 	 */
-	public static SortedSet<Couple> getHighScoreList(Mode mode){
+	public static SortedSet<Couple> getHighScoreList(Mode mode, Context context){
 		SortedSet<Couple> ret = new TreeSet<Couple>();
 		
-		SharedPreferences scores = getSharedPreferences("Scores", 0);
+		SharedPreferences scores = context.getSharedPreferences("Scores", 0);
 		for(int i = 1; i<6; i++){
 			Couple tmp = new Couple(score.getString(mode.getNom()+"pseudo"+i, null), score.getInt(mode.getNom()+"score"+i, -1));
 			if(tmp.getDeux() == -1){
@@ -32,7 +33,7 @@ public abstract class Score {
 	 * @param mode Le mode de jeu voulu
 	 * @param score Le score a tester
 	 */
-	public static boolean isHighScore(Mode mode, int score){
+	public static boolean isHighScore(Mode mode, int score, Context context){
 		SharedPreferences scores = getSharedPreferences("Scores", 0);
 		return score > scores.getInt(mode.getNom()+"score"+5, -1);
 	}
@@ -44,7 +45,7 @@ public abstract class Score {
 	 * @param pseudo Le pseudo a sauvegarder
 	 * @param score Le score a sauvegarder
 	 */
-	public static void save(Mode mode, String pseudo, int score){
+	public static void save(Mode mode, String pseudo, int score, Context context){
 		SharedPreferences scores = getSharedPreferences("Scores", 0);
 		SharedPreferences.Editor editor = scores.edit();
 
