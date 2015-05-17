@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Tetris</string>
+
+
+    <string name="title_activity_game">Jouer</string>
+        <string name="score">Score : </string>
+        <string name="textPause">Que voulez vous faire ? </string>
+        <string name="restart">Rejouer </string>
+
+
+    <string name="title_activity_page_intructions">Instructions</string>
+        <string name="textInstructionsClassique">
+            En mode classique, Tetris met le joueur au défi de réaliser des lignes complètes en déplaçant des pièces de formes
+            différentes, les tétriminos, qui défilent depuis le haut vers le bas de l\'écran. Les lignes complétées disparaissent tout en
+            rapportant des points et le joueur peut de nouveau remplir les cases libérées. Le jeu n\'a pas de fin : le joueur perd la partie
+            lorsqu\'un tétrimino reste bloqué en haut. Il doit donc résister le plus longtemps à la chute continue des tétriminos, afin de
+            réaliser le meilleur score possible.
+        </string>
+        <string name="textInstructionsCLM">
+            En mode contre-la-montre, les règles sont relativement les même sauf que le but est de marquer le plus de points possible dans le
+            temps imparti. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
+        </string>
+        <string name="textInstructionsEvents">Pour déplacer une pièce il suffit de cliquer sur un des côtés de l\'écran, la pièce se déplacera du côté cliqué.
+            En cliquant au centre de l\'écran, la pièce subira une rotation de 90° dans le sens horaire. Un mouvement de glisser vers le bas,au centre de l\'écran, entraînera une chute rapide et irréversible de la pièce.
+        </string>
+
+    <string name="title_activity_options">Options</string>
+        <string name="themes">Thème</string>
+            <string name="themeClassique">Classique</string>
+            <string name="themePolytech">Polytech\'</string>
+            <string name="themeWalkingDead">Walking Dead</string>
+        <string name="mode">Mode</string>
+            <string name="modeClassique">Classique</string>
+            <string name="modeCLM">Contre-la-montre</string>
+        <string name="vit">Vitesse</string>
+            <string name="vit1">1</string>
+            <string name="vit2">2</string>
+            <string name="vit3">3</string>
+        <string name="accel">Accèlération</string>
+            <string name="accel0">0</string>
+            <string name="accel1">1</string>
+            <string name="accel2">2</string>
+        <string name="musique">Musique</string>
+        <string name="openMusique">Choisir une musique</string>
+
+
+    <string name="highscores">Meilleurs scores</string>
+
+    
+    <string name="action_settings">Mettre en pause</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+</resources>
