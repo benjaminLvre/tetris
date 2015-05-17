@@ -253,6 +253,10 @@ public class Grille {
 		return 0 <= p.getX() && p.getX() < plateau[0].length && 0 <= p.getY() && p.getY() < plateau.length;
 	}
 	
+	public TypePiece[][] getPlateau(){
+		return plateau;
+	}
+	
 	public String toString(){
 		StringBuilder s= new StringBuilder();
 		for(int y = 0; y<23;y++){

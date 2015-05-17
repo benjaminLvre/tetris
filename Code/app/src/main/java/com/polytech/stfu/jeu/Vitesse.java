@@ -5,7 +5,7 @@ package com.polytech.stfu.jeu;
  * @author Stfu
  *
  */
-public enum Vitesse {
+public enum Vitesse{
 	FAIBLE(50),
 	NORMALE(100),
 	ELEVEE(150);
@@ -21,5 +21,9 @@ public enum Vitesse {
 	
 	public int getVal(){
 		return val;
+	}
+	
+	public int describeContents(){
+		return 0;
 	}
 }

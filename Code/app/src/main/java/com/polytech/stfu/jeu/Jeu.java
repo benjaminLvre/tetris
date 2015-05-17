@@ -2,15 +2,18 @@ package com.polytech.stfu.jeu;
 
 import android.database.CrossProcessCursor;
 
-public abstract class Jeu extends Thread{
+public abstract class Jeu extends Thread implements Parcelable{
 	protected Vitesse vitesse;
 	protected Acceleration acceleration;
 	protected Grille grille;
 	protected TypePiece piece;
 	protected int intervalTime;
+	private Mode mode;
 	
 	private boolean pause;
 	private Object lockPause;
+	
+	private static Jeu jeu;
 	
 	public Jeu(){
 		pause = false;
@@ -20,6 +23,12 @@ public abstract class Jeu extends Thread{
 		acceleration = Acceleration.MODEREE;
 		grille = new Grille();
 		intervalTime = 500 * vitesse.getVal()/100;
+		
+		Jeu.jeu = this;
+	}
+	
+	public static Jeu getJeu(){
+		return jeu;
 	}
 	
 	public void move(TypeMove move){
@@ -143,8 +152,16 @@ public abstract class Jeu extends Thread{
 		this.acceleration = acceleration;
 	}
 	
+	public TypePiece getGrille(){
+		return grille.getPlateau();
+	}
+	
 	public TypePiece getTypePiece(){
 		return piece;
+	}
+	
+	public Mode getMode(){
+		return mode;
 	}
 	
 	public void aff(){
