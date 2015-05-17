@@ -13,5 +13,9 @@ public enum TypePiece {
 	Z,
 	O,
 	I,
-	None
+	None;
+	
+	public String toString(){
+		return name();
+	}
 }

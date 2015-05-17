@@ -3,8 +3,13 @@ package com.polytech.stfu.jeu;
 public class JeuClassique extends Jeu {
 	private int score;
 	
-	public void start(){
-		
+	public JeuClassique(){
+		super();
+		score = 0;
+	}
+	
+	public void startGame(){
+		super.start();
 	}
 	
 	public void pause(){
@@ -17,6 +22,10 @@ public class JeuClassique extends Jeu {
 	
 	public void end(){
 		
+	}
+	
+	protected boolean isFinish(){
+		return !grille.topLineIsEmpty();
 	}
 	
 	public int getScore(){

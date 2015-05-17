@@ -20,19 +20,24 @@ public class Grille {
 	private Piece piece;
 	
 	/**
-	 * Contructeur par defaut pour definir une grille de tetris standard
-	 */
-	protected Grille(){
-		plateau = new TypePiece[23][12];
-	}
-	
-	/**
 	 * Contructeur a partir de la largeur et la hauteur de la grille
 	 * @param largeur Largeur de la grille
 	 * @param hauteur Hauteur de la grille
 	 */
 	protected Grille(int largeur, int hauteur){
 		plateau = new TypePiece[hauteur+1][largeur];
+		for(int x = 0;x<12;x++){
+			for(int y = 22; y>=0;y--){
+				plateau[y][x] = TypePiece.None;
+			}
+		}
+	}
+	
+	/**
+	 * Contructeur par defaut pour definir une grille de tetris standard
+	 */
+	protected Grille(){
+		this(12, 22);
 	}
 	
 	/**
@@ -89,14 +94,19 @@ public class Grille {
 	}
 	
 	/**
-	 * Methode supprimant une ligne et rabaissant toutes les lignes supérieures
+	 * Methode supprimant une ligne si elle est complete et rabaissant toutes les lignes supérieures
 	 * @param line Numero de la ligne a tester, la ligne 0 etant la ligne la plus haute de la grille
+	 * @return Renvoit vrai si la line a ete supprimee
 	 */
-	private void removeLine(int line){
-		while(line > 0 && !isEmptyLine(line)){
-			plateau[line] = plateau[line-1];
-			line--;
+	protected boolean removeLine(int line){
+		boolean suppr = false;
+		synchronized (this) {
+			while(isFullLine(line)){
+				plateau[line] = plateau[line-1];
+				suppr = true;
+			}
 		}
+		return suppr;
 	}
 	
 	/**
@@ -105,7 +115,7 @@ public class Grille {
 	 */
 	private boolean isValidPosition(Point[] testedPosition){
 		for(Point pTest : testedPosition){
-			if(!isEmptyCase(pTest) && !piece.isOn(pTest)){
+			if(!isInPlateau(pTest) || (!isEmptyCase(pTest) && !piece.isOn(pTest))){
 				return false;
 			}
 		}
@@ -125,14 +135,18 @@ public class Grille {
 	 * @param move Direction du mouvement voulu
 	 */
 	protected boolean canMovePiece(TypeMove move){
-		return isValidPosition(piece.getMovePosition(move));
+		synchronized (this) {
+			return isValidPosition(piece.getMovePosition(move));
+		}
 	}
 	
 	/**
 	 * Methode testant la rotation est possible
 	 */
 	protected boolean canRotatePiece(){
-		return isValidPosition(piece.getRotatePosition());
+		synchronized (this) {
+			return isValidPosition(piece.getRotatePosition());
+		}
 	}
 	
 	/**
@@ -140,18 +154,22 @@ public class Grille {
 	 * @param move Direction du mouvement voulu
 	 */
 	protected void movePiece(TypeMove move){
-		removePieceToPlateau();
-		piece.move(move);
-		setPieceOnPlateau();
+		synchronized (this) {
+			removePieceToPlateau();
+			piece.move(move);
+			setPieceOnPlateau();
+		}
 	}
 	
 	/**
 	 * Methode faisant une rotation de la piece
 	 */
 	protected void rotatePiece(){
-		removePieceToPlateau();
-		piece.rotate();
-		setPieceOnPlateau();
+		synchronized (this) {
+			removePieceToPlateau();
+			piece.rotate();
+			setPieceOnPlateau();
+		}
 	}
 	
 	/**
@@ -160,7 +178,9 @@ public class Grille {
 	 */
 	protected void setNewPiece(Piece p){
 		piece = p;
-		setPieceOnPlateau();
+		synchronized (this) {
+			setPieceOnPlateau();
+		}
 	}
 	
 	/**
@@ -188,5 +208,46 @@ public class Grille {
 		for(Point p : piece.getPosition()){
 			setTypeOnCase(p, piece.getTypePiece());
 		}
+	}
+	
+	protected boolean topLineIsEmpty(){
+		synchronized (this) {
+			return isEmptyLine(0);
+		}
+	}
+	
+	protected int getTopLinePiece(){
+		int ret = plateau.length-1;
+		for(Point c : piece.getPosition()){
+			if(ret > c.getY()){
+				ret = c.getY();
+			}
+		}
+		return ret;
+	}
+	
+	protected int getBottomLinePiece(){
+		int ret = 0;
+		for(Point c : piece.getPosition()){
+			if(ret < c.getY()){
+				ret = c.getY();
+			}
+		}
+		return ret;
+	}
+	
+	private boolean isInPlateau(Point p){
+		return 0 <= p.getX() && p.getX() < plateau[0].length && 0 <= p.getY() && p.getY() < plateau.length;
+	}
+	
+	public String toString(){
+		StringBuilder s= new StringBuilder();
+		for(int y = 0; y<23;y++){
+			for(int x = 0;x<12;x++){
+				s.append(plateau[y][x].toString()+"\t");
+			}
+			s.append('\n');
+		}
+		return s.toString();
 	}
 }

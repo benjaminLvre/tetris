@@ -6,7 +6,7 @@ package com.polytech.stfu.jeu;
  * @see Point
  *
  */
-public class Piece {
+public class Piece{
 	/**
 	 * Les cases occupees par la piece
 	 */
@@ -25,9 +25,10 @@ public class Piece {
 	 * @param position Les points composants la piece
 	 * @param t Le type de la piece
 	 */
-	private Piece(Point[] position, TypePiece t){
+	private Piece(Point[] position, TypePiece t, Point centre){
 		cases = position;
 		type = t;
+		centreRotation = centre;
 	}
 	
 	/**
@@ -40,7 +41,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX()+1, pointInitial.getY());
 		cases[3] = new Point(pointInitial.getX()+2, pointInitial.getY());
-		return new Piece(cases, TypePiece.I);
+		return new Piece(cases, TypePiece.I, new Point(pointInitial.getX(), pointInitial.getY()));
 	}
 	
 	
@@ -54,7 +55,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX(), pointInitial.getY()+1);
 		cases[3] = new Point(pointInitial.getX()+1, pointInitial.getY());
-		return new Piece(cases, TypePiece.S);
+		return new Piece(cases, TypePiece.S, new Point(pointInitial.getX(), pointInitial.getY()));
 	}
 	
 	
@@ -68,7 +69,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX(), pointInitial.getY()+1);
 		cases[3] = new Point(pointInitial.getX()+1, pointInitial.getY()+1);
-		return new Piece(cases, TypePiece.Z);
+		return new Piece(cases, TypePiece.Z, new Point(pointInitial.getX(), pointInitial.getY()+1));
 	}
 	
 	
@@ -82,7 +83,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX()+1, pointInitial.getY());
 		cases[3] = new Point(pointInitial.getX()-1, pointInitial.getY()+1);
-		return new Piece(cases, TypePiece.L);
+		return new Piece(cases, TypePiece.L, new Point(pointInitial.getX(), pointInitial.getY()));
 	}
 	
 	/**
@@ -95,7 +96,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX()+1, pointInitial.getY());
 		cases[3] = new Point(pointInitial.getX()+1, pointInitial.getY()+1);
-		return new Piece(cases, TypePiece.J);
+		return new Piece(cases, TypePiece.J, new Point(pointInitial.getX(), pointInitial.getY()));
 	}
 	
 	
@@ -109,7 +110,7 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX()+1, pointInitial.getY()+1);
 		cases[3] = new Point(pointInitial.getX(), pointInitial.getY()+1);
-		return new Piece(cases, TypePiece.O);
+		return new Piece(cases, TypePiece.O, null);
 	}
 	
 	
@@ -123,30 +124,44 @@ public class Piece {
 		cases[1] = new Point(pointInitial.getX(), pointInitial.getY());
 		cases[2] = new Point(pointInitial.getX()+1, pointInitial.getY());
 		cases[3] = new Point(pointInitial.getX(), pointInitial.getY()+1);
-		return new Piece(cases, TypePiece.T);
+		return new Piece(cases, TypePiece.T, new Point(pointInitial.getX(), pointInitial.getY()));
 	}
 	
 	protected Point[] getPosition(){
-		return cases;
+		synchronized (this) {
+			return cases;
+		}
 	}
 	
 	/**
 	 * Methode retournant la position de la piece apres rotation
 	 */
 	protected Point[] getRotatePosition(){
-		Point[] futurePos = new Point[4];
-		for(int i=0; i<cases.length; i++){
-			futurePos[i] = cases[i].getRotatePosition(centreRotation);
+		synchronized (this) {
+			if(centreRotation == null){
+				return getPosition();
+			}
+			else{
+				Point[] futurePos = new Point[4];
+				for(int i=0; i<cases.length; i++){
+					futurePos[i] = cases[i].getRotatePosition(centreRotation);
+				}
+				return futurePos;
+			}
+			
 		}
-		return futurePos;
 	}
 	
 	/**
 	 * Methode effactuant une rotation a la piece
 	 */
 	protected void rotate(){
-		for(Point p : cases){
-			p.setRotatePosition(centreRotation);
+		synchronized (this) {
+			if(centreRotation != null){
+				for(Point p : cases){
+					p.setRotatePosition(centreRotation);
+				}
+			}
 		}
 	}
 	
@@ -155,12 +170,13 @@ public class Piece {
 	 * @param move La direction du mouvement
 	 */
 	protected Point[] getMovePosition(TypeMove move){
-		Point[] futurePos = new Point[4];
-		for(int i=0; i<cases.length; i++){
-			futurePos[i] = cases[i].getMovePosition(move);
+		synchronized (this) {
+			Point[] futurePos = new Point[4];
+			for(int i=0; i<cases.length; i++){
+				futurePos[i] = cases[i].getMovePosition(move);
+			}
+			return futurePos;
 		}
-		centreRotation.setMovePosition(move);
-		return futurePos;
 	}
 	
 	/**
@@ -168,8 +184,13 @@ public class Piece {
 	 * @param move La direction du mouvement
 	 */
 	protected void move(TypeMove move){
-		for(Point p : cases){
-			p.setMovePosition(move);
+		synchronized (this) {
+			for(Point p : cases){
+				p.setMovePosition(move);
+			}
+			if(centreRotation != null){
+				centreRotation.setMovePosition(move);
+			}
 		}
 	}
 	
@@ -178,12 +199,14 @@ public class Piece {
 	 * @param p La case a tester
 	 */
 	protected boolean isOn(Point p){
-		for(Point c : cases){
-			if(p.equals(c)){
-				return true;
+		synchronized (this) {
+			for(Point c : cases){
+				if(p.equals(c)){
+					return true;
+				}
 			}
+			return false;
 		}
-		return false;
 	}
 	
 	protected TypePiece getTypePiece(){

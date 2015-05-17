@@ -8,7 +8,7 @@ public class JeuChrono extends Jeu {
 		
 	}
 	
-	public void start(){
+	public void startGame(){
 		
 	}
 	

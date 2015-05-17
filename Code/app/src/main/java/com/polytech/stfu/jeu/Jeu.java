@@ -1,10 +1,18 @@
 package com.polytech.stfu.jeu;
 
-public abstract class Jeu {
-	private Vitesse vitesse;
-	private Acceleration acceleration;
-	private Grille grille;
-	private Piece piece;
+public abstract class Jeu extends Thread{
+	protected Vitesse vitesse;
+	protected Acceleration acceleration;
+	protected Grille grille;
+	protected TypePiece piece;
+	protected int intervalTime;
+	
+	public Jeu(){
+		vitesse = Vitesse.NORMALE;
+		acceleration = Acceleration.MODEREE;
+		grille = new Grille();
+		intervalTime = 500 * vitesse.getVal()/100;
+	}
 	
 	public void move(TypeMove move){
 		if(grille.canMovePiece(move)){
@@ -19,11 +27,38 @@ public abstract class Jeu {
 	}
 	
 	public TypePiece getTypeNextPiece(){
-		return piece.getTypePiece();
+		return piece;
 	}
 	
-	public void start(){
-		
+	public void run(){
+		piece = createFuturPiece();
+		while(true){
+			aff();
+			try {
+				sleep(intervalTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(grille.canMovePiece(TypeMove.DOWN)){
+				grille.movePiece(TypeMove.DOWN);
+			}
+			else{
+				for(int line = grille.getBottomLinePiece(); line >= grille.getTopLinePiece(); line--){
+					if(grille.removeLine(line)){
+						break;
+					}
+				}
+				if(isFinish()){
+					break;
+				}
+				piece = createFuturPiece();
+				intervalTime *= 0.01 * acceleration.getVal();
+			}
+		}
+	}
+	
+	public void startGame(){
+		start();
 	}
 	
 	public void pause(){
@@ -38,10 +73,12 @@ public abstract class Jeu {
 		
 	}
 	
-	private Piece createFuturPiece(){
+	protected abstract boolean isFinish();
+	
+	protected TypePiece createFuturPiece(){
 		int type = (int)(Math.random()*7);
-		Piece newPiece;
 		Point pointInitial = new Point(5,0);
+		Piece newPiece;
 		switch(type){
 		case 0:
 			newPiece = Piece.createPieceI(pointInitial);
@@ -64,7 +101,12 @@ public abstract class Jeu {
 		case 6:
 			newPiece = Piece.createPieceZ(pointInitial);
 			break;
+		default:
+			newPiece = Piece.createPieceI(pointInitial);
 		}
+		piece = newPiece.getTypePiece();
+		grille.setNewPiece(newPiece);
+		return piece;
 	}
 	
 	public abstract int getScore();
@@ -83,5 +125,13 @@ public abstract class Jeu {
 
 	public void setAcceleration(Acceleration acceleration) {
 		this.acceleration = acceleration;
+	}
+	
+	public TypePiece getTypePiece(){
+		return piece;
+	}
+	
+	public void aff(){
+		System.out.println(grille);
 	}
 }

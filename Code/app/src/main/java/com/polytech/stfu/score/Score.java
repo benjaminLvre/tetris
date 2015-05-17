@@ -1,9 +1,18 @@
 package com.polytech.stfu.score;
-
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Classe gerant la sauvegarde des scores
+ * @author Stfu
+ *
+ */
 public abstract class Score {
+	/**
+	 * Fonction pour obtenir l'ensemble des meilleurs scores d'un mode
+	 * @param mode Le mode de jeu voulu
+	 * @return L'ensemble des 5 meilleurs scores
+	 */
 	public static SortedSet<Couple> getHighScoreList(Mode mode){
 		SortedSet<Couple> ret = new TreeSet<Couple>();
 		
@@ -18,11 +27,23 @@ public abstract class Score {
 		return ret;
 	}
 
+	/**
+	 * Fonction pour tester si un score est dans les 5 meileurs du mode voulu
+	 * @param mode Le mode de jeu voulu
+	 * @param score Le score a tester
+	 */
 	public static boolean isHighScore(Mode mode, int score){
 		SharedPreferences scores = getSharedPreferences("Scores", 0);
 		return score > scores.getInt(mode.getNom()+"score"+5, -1);
 	}
 	
+	/**
+	 * Fonction pour sauvegarder un couple (pseudo, score) dans le mode voulu.
+	 * L'ordre des meilleurs scores est assure
+	 * @param mode Le mode de jeu voulu
+	 * @param pseudo Le pseudo a sauvegarder
+	 * @param score Le score a sauvegarder
+	 */
 	public static void save(Mode mode, String pseudo, int score){
 		SharedPreferences scores = getSharedPreferences("Scores", 0);
 		SharedPreferences.Editor editor = scores.edit();

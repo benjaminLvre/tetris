@@ -1,7 +1,18 @@
 package com.polytech.stfu.score;
 
+/**
+ * Classe representant un couple (pseudo, score)
+ * @author Stfu
+ *
+ */
 public class Couple  implements Comparable<Couple>{
+	/**
+	 * Pseudo du joueur a qui appartient le score
+	 */
 	private String pseudo;
+	/**
+	 * Score effectue
+	 */
 	private int score;
 
 	public Couple(String pseudo, int score) {
@@ -54,6 +65,9 @@ public class Couple  implements Comparable<Couple>{
 		return true;
 	}
 
+	/**
+	 * Fonction de comparaison par ordre décroissant de score
+	 */
 	@Override
 	public int compareTo(Couple o) {
 		if(this.score > o.score){
