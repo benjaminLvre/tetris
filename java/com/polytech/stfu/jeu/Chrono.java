@@ -1,3 +1,5 @@
+package com.polytech.stfu.jeu;
+
 public class Chrono extends Thread{
 	private long temps;
 	private boolean pause;

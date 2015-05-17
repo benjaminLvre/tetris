@@ -1,5 +1,10 @@
 package com.polytech.stfu.score;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.polytech.stfu.jeu.Mode;
+
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,8 +24,8 @@ public abstract class Score {
 
         SharedPreferences scores = context.getSharedPreferences("Scores", 0);
         for(int i = 1; i<6; i++){
-            Couple tmp = new Couple(score.getString(mode.getNom()+"pseudo"+i, null), score.getInt(mode.getNom()+"score"+i, -1));
-            if(tmp.getDeux() == -1){
+            Couple tmp = new Couple(scores.getString(mode.getNom()+"pseudo"+i, null), scores.getInt(mode.getNom()+"score"+i, -1));
+            if(tmp.getScore() == -1){
                 break;
             }
             ret.add(tmp);
@@ -34,7 +39,7 @@ public abstract class Score {
      * @param score Le score a tester
      */
     public static boolean isHighScore(Mode mode, int score, Context context){
-        SharedPreferences scores = getSharedPreferences("Scores", 0);
+        SharedPreferences scores = context.getSharedPreferences("Scores", 0);
         return score > scores.getInt(mode.getNom()+"score"+5, -1);
     }
 
@@ -46,11 +51,11 @@ public abstract class Score {
      * @param score Le score a sauvegarder
      */
     public static void save(Mode mode, String pseudo, int score, Context context){
-        SharedPreferences scores = getSharedPreferences("Scores", 0);
+        SharedPreferences scores = context.getSharedPreferences("Scores", 0);
         SharedPreferences.Editor editor = scores.edit();
 
-        SortedSet<Couple> setScores = getHighScoreList(mode);
-        scores.add(new Couple(pseudo, score));
+        SortedSet<Couple> setScores = getHighScoreList(mode, context);
+        setScores.add(new Couple(pseudo, score));
 
         int i = 0;
         for(Couple c : setScores){

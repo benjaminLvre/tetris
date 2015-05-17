@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MenuPrincipal">
+    tools:context=".MenuPrincipal"
+    android:background="@drawable/background_cubes">
 
     <Button
         android:id="@+id/jouer"

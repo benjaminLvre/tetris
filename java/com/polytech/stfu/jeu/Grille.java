@@ -104,22 +104,13 @@ public class Grille {
 				break;
 			}
 			if(isFullLine(line)){
-				decalageLigne(line);
+				decalageLine(line);
 			}
 			else{
-				i++;
+				line++;
 			}
 		}
 		return ret;
-		
-		boolean suppr = false;
-		synchronized (this) {
-			while(isFullLine(line)){
-				plateau[line] = plateau[line-1];
-				suppr = true;
-			}
-		}
-		return suppr;
 	}
 	
 	/**
@@ -266,7 +257,7 @@ public class Grille {
 	
 	private void decalageLine(int line){
 		for(int i = line; i > 0; i--){
-			plateau[i] = plateau[i-1]
+			plateau[i] = plateau[i-1];
 		}
 	}
 }

@@ -8,6 +8,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.polytech.stfu.jeu.Acceleration;
+import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.JeuChrono;
+import com.polytech.stfu.jeu.JeuClassique;
+import com.polytech.stfu.jeu.Vitesse;
+
 public class OptionsActivity extends Activity {
 
     // private int theme = Jeu.theme;
@@ -82,8 +88,10 @@ public class OptionsActivity extends Activity {
      * @param view  Le radioButton cliqué
      */
     public void changeMode(View view){
-        Toast.makeText(OptionsActivity.this, "Mode modifié", Toast.LENGTH_SHORT).show();
-        //Jeu.mode = view.getId();
+        //Toast.makeText(OptionsActivity.this, "Mode modifié", Toast.LENGTH_SHORT).show();
+
+        if(view.getId() == R.id.modeClassique) new JeuClassique();
+        else new JeuChrono();
     }
 
     /**
@@ -91,8 +99,12 @@ public class OptionsActivity extends Activity {
      * @param view  Le radioButton cliqué
      */
     public void changeVitesse(View view){
-        Toast.makeText(OptionsActivity.this, "Vitesse modifiée", Toast.LENGTH_SHORT).show();
-        //Jeu.vitesse = view.getId();
+        //Toast.makeText(OptionsActivity.this, "Vitesse modifiée", Toast.LENGTH_SHORT).show();
+        switch (view.getId()){
+            case R.id.vit1 : getJeu().setVitesse(Vitesse.FAIBLE); break;
+            case R.id.vit2 : getJeu().setVitesse(Vitesse.NORMALE); break;
+            case R.id.vit3 : getJeu().setVitesse(Vitesse.ELEVEE); break;
+        }
     }
 
     /**
@@ -100,8 +112,12 @@ public class OptionsActivity extends Activity {
      * @param view  Le radioButton cliqué
      */
     public void changeAcceleration(View view){
-        Toast.makeText(OptionsActivity.this, "Acceleration modifiée", Toast.LENGTH_SHORT).show();
-        //Jeu.accel = view.getId();
+        //Toast.makeText(OptionsActivity.this, "Acceleration modifiée", Toast.LENGTH_SHORT).show();
+        switch (view.getId()){
+            case R.id.accel0 : getJeu().setAcceleration(Acceleration.NULLE); break;
+            case R.id.accel1 : getJeu().setAcceleration(Acceleration.MODEREE); break;
+            case R.id.accel2 : getJeu().setAcceleration(Acceleration.FORTE); break;
+        }
     }
 
     public void openMusic(View view){

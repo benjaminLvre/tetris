@@ -7,8 +7,13 @@ import android.content.Intent;
 
 import android.view.View;
 
+import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.JeuClassique;
+
 
 public class mainMenuActivity extends Activity {
+
+
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
@@ -18,10 +23,15 @@ public class mainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new JeuClassique();
     }
 
     public void launchGame(View view){
         Intent gameActivity = new Intent(mainMenuActivity.this, GameActivity.class);
+
+
+
         startActivity(gameActivity);
     }
     /**

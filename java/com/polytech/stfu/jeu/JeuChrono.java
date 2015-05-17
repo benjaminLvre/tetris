@@ -8,16 +8,20 @@ public class JeuChrono extends Jeu {
 		chrono = new Chrono();
 		tempsLimite = 60;
 	}
+
+	public boolean isFinish(){
+		return tempsLimite < chrono.getTemps();
+	}
 	
 	public void pause(){
-		synchronized (pause) {
+		synchronized (lockPause) {
 			pause = true;
 		}
 		chrono.pause();
 	}
 	
 	public void restart(){
-		synchronized (pause) {
+		synchronized (lockPause) {
 			pause = false;
 		}
 		chrono.restart();

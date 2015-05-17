@@ -9,8 +9,8 @@ public abstract class Jeu extends Thread{
 	protected TypePiece piece;
 	protected int intervalTime;
 	
-	private boolean pause;
-	private Object lockPause;
+	protected boolean pause;
+	protected Object lockPause;
 	
 	public Jeu(){
 		pause = false;
@@ -51,7 +51,7 @@ public abstract class Jeu extends Thread{
 				grille.movePiece(TypeMove.DOWN);
 			}
 			else{
-				updateScore(grille.removeLines(line));
+				updateScore(grille.removeLines());
 				if(isFinish()){
 					break;
 				}
@@ -66,13 +66,13 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public void pause(){
-		synchronized (pause) {
+		synchronized (lockPause) {
 			pause = true;
 		}
 	}
 	
 	public void restart(){
-		synchronized (pause) {
+		synchronized (lockPause) {
 			pause = false;
 		}
 	}

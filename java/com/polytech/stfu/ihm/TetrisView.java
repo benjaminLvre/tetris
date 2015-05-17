@@ -11,6 +11,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.polytech.stfu.jeu.TypePiece;
+
 /**
  * Classe permettant de créer la vue d'une partie
  */
@@ -20,6 +22,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private SurfaceHolder mSurfaceHolder;
     private Thread mThread;
 
+    private TypePiece grille[][];
 
     private Paint linePaint;
     private Paint bgc;
@@ -27,31 +30,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private Paint scoreColor;
 
     private Paint caseColor;
-
-    int grille[][] = {
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 2, 0, 4, 4, 0, 3, 3, 1},
-            {1, 1, 1, 1, 2, 2, 2, 4, 4, 3, 3, 1}
-    };
 
     final int  HORIZONTAL_LINES = 21;
     final int VERTICAL_LINES = 11;
@@ -72,6 +50,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.mSurfaceHolder.addCallback(this);
 
         this.mThread = new DrawingThread();
+
+        this.grille = new TypePiece[23][12];
+
         this.linePaint = new Paint();
 
         this.bgc = new Paint();
@@ -115,12 +96,15 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         // Dessine une case
         for(int li=0; li< HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
-                if(grille[li][col] != 0){
+                if(grille[li][col] != TypePiece.None){
                     switch (grille[li][col]){
-                        case 1: caseColor.setColor(Color.RED);break;
-                        case 2: caseColor.setColor(Color.BLUE);break;
-                        case 3: caseColor.setColor(Color.GREEN);break;
-                        case 4: caseColor.setColor(Color.YELLOW);break;
+                        case L : caseColor.setColor(Color.RED);break;
+                        case O: caseColor.setColor(Color.BLUE);break;
+                        case S: caseColor.setColor(Color.GREEN);break;
+                        case Z: caseColor.setColor(Color.YELLOW);break;
+                        case T: caseColor.setColor(Color.MAGENTA);break;
+                        case J: caseColor.setColor(Color.BLACK);break;
+                        case I: caseColor.setColor(Color.CYAN);break;
                         default:break;
                     }
                     Log.d(TAG, " draw un carré");

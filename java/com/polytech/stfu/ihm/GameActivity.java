@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 
 
-
 public class GameActivity extends Activity {
 
 
