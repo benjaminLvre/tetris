@@ -101,9 +101,9 @@ public class OptionsActivity extends Activity {
     public void changeVitesse(View view){
         //Toast.makeText(OptionsActivity.this, "Vitesse modifiée", Toast.LENGTH_SHORT).show();
         switch (view.getId()){
-            case R.id.vit1 : getJeu().setVitesse(Vitesse.FAIBLE); break;
-            case R.id.vit2 : getJeu().setVitesse(Vitesse.NORMALE); break;
-            case R.id.vit3 : getJeu().setVitesse(Vitesse.ELEVEE); break;
+            case R.id.vit1 : Jeu.getJeu().setVitesse(Vitesse.FAIBLE); break;
+            case R.id.vit2 : Jeu.getJeu().setVitesse(Vitesse.NORMALE); break;
+            case R.id.vit3 : Jeu.getJeu().setVitesse(Vitesse.ELEVEE); break;
         }
     }
 
@@ -114,9 +114,9 @@ public class OptionsActivity extends Activity {
     public void changeAcceleration(View view){
         //Toast.makeText(OptionsActivity.this, "Acceleration modifiée", Toast.LENGTH_SHORT).show();
         switch (view.getId()){
-            case R.id.accel0 : getJeu().setAcceleration(Acceleration.NULLE); break;
-            case R.id.accel1 : getJeu().setAcceleration(Acceleration.MODEREE); break;
-            case R.id.accel2 : getJeu().setAcceleration(Acceleration.FORTE); break;
+            case R.id.accel0 : Jeu.getJeu().setAcceleration(Acceleration.NULLE); break;
+            case R.id.accel1 : Jeu.getJeu().setAcceleration(Acceleration.MODEREE); break;
+            case R.id.accel2 : Jeu.getJeu().setAcceleration(Acceleration.FORTE); break;
         }
     }
 

@@ -1,8 +1,9 @@
 package com.polytech.stfu.jeu;
 
 import android.database.CrossProcessCursor;
+import android.os.Parcelable;
 
-public abstract class Jeu extends Thread implements Parcelable{
+public abstract class Jeu extends Thread{
 	protected Vitesse vitesse;
 	protected Acceleration acceleration;
 	protected Grille grille;
@@ -152,7 +153,7 @@ public abstract class Jeu extends Thread implements Parcelable{
 		this.acceleration = acceleration;
 	}
 	
-	public TypePiece getGrille(){
+	public TypePiece[][] getGrille(){
 		return grille.getPlateau();
 	}
 	

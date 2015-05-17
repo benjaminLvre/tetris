@@ -24,8 +24,8 @@ public abstract class Score {
 		
 		SharedPreferences scores = context.getSharedPreferences("Scores", 0);
 		for(int i = 1; i<6; i++){
-			Couple tmp = new Couple(score.getString(mode.getNom()+"pseudo"+i, null), score.getInt(mode.getNom()+"score"+i, -1));
-			if(tmp.getDeux() == -1){
+			Couple tmp = new Couple(scores.getString(mode.getNom()+"pseudo"+i, null), scores.getInt(mode.getNom()+"score"+i, -1));
+			if(tmp.getScore() == -1){
 				break;
 			}
 			ret.add(tmp);
