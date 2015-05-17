@@ -38,8 +38,6 @@ public class GameActivity extends Activity {
     }
 
 
-
-
     // EVENTS
 
     /**
