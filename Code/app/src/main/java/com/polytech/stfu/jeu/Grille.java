@@ -94,11 +94,24 @@ public class Grille {
 	}
 	
 	/**
-	 * Methode supprimant une ligne si elle est complete et rabaissant toutes les lignes supérieures
-	 * @param line Numero de la ligne a tester, la ligne 0 etant la ligne la plus haute de la grille
+	 * Methode supprimant les lignes completes et rabaissent celle superieure
 	 * @return Renvoit vrai si la line a ete supprimee
 	 */
-	protected boolean removeLine(int line){
+	protected int removeLines(){
+		int ret = 0;
+		for(int line = plateau.length-1; line >= 0; line--){
+			if(isEmptyLine(line)){
+				break;
+			}
+			if(isFullLine(line)){
+				decalageLigne(line);
+			}
+			else{
+				i++;
+			}
+		}
+		return ret;
+		
 		boolean suppr = false;
 		synchronized (this) {
 			while(isFullLine(line)){
@@ -249,5 +262,11 @@ public class Grille {
 			s.append('\n');
 		}
 		return s.toString();
+	}
+	
+	private void decalageLine(int line){
+		for(int i = line; i > 0; i--){
+			plateau[i] = plateau[i-1]
+		}
 	}
 }

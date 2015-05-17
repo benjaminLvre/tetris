@@ -1,5 +1,7 @@
 package com.polytech.stfu.jeu;
 
+import android.database.CrossProcessCursor;
+
 public abstract class Jeu extends Thread{
 	protected Vitesse vitesse;
 	protected Acceleration acceleration;
@@ -7,7 +9,13 @@ public abstract class Jeu extends Thread{
 	protected TypePiece piece;
 	protected int intervalTime;
 	
+	private boolean pause;
+	private Object lockPause;
+	
 	public Jeu(){
+		pause = false;
+		lockPause = new Object();
+		
 		vitesse = Vitesse.NORMALE;
 		acceleration = Acceleration.MODEREE;
 		grille = new Grille();
@@ -33,7 +41,7 @@ public abstract class Jeu extends Thread{
 	public void run(){
 		piece = createFuturPiece();
 		while(true){
-			aff();
+			lockPause();
 			try {
 				sleep(intervalTime);
 			} catch (InterruptedException e) {
@@ -43,11 +51,7 @@ public abstract class Jeu extends Thread{
 				grille.movePiece(TypeMove.DOWN);
 			}
 			else{
-				for(int line = grille.getBottomLinePiece(); line >= grille.getTopLinePiece(); line--){
-					if(grille.removeLine(line)){
-						break;
-					}
-				}
+				updateScore(grille.removeLines(line));
 				if(isFinish()){
 					break;
 				}
@@ -62,18 +66,30 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public void pause(){
-		
+		synchronized (pause) {
+			pause = true;
+		}
 	}
 	
 	public void restart(){
-		
+		synchronized (pause) {
+			pause = false;
+		}
 	}
 	
 	public void end(){
 		
 	}
 	
+	protected void lockPause(){
+		while(pause){
+			yield();
+		}
+	}
+	
 	protected abstract boolean isFinish();
+	
+	protected abstract void updateScore(int line);
 	
 	protected TypePiece createFuturPiece(){
 		int type = (int)(Math.random()*7);
