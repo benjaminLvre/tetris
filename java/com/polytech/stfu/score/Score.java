@@ -14,24 +14,25 @@ import java.util.TreeSet;
  *
  */
 public abstract class Score {
-    /**
-     * Fonction pour obtenir l'ensemble des meilleurs scores d'un mode
-     * @param mode Le mode de jeu voulu
-     * @return L'ensemble des 5 meilleurs scores
-     */
-    public static SortedSet<Couple> getHighScoreList(Mode mode, Context context){
-        SortedSet<Couple> ret = new TreeSet<Couple>();
+	/**
+	 * Fonction pour obtenir l'ensemble des meilleurs scores d'un mode
+	 * @param mode Le mode de jeu voulu
+	 * @return L'ensemble des 5 meilleurs scores
+	 */
+	public static SortedSet<Couple> getHighScoreList(Mode mode, Context context){
+		SortedSet<Couple> ret = new TreeSet<Couple>();
+		
+		SharedPreferences scores = context.getSharedPreferences("Scores", 0);
+		for(int i = 1; i<6; i++){
+			Couple tmp = new Couple(score.getString(mode.getNom()+"pseudo"+i, null), score.getInt(mode.getNom()+"score"+i, -1));
+			if(tmp.getDeux() == -1){
+				break;
+			}
+			ret.add(tmp);
+		}
+		return ret;
+	}
 
-        SharedPreferences scores = context.getSharedPreferences("Scores", 0);
-        for(int i = 1; i<6; i++){
-            Couple tmp = new Couple(scores.getString(mode.getNom()+"pseudo"+i, null), scores.getInt(mode.getNom()+"score"+i, -1));
-            if(tmp.getScore() == -1){
-                break;
-            }
-            ret.add(tmp);
-        }
-        return ret;
-    }
 
     /**
      * Fonction pour tester si un score est dans les 5 meileurs du mode voulu
@@ -68,4 +69,5 @@ public abstract class Score {
         }
         editor.commit();
     }
+
 }
