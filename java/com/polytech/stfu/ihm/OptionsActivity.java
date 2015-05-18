@@ -107,10 +107,12 @@ public class OptionsActivity extends Activity {
      * @param view  Le radioButton sélectionné"
      */
     public void changeTheme(View view){
-        Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
+        /*switch (view.getId()){
+            case R.id.themeClassique : setThemeClassique();break;
+        }*/
         scrollView.setBackgroundResource(R.drawable.background_cubes);
         // Jeu.THEME = view.getId();
     }

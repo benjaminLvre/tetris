@@ -44,8 +44,6 @@ public class GameActivity extends Activity {
         //unregisterReceiver(receiver);
     }
 
-
-
     // EVENTS
 
     /**

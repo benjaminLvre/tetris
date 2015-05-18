@@ -158,7 +158,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     /**
      * Operation réalisé lors du clic sur l'ecran de jeu
      * @param event L'évènement
-     * @return
+     * @return boolean
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
