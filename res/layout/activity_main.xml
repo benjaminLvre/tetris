@@ -6,8 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MenuPrincipal"
-    android:id="@+id/linearMain"
     android:background="@drawable/background_cubes">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/polytris_logo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp" />
 
     <Button
         android:id="@+id/jouer"
@@ -17,7 +24,16 @@
         android:onClick="launchGame"
         android:padding="5dip"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="130dp" />
+        android:layout_marginTop="0dp"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:background="@drawable/btn_custom"/>
+    <!--
+    android:textColor="@android:color/black"
+    android:textSize="30sp"
+    android:background="@drawable/btn_custom"
+    android:layout_marginBottom="10dp"
+    android:textStyle="bold" -->
     <Button
         android:id="@+id/instructions"
         android:layout_width="200dp"
@@ -26,7 +42,16 @@
         android:text="@string/title_activity_page_intructions"
         android:onClick="seeInstructions"
         android:padding="5dip"
-        />
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:background="@drawable/btn_custom"/>
+    <!--
+    android:textColor="@android:color/black"
+    android:textSize="30sp"
+    android:background="@drawable/btn_custom"
+    android:layout_marginBottom="10dp"
+    android:textStyle="bold"-->
+
     <Button
         android:id="@+id/options"
         android:layout_width="200dp"
@@ -35,7 +60,15 @@
         android:text="@string/title_activity_options"
         android:onClick="changeOptions"
         android:padding="5dip"
-        />
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:background="@drawable/btn_custom"/>
+    <!--android:textColor="@android:color/black"
+    android:textSize="30sp"
+    android:background="@drawable/btn_custom"
+    android:layout_marginBottom="10dp"
+    android:textStyle="bold"-->
+
     <Button
         android:id="@+id/highscores"
         android:layout_width="200dp"
@@ -44,6 +77,13 @@
         android:text="@string/highscores"
         android:onClick="seeHighscores"
         android:padding="5dip"
-        />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:background="@drawable/btn_custom"/>
+    <!--
+    android:textColor="@android:color/black"
+    android:textSize="24sp"
+    android:background="@drawable/btn_custom"
+    android:textStyle="bold" -->
 
 </LinearLayout>

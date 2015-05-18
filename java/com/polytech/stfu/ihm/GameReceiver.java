@@ -1,17 +1,26 @@
 package com.polytech.stfu.ihm;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
+
+import com.polytech.stfu.jeu.Jeu;
 
 public class GameReceiver extends BroadcastReceiver {
 
     private TetrisView mView;
+    private Activity mActivity;
     private Jeu jeu;
 
-    public GameReceiver(TetrisView view, Jeu jeu){
+    public GameReceiver(){}
+
+    public GameReceiver(Activity pActivity, TetrisView view, Jeu jeu){
         this.mView = view;
         this.jeu = jeu;
+
+        this.mActivity = pActivity;
     }
 
     @Override
@@ -19,12 +28,15 @@ public class GameReceiver extends BroadcastReceiver {
         if(intent.getAction().equals(Jeu.GAME_STATE_CHANGE)){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Actualiser l'affichage du jeu
+                Toast.makeText(this.mActivity, "GAME_STATE_CHANGE ", Toast.LENGTH_SHORT).show();
+                mActivity.runOnUiThread(mView.getmThread());
         	}
         }
         else if(intent.getAction().equals(Jeu.GAME_END)){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Enlever les controles du Jeu
         		//Afficher le menu de fin
+
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){
         		jeu.end();
@@ -39,14 +51,14 @@ public class GameReceiver extends BroadcastReceiver {
         else if(intent.getAction().equals(Jeu.GAME_PAUSE)){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Enlever les controles du Jeu
-        		Jeu.pause();
+        		jeu.pause();
         	}
         }
         else if(intent.getAction().equals(Jeu.GAME_UNPAUSE)){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Remettre les controles du Jeu
-        		Jeu.restart();
+        		jeu.restart();
         	}
         }
     }
-} 
+}

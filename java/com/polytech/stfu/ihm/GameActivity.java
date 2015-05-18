@@ -18,7 +18,6 @@ public class GameActivity extends Activity {
 
     private GameReceiver receiver;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +25,7 @@ public class GameActivity extends Activity {
         TetrisView tetrisView = new TetrisView(this);
         setContentView(tetrisView);
 
-        receiver = new GameReceiver(tetrisView, Jeu.getJeu());
+        receiver = new GameReceiver(this,tetrisView, Jeu.getJeu());
 
         Jeu.getJeu().startGame();
     }
@@ -35,13 +34,11 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        //registerReceiver(receiver, new Intent());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //unregisterReceiver(receiver);
     }
 
     // EVENTS

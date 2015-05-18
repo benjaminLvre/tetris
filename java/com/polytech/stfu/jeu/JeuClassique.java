@@ -1,12 +1,15 @@
 package com.polytech.stfu.jeu;
 
+import android.content.Context;
+
 public class JeuClassique extends Jeu {
 	private int score;
 	
 	private Object lockScore;
+
 	
-	public JeuClassique(){
-		super();
+	public JeuClassique(Context pContext){
+		super(pContext);
 		score = 0;
 		
 		lockScore = new Object();

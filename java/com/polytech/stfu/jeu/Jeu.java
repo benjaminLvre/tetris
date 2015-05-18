@@ -1,5 +1,7 @@
 package com.polytech.stfu.jeu;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.CrossProcessCursor;
 import android.os.Parcelable;
 
@@ -10,16 +12,27 @@ public abstract class Jeu extends Thread{
 	protected TypePiece piece;
 	protected int intervalTime;
 	private Mode mode;
-	
+
+	private Context mContext;
+
+	protected boolean fin;
 	protected boolean pause;
 	protected Object lockPause;
 	
 	private static Jeu jeu;
+
+	public final static String GAME_STATE_CHANGE  = "com.polytech.stfu.jeu.GAME_STATE_CHANGE";
+	public final static String NEW_SCORE  = "com.polytech.stfu.jeu.NEW_SCORE";
+	public final static String GAME_END  = "com.polytech.stfu.jeu.GAME_END";
+	public final static String GAME_PAUSE  = "com.polytech.stfu.jeu.GAME_PAUSE";
+	public final static String GAME_UNPAUSE  = "com.polytech.stfu.jeu.GAME_UNPAUSE";
 	
-	public Jeu(){
+	public Jeu(Context pContext){
 		pause = false;
 		lockPause = new Object();
-		
+
+		mContext = pContext;
+		fin = false;
 		vitesse = Vitesse.NORMALE;
 		acceleration = Acceleration.MODEREE;
 		grille = new Grille();
@@ -53,10 +66,10 @@ public abstract class Jeu extends Thread{
 	public TypePiece getTypeNextPiece(){
 		return piece;
 	}
-	
+
 	public void run(){
 		piece = createFuturPiece();
-		while(true){
+		while(!fin){
 			lockPause();
 			try {
 				sleep(intervalTime);
@@ -68,12 +81,15 @@ public abstract class Jeu extends Thread{
 			}
 			else{
 				updateScore(grille.removeLines());
+				sendNewScore();
 				if(isFinish()){
+					sendGameEnd();
 					break;
 				}
 				piece = createFuturPiece();
 				intervalTime *= 0.01 * acceleration.getVal();
 			}
+			sendGameStateChange();
 		}
 	}
 	
@@ -94,7 +110,7 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public void end(){
-		
+		fin = true;
 	}
 	
 	protected void lockPause(){
@@ -173,5 +189,23 @@ public abstract class Jeu extends Thread{
 	
 	public void aff(){
 		System.out.println(grille);
+	}
+
+	private void sendGameStateChange(){
+		Intent intent = new Intent(GAME_STATE_CHANGE);
+		intent.putExtra("Source", "Jeu");
+		mContext.sendBroadcast(intent);
+	}
+
+	private void sendNewScore(){
+		Intent intent = new Intent(NEW_SCORE);
+		intent.putExtra("Source", "Jeu");
+		mContext.sendBroadcast(intent);
+	}
+
+	private void sendGameEnd(){
+		Intent intent = new Intent(GAME_END);
+		intent.putExtra("Source", "Jeu");
+		mContext.sendBroadcast(intent);
 	}
 }
