@@ -73,7 +73,6 @@ public class OptionsActivity extends Activity {
                 case "contre-la-montre": modeCLM.setChecked(true);new JeuChrono();break;
             }
         }
-
         SharedPreferences vitesseRegister = getApplicationContext().getSharedPreferences("Vitesse", 0);
         String vitesseRegisterValue = vitesseRegister.getString("vitesse", null);
         if(vitesseRegisterValue == null){
@@ -87,8 +86,8 @@ public class OptionsActivity extends Activity {
                 case "ELEVEE": vit3.setChecked(true);Jeu.getJeu().setVitesse(Vitesse.ELEVEE);break;
             }
         }
-        SharedPreferences accelerationRegister = getApplicationContext().getSharedPreferences("Mode", 0);
-        String accelerationRegisterValue = accelerationRegister.getString("mode", null);
+        SharedPreferences accelerationRegister = getApplicationContext().getSharedPreferences("Acceleration", 0);
+        String accelerationRegisterValue = accelerationRegister.getString("acceleration", null);
         if(accelerationRegisterValue == null){
             editor = accelerationRegister.edit();
             editor.putString("acceleration", "NULLE");
@@ -100,8 +99,6 @@ public class OptionsActivity extends Activity {
                 case "FORTE": accel2.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.FORTE);break;
             }
         }
-
-        Toast.makeText(OptionsActivity.this, "theme enregistré : " + themeRegisterValue, Toast.LENGTH_SHORT).show();
 
     }
 

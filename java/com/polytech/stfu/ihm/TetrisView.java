@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Grille;
+import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.TypePiece;
 
 /**
@@ -83,8 +84,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
 
-        //pCanvas.drawRect(0.0f,0.0f,(float)width,50.0f, this.scoreBgc);
-        //pCanvas.drawText("Score : 0000", 15.0f, 25.0f, this.scoreColor);
+        pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
+        pCanvas.drawText("Score : " + String.valueOf(Jeu.getJeu().getScore()), 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille
         for(int hl=1; hl<=HORIZONTAL_LINES; hl++){
