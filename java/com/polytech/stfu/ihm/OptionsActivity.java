@@ -69,8 +69,8 @@ public class OptionsActivity extends Activity {
             editor.apply();
         }else{
             switch (modeRegisterValue){
-                case "classique": modeClassique.setChecked(true);new JeuClassique(); break;
-                case "contre-la-montre": modeCLM.setChecked(true);new JeuChrono();break;
+                case "classique": modeClassique.setChecked(true);new JeuClassique(this); break;
+                case "contre-la-montre": modeCLM.setChecked(true);new JeuChrono(this);break;
             }
         }
         SharedPreferences vitesseRegister = getApplicationContext().getSharedPreferences("Vitesse", 0);
@@ -123,8 +123,8 @@ public class OptionsActivity extends Activity {
     public void changeMode(View view){
         //Toast.makeText(OptionsActivity.this, "Mode modifié", Toast.LENGTH_SHORT).show();
         saveMode(view.getId(), getApplicationContext());
-        if(view.getId() == R.id.modeClassique) new JeuClassique();
-        else new JeuChrono();
+        if(view.getId() == R.id.modeClassique) new JeuClassique(this);
+        else new JeuChrono(this);
     }
 
     /**

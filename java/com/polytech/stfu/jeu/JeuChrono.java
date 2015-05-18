@@ -1,10 +1,13 @@
 package com.polytech.stfu.jeu;
 
+import android.content.Context;
+
 public class JeuChrono extends Jeu {
 	private int tempsLimite;
 	private Chrono chrono;
 	
-	public JeuChrono(){
+	public JeuChrono(Context pContext){
+		super(pContext);
 		chrono = new Chrono();
 		tempsLimite = 60;
 	}

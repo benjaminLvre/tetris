@@ -24,7 +24,7 @@ public class mainMenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new JeuClassique();
+        new JeuClassique(mainMenuActivity.this);
     }
 
     public void launchGame(View view){

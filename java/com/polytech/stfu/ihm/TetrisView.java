@@ -1,7 +1,7 @@
 package com.polytech.stfu.ihm;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +13,8 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.TypeMove;
+import com.polytech.stfu.jeu.TypePiece;
 
 /**
  * Classe permettant de créer la vue d'une partie
@@ -21,7 +23,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private static final String TAG = TetrisView.class.getSimpleName();
     // Holder
     private SurfaceHolder mSurfaceHolder;
-    private Thread mThread;
+    private Runnable drawingThread;
 
     private Paint linePaint;
     private Paint bgc;
@@ -48,7 +50,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.mSurfaceHolder = getHolder();
         this.mSurfaceHolder.addCallback(this);
 
-        this.mThread = new DrawingThread();
+        this.drawingThread = new DrawingThread();
 
         this.linePaint = new Paint();
 
@@ -79,7 +81,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
 
-        pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
+       // pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
         pCanvas.drawText("Score : " + String.valueOf(Jeu.getJeu().getScore()), 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille
@@ -87,11 +89,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             pCanvas.drawLine(0.0f,(float)horizontalLargeLine*(hl)+50.0f, (float)width,(float)horizontalLargeLine*(hl)+50.0f, this.linePaint);
         }
         for(int vl=1; vl<=VERTICAL_LINES; vl++){
-            pCanvas.drawLine((float)verticalLargeLine*(vl),50.0f,(float)verticalLargeLine*(vl), (float)height +50.0f, this.linePaint);
+                    //srtX,srtY, spx, spY
+            pCanvas.drawLine((float)verticalLargeLine*(vl),50.0f,(float)verticalLargeLine*(vl), (float)height+50.0f, this.linePaint);
         }
 
         // Dessine une case
-        for(int li=0; li< HORIZONTAL_LINES +1; li++){
+        for(int li=1; li<= HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
                 if(Jeu.getJeu().getGrille()[li][col] != TypePiece.None){
                     switch (Jeu.getJeu().getGrille()[li][col]){
@@ -135,7 +138,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceCreated(SurfaceHolder pHolder) {
         keepDrawing = true;
-        this.mThread.start();
+        ((Activity)mContext).runOnUiThread(getmThread());
     }
     /**
      * Lancée quand la vue est détruite.
@@ -144,13 +147,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceDestroyed(SurfaceHolder pHolder) {
         this.keepDrawing = false;
-        boolean retry = true;
-        while(retry){
-            try{
-                mThread.join();
-                retry = false;
-            }catch (InterruptedException e){}
-        }
     }
 
     /**
@@ -158,16 +154,44 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      * @param event L'évènement
      * @return boolean
      */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int quarter = getWidth()/4;
+        // Clic sur l'ecran
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            if(event.getX()< quarter){
+                Toast.makeText(this.mContext, "move left ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().move(TypeMove.LEFT);
+
+            }
+            else if(event.getX() > quarter && event.getX() < 3*quarter){
+                Toast.makeText(this.mContext, "rotate piece ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().rotate();
+            }
+            else{
+                Toast.makeText(this.mContext, "move right ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().move(TypeMove.RIGHT);
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void refreshDraw(){
+        keepDrawing = true;
+    }
+
+    public Runnable getmThread(){
+        return new DrawingThread();
+    }
 
 
     /**
      * Classe Thread interne permettant de dessiner la vue du jeu
      */
-    private class DrawingThread extends Thread{
+    private class DrawingThread implements Runnable{
 
         @Override
         public void run() {
-            while(keepDrawing){
                 Canvas canvas = null;
                 keepDrawing = false;
                 try{
@@ -184,14 +208,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                         mSurfaceHolder.unlockCanvasAndPost(canvas);
                     }
                 }
-
-                // Permet de dessiner à 50 fps
-                try{
-                    Thread.sleep(20);
-                }catch (InterruptedException e){}
-            }
         }
-
     }
 
 }

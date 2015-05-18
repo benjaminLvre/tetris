@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +19,10 @@ import com.polytech.stfu.jeu.Jeu;
 
 public class GameActivity extends Activity {
 
-    private GameReceiver receiver;
 
+    private static final String TAG = GameActivity.class.getSimpleName();
+
+    private GameReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,7 @@ public class GameActivity extends Activity {
         TetrisView tetrisView = new TetrisView(this);
         setContentView(tetrisView);
 
-        receiver = new GameReceiver(tetrisView, Jeu.getJeu());
+        receiver = new GameReceiver(this,tetrisView, Jeu.getJeu());
 
         Jeu.getJeu().startGame();
     }
@@ -35,13 +40,14 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        //registerReceiver(receiver, new Intent());
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //unregisterReceiver(receiver);
+        Log.d(TAG,"onPause");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
     // EVENTS
