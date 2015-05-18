@@ -37,6 +37,12 @@ public abstract class Jeu extends Thread{
 			grille.movePiece(move);
 		}
 	}
+
+	public void rotate(){
+		if(grille.canRotatePiece()) {
+			grille.rotatePiece();
+		}
+	}
 	
 	public void down(){
 		while(grille.canMovePiece(TypeMove.DOWN)){

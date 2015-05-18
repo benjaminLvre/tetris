@@ -1,6 +1,7 @@
 package com.polytech.stfu.ihm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,8 +12,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
-import com.polytech.stfu.jeu.Grille;
 import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.TypeMove;
 import com.polytech.stfu.jeu.TypePiece;
 
 /**
@@ -23,8 +24,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     // Holder
     private SurfaceHolder mSurfaceHolder;
     private Thread mThread;
-
-    private Grille grille;
 
     private Paint linePaint;
     private Paint bgc;
@@ -52,8 +51,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.mSurfaceHolder.addCallback(this);
 
         this.mThread = new DrawingThread();
-
-        this.grille = new Grille(12, 22);
 
         this.linePaint = new Paint();
 
@@ -98,8 +95,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         // Dessine une case
         for(int li=0; li< HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
-                if(grille.getPlateau()[li][col] != TypePiece.None){
-                    switch (grille.getPlateau()[li][col]){
+                if(Jeu.getJeu().getGrille()[li][col] != TypePiece.None){
+                    switch (Jeu.getJeu().getGrille()[li][col]){
                         case L : caseColor.setColor(Color.RED);break;
                         case O: caseColor.setColor(Color.BLUE);break;
                         case S: caseColor.setColor(Color.GREEN);break;
@@ -125,10 +122,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
-    @Override
     /**
      * Lancée lorsque l'ecran subit un changement, non utilisé ici
      */
+    @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         // Ne fait rien
     }
@@ -169,13 +166,16 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         // Clic sur l'ecran
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             if(event.getX()< quarter){
-                Toast.makeText(this.mContext, "move left ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this.mContext, "move left ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().move(TypeMove.LEFT);
             }
             else if(event.getX() > quarter && event.getX() < 3*quarter){
-                Toast.makeText(this.mContext, "rotate piece ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this.mContext, "rotate piece ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().rotate();
             }
             else{
-                Toast.makeText(this.mContext, "move right ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this.mContext, "move right ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().move(TypeMove.RIGHT);
             }
         }
         return super.onTouchEvent(event);

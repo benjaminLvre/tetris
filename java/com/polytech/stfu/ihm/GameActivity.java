@@ -11,8 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.polytech.stfu.jeu.Jeu;
+
 
 public class GameActivity extends Activity {
+
+    private GameReceiver receiver;
 
 
     @Override
@@ -22,19 +26,24 @@ public class GameActivity extends Activity {
         TetrisView tetrisView = new TetrisView(this);
         setContentView(tetrisView);
 
+        receiver = new GameReceiver(tetrisView);
+
+        Jeu.getJeu().startGame();
     }
 
-    @Override
-    protected void onPause() {
-        super.onStop();
-
-        // mettre le jeu en pause
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        //registerReceiver(receiver, filter);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //unregisterReceiver(receiver);
+    }
+
 
 
     // EVENTS
@@ -53,9 +62,7 @@ public class GameActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-
     // DIALOG BOX
-
     public void showPauseDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
@@ -84,7 +91,6 @@ public class GameActivity extends Activity {
         });
         adb.show();
     }
-
     public void showScoresDialog(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View alertDialogView = factory.inflate(R.layout.dialog_highscores, null);
@@ -116,6 +122,4 @@ public class GameActivity extends Activity {
             } });
         adb.show();
     }
-
-
 }
