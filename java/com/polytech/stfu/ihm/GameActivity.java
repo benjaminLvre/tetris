@@ -26,7 +26,7 @@ public class GameActivity extends Activity {
         TetrisView tetrisView = new TetrisView(this);
         setContentView(tetrisView);
 
-        receiver = new GameReceiver(tetrisView);
+        receiver = new GameReceiver(tetrisView, Jeu.getJeu());
 
         Jeu.getJeu().startGame();
     }
@@ -35,7 +35,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        //registerReceiver(receiver, filter);
+        //registerReceiver(receiver, new Intent());
     }
 
     @Override

@@ -13,8 +13,6 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
-import com.polytech.stfu.jeu.TypeMove;
-import com.polytech.stfu.jeu.TypePiece;
 
 /**
  * Classe permettant de créer la vue d'une partie
@@ -160,26 +158,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      * @param event L'évènement
      * @return boolean
      */
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int quarter = getWidth()/4;
-        // Clic sur l'ecran
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            if(event.getX()< quarter){
-                //Toast.makeText(this.mContext, "move left ", Toast.LENGTH_SHORT).show();
-                Jeu.getJeu().move(TypeMove.LEFT);
-            }
-            else if(event.getX() > quarter && event.getX() < 3*quarter){
-                //Toast.makeText(this.mContext, "rotate piece ", Toast.LENGTH_SHORT).show();
-                Jeu.getJeu().rotate();
-            }
-            else{
-                //Toast.makeText(this.mContext, "move right ", Toast.LENGTH_SHORT).show();
-                Jeu.getJeu().move(TypeMove.RIGHT);
-            }
-        }
-        return super.onTouchEvent(event);
-    }
+
 
     /**
      * Classe Thread interne permettant de dessiner la vue du jeu
