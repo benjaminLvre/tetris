@@ -24,7 +24,7 @@ public class Grille {
 	 * @param largeur Largeur de la grille
 	 * @param hauteur Hauteur de la grille
 	 */
-	protected Grille(int largeur, int hauteur){
+	public Grille(int largeur, int hauteur){
 		plateau = new TypePiece[hauteur+1][largeur];
 		for(int x = 0;x<12;x++){
 			for(int y = 22; y>=0;y--){

@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.polytech.stfu.jeu.Grille;
 import com.polytech.stfu.jeu.TypePiece;
 
 /**
@@ -22,7 +23,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private SurfaceHolder mSurfaceHolder;
     private Thread mThread;
 
-    private TypePiece grille[][];
+    private Grille grille;
 
     private Paint linePaint;
     private Paint bgc;
@@ -51,7 +52,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
         this.mThread = new DrawingThread();
 
-        this.grille = new TypePiece[23][12];
+        this.grille = new Grille(12, 22);
 
         this.linePaint = new Paint();
 
@@ -72,7 +73,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     protected void onDraw(Canvas pCanvas) {
         Log.d(TAG, "OnDraw canvas");
         int width = getWidth();
-        int height = getHeight() - 50;
+        int height = getHeight() - (int) 50.0f;
         int horizontalLargeLine = height / (HORIZONTAL_LINES +1);
         int verticalLargeLine = width / (VERTICAL_LINES +1);
 
@@ -82,22 +83,22 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
 
-        pCanvas.drawRect(0.0f,0.0f,(float)width,50.0f, this.scoreBgc);
-        pCanvas.drawText("Score : 0000", 15.0f, 25.0f, this.scoreColor);
+        //pCanvas.drawRect(0.0f,0.0f,(float)width,50.0f, this.scoreBgc);
+        //pCanvas.drawText("Score : 0000", 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille
-        for(int hl=0; hl<HORIZONTAL_LINES; hl++){
-            pCanvas.drawLine(0.0f,(float)horizontalLargeLine*(hl+1)+50.0f, (float)width,(float)horizontalLargeLine*(hl+1)+50.0f, this.linePaint);
+        for(int hl=1; hl<=HORIZONTAL_LINES; hl++){
+            pCanvas.drawLine(0.0f,(float)horizontalLargeLine*(hl)+50.0f, (float)width,(float)horizontalLargeLine*(hl)+50.0f, this.linePaint);
         }
-        for(int vl=0; vl<VERTICAL_LINES; vl++){
-            pCanvas.drawLine((float)verticalLargeLine*(vl+1),50.0f,(float)verticalLargeLine*(vl+1), (float)height +50.0f, this.linePaint);
+        for(int vl=1; vl<=VERTICAL_LINES; vl++){
+            pCanvas.drawLine((float)verticalLargeLine*(vl),50.0f,(float)verticalLargeLine*(vl), (float)height +50.0f, this.linePaint);
         }
 
         // Dessine une case
         for(int li=0; li< HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
-                if(grille[li][col] != TypePiece.None){
-                    switch (grille[li][col]){
+                if(grille.getPlateau()[li][col] != TypePiece.None){
+                    switch (grille.getPlateau()[li][col]){
                         case L : caseColor.setColor(Color.RED);break;
                         case O: caseColor.setColor(Color.BLUE);break;
                         case S: caseColor.setColor(Color.GREEN);break;
