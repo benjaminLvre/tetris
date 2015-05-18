@@ -19,7 +19,6 @@ import com.polytech.stfu.jeu.Jeu;
 
 public class GameActivity extends Activity {
 
-
     private static final String TAG = GameActivity.class.getSimpleName();
 
     private GameReceiver receiver;
@@ -40,6 +39,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
 

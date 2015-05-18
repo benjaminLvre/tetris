@@ -35,9 +35,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     final int  HORIZONTAL_LINES = 21;
     final int VERTICAL_LINES = 11;
 
-    // Permet d'arreter le dessin quand il le faut
-    boolean keepDrawing = true;
-
     Context mContext;
 
     /**
@@ -137,7 +134,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     public void surfaceCreated(SurfaceHolder pHolder) {
-        keepDrawing = true;
         ((Activity)mContext).runOnUiThread(getmThread());
     }
     /**
@@ -146,7 +142,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder pHolder) {
-        this.keepDrawing = false;
+
     }
 
     /**
@@ -176,10 +172,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         return super.onTouchEvent(event);
     }
 
-    public void refreshDraw(){
-        keepDrawing = true;
-    }
-
     public Runnable getmThread(){
         return new DrawingThread();
     }
@@ -193,7 +185,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         @Override
         public void run() {
                 Canvas canvas = null;
-                keepDrawing = false;
                 try{
                     canvas = mSurfaceHolder.lockCanvas();
                     // Aucun autre thread n'a acces au Holder

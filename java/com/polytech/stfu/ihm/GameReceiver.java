@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,7 +36,8 @@ public class GameReceiver extends BroadcastReceiver {
                 Log.d(TAG,"extra : Source");
         		//Actualiser l'affichage du jeu
                 //Toast.makeText(this.mActivity, "GAME_STATE_CHANGE ", Toast.LENGTH_SHORT).show();
-                Jeu.getJeu().aff();
+                //Jeu.getJeu().aff();
+
                 mActivity.runOnUiThread(mView.getmThread());
         	}
         }

@@ -51,7 +51,8 @@
 
 
     <string name="highscores">Meilleurs scores</string>
-
+    <string name="scoreClassique">Classique</string>
+    <string name="scoreChrono">Chrono'</string>
 
     <string name="action_settings">Mettre en pause</string>
 
