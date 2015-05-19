@@ -54,12 +54,15 @@ public abstract class Jeu extends Thread{
 	public void move(TypeMove move){
 		if(grille.canMovePiece(move)){
 			grille.movePiece(move);
+			sendGameStateChange();
 		}
 	}
 
 	public void rotate(){
 		if(grille.canRotatePiece()) {
 			grille.rotatePiece();
+			Jeu.getJeu().aff();
+			sendGameStateChange();
 		}
 	}
 	
@@ -194,7 +197,7 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public void aff(){
-		//Log.d(TAG, "grille : " + grille.toString());
+		Log.d(TAG, "grille : " + grille.toString());
 		//System.out.println(grille);
 
 	}

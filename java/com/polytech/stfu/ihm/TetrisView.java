@@ -67,10 +67,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     protected void onDraw(Canvas pCanvas) {
         Log.d(TAG, "OnDraw canvas");
-        int width = getWidth();
-        int height = getHeight() - (int) 50.0f;
-        int horizontalLargeLine = height / (HORIZONTAL_LINES +1);
-        int verticalLargeLine = width / (VERTICAL_LINES +1);
+        float width = (float)getWidth();
+        float height = (float)getHeight();
+        float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
+        float verticalLargeLine = width / (float)(VERTICAL_LINES +1);
 
         // Fond de l'écran
         pCanvas.drawColor(this.bgc.getColor());
@@ -78,16 +78,17 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
 
-        pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
-        pCanvas.drawText("Score : " + String.valueOf(Jeu.getJeu().getScore()), 15.0f, 25.0f, this.scoreColor);
+        pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
+        pCanvas.drawText("Score : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille
-        for(int hl=1; hl<=HORIZONTAL_LINES; hl++){
-            pCanvas.drawLine(0.0f,(float)horizontalLargeLine*(hl)+50.0f, (float)width,(float)horizontalLargeLine*(hl)+50.0f, this.linePaint);
+        for(int hl=2; hl<=HORIZONTAL_LINES +1; hl++){
+
+            pCanvas.drawLine(0.0f,horizontalLargeLine*(hl), width,horizontalLargeLine*(hl), this.linePaint);
         }
         for(int vl=1; vl<=VERTICAL_LINES; vl++){
                     //srtX,srtY, spx, spY
-            pCanvas.drawLine((float)verticalLargeLine*(vl),50.0f,(float)verticalLargeLine*(vl), (float)height+50.0f, this.linePaint);
+            pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), height, this.linePaint);
         }
 
         // Dessine une case
@@ -106,15 +107,15 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                     }
                     Log.d(TAG, " draw un carré");
                     if(li == 0 && col == 0){
-                        pCanvas.drawRect(0.0f,50.0f,(float)verticalLargeLine,(float)horizontalLargeLine +50.0f, caseColor);
+                        pCanvas.drawRect(0.0f,horizontalLargeLine,verticalLargeLine,horizontalLargeLine, caseColor);
                     }
                     else if(col == 0){
-                        pCanvas.drawRect(0.0f,(float)horizontalLargeLine*li +50.0f,(float)verticalLargeLine,(float)horizontalLargeLine*(li+1)+50.0f, caseColor);
+                        pCanvas.drawRect(0.0f,horizontalLargeLine*li,verticalLargeLine,horizontalLargeLine*(li+1), caseColor);
                     }else if(li == 0) {
-                        pCanvas.drawRect((float)verticalLargeLine*col,50.0f,(float)verticalLargeLine*(col+1),(float)horizontalLargeLine +50.0f, caseColor);
+                        pCanvas.drawRect(verticalLargeLine*col,horizontalLargeLine,verticalLargeLine*(col+1),horizontalLargeLine, caseColor);
                     }
                     else{
-                        pCanvas.drawRect((float)verticalLargeLine*col,(float)horizontalLargeLine*li +50.0f,(float)verticalLargeLine*(col+1),(float)horizontalLargeLine*(li+1) +50.0f, caseColor);
+                        pCanvas.drawRect(verticalLargeLine*col,horizontalLargeLine*li,verticalLargeLine*(col+1),horizontalLargeLine*(li+1), caseColor);
                     }
                 }
             }
@@ -156,16 +157,14 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         // Clic sur l'ecran
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             if(event.getX()< quarter){
-                Toast.makeText(this.mContext, "move left ", Toast.LENGTH_SHORT).show();
                 Jeu.getJeu().move(TypeMove.LEFT);
-
             }
             else if(event.getX() > quarter && event.getX() < 3*quarter){
-                Toast.makeText(this.mContext, "rotate piece ", Toast.LENGTH_SHORT).show();
+                Jeu.getJeu().aff();
                 Jeu.getJeu().rotate();
+                Jeu.getJeu().aff();
             }
             else{
-                Toast.makeText(this.mContext, "move right ", Toast.LENGTH_SHORT).show();
                 Jeu.getJeu().move(TypeMove.RIGHT);
             }
         }

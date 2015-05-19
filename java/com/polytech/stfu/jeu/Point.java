@@ -27,7 +27,7 @@ public class Point {
 	public Point getRotatePosition(Point centreRotation){
 		int x = centreRotation.x-this.x;
 		int y = centreRotation.y-this.y;
-		return new Point(y, -x);
+		return new Point(y + centreRotation.x, -x + centreRotation.y);
 	}
 	
 	/**
@@ -35,8 +35,8 @@ public class Point {
 	 * @param centreRotation Le centre de la rotation
 	 */
 	public void setRotatePosition(Point centreRotation){
-		x = centreRotation.y-this.y;
-		y = -centreRotation.x+this.x;
+		x = centreRotation.y-this.y + centreRotation.x;
+		y = centreRotation.x-this.x +centreRotation.y;
 	}
 
 	/**
@@ -64,11 +64,11 @@ public class Point {
 	public void setMovePosition(TypeMove move){
 		switch(move){
 		case LEFT:
-			x--;
+			x--; break;
 		case RIGHT:
-			x++;
+			x++; break;
 		case DOWN:
-			y++;
+			y++; break;
 		}
 	}
 	

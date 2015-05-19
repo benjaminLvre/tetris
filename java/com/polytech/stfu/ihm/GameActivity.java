@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.polytech.stfu.jeu.Jeu;
@@ -28,6 +29,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         TetrisView tetrisView = new TetrisView(this);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(tetrisView);
 
         receiver = new GameReceiver(this,tetrisView, Jeu.getJeu());
