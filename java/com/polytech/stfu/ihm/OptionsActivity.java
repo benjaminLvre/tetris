@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Acceleration;
 import com.polytech.stfu.jeu.Jeu;
@@ -28,78 +27,13 @@ public class OptionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        ScrollView scrollViewOption = (ScrollView)findViewById(R.id.themeOptions);
+        ViewDesign.changeOptions(this);
+    }
 
-        // Radio theme
-        RadioButton themeC = (RadioButton)findViewById(R.id.themeClassique);
-        RadioButton themeP = (RadioButton)findViewById(R.id.themePolytech);
-        RadioButton themeWD = (RadioButton)findViewById(R.id.themeWalkingDead);
-        // Radio mode
-        RadioButton modeClassique = (RadioButton)findViewById(R.id.modeClassique);
-        RadioButton modeCLM = (RadioButton)findViewById(R.id.modeCLM);
-        // Radio vitesse
-        RadioButton vit1 = (RadioButton)findViewById(R.id.vit1);
-        RadioButton vit2 = (RadioButton)findViewById(R.id.vit2);
-        RadioButton vit3 = (RadioButton)findViewById(R.id.vit3);
-        // Radio acceleration
-        RadioButton accel0 = (RadioButton)findViewById(R.id.accel0);
-        RadioButton accel1 = (RadioButton)findViewById(R.id.accel1);
-        RadioButton accel2 = (RadioButton)findViewById(R.id.accel2);
-
-
-        SharedPreferences themeRegister = getApplicationContext().getSharedPreferences("Theme", 0);
-        String themeRegisterValue = themeRegister.getString("theme", null);
-        SharedPreferences.Editor editor;
-        if(themeRegisterValue == null){
-            editor = themeRegister.edit();
-            editor.putString("theme", "classique");
-            editor.apply();
-        }else{
-            switch (themeRegisterValue){
-                case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_cubes);break;
-                case "polytech": themeP.setChecked(true);break;
-                case "walking_dead": themeWD.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_wd);break;
-            }
-        }
-        SharedPreferences modeRegister = getApplicationContext().getSharedPreferences("Mode", 0);
-        String modeRegisterValue = modeRegister.getString("mode", null);
-        if(modeRegisterValue == null){
-            editor = modeRegister.edit();
-            editor.putString("mode", "classique");
-            editor.apply();
-        }else{
-            switch (modeRegisterValue){
-                case "classique": modeClassique.setChecked(true);new JeuClassique(this); break;
-                case "contre-la-montre": modeCLM.setChecked(true);new JeuChrono(this);break;
-            }
-        }
-        SharedPreferences vitesseRegister = getApplicationContext().getSharedPreferences("Vitesse", 0);
-        String vitesseRegisterValue = vitesseRegister.getString("vitesse", null);
-        if(vitesseRegisterValue == null){
-            editor = vitesseRegister.edit();
-            editor.putString("vitesse", "FAIBLE");
-            editor.apply();
-        }else{
-            switch (vitesseRegisterValue){
-                case "FAIBLE": vit1.setChecked(true);Jeu.getJeu().setVitesse(Vitesse.FAIBLE);break;
-                case "NORMALE": vit2.setChecked(true);Jeu.getJeu().setVitesse(Vitesse.NORMALE);break;
-                case "ELEVEE": vit3.setChecked(true);Jeu.getJeu().setVitesse(Vitesse.ELEVEE);break;
-            }
-        }
-        SharedPreferences accelerationRegister = getApplicationContext().getSharedPreferences("Acceleration", 0);
-        String accelerationRegisterValue = accelerationRegister.getString("acceleration", null);
-        if(accelerationRegisterValue == null){
-            editor = accelerationRegister.edit();
-            editor.putString("acceleration", "NULLE");
-            editor.apply();
-        }else{
-            switch (accelerationRegisterValue){
-                case "NULLE": accel0.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.NULLE); break;
-                case "MODEREE": accel1.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.MODEREE);break;
-                case "FORTE": accel2.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.FORTE);break;
-            }
-        }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewDesign.changeOptions(this);
     }
 
     /**
@@ -108,11 +42,21 @@ public class OptionsActivity extends Activity {
      */
     public void changeTheme(View view){
         //Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
+        SharedPreferences themeRegister = this.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
+        SharedPreferences.Editor editor;
+        editor = themeRegister.edit();
+
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
         switch (view.getId()){
-            case R.id.themeClassique : scrollView.setBackgroundResource(R.drawable.background_cubes);break;
-            case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd); break;
+            case R.id.themeClassique :
+                scrollView.setBackgroundResource(R.drawable.background_classique);
+                editor.putString("theme", "classique");
+                editor.apply();break;
+            case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd);
+                editor.putString("theme", "walking_dead");
+                editor.apply();break;
         }
 
         // Jeu.THEME = view.getId();
