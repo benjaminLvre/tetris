@@ -89,14 +89,16 @@ public abstract class Jeu extends Thread{
 				grille.movePiece(TypeMove.DOWN);
 			}
 			else{
-				updateScore(grille.removeLines());
+				int tmp = grille.removeLines();
+				updateScore(tmp);
 				sendNewScore();
 				if(isFinish()){
 					sendGameEnd();
 					break;
 				}
 				piece = createFuturPiece();
-				intervalTime *= 0.01 * acceleration.getVal();
+				if(acceleration.getVal() != 0)
+					intervalTime *= 0.01 * acceleration.getVal();
 			}
 			sendGameStateChange();
 		}

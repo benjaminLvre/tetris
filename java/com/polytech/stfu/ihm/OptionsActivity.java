@@ -52,12 +52,16 @@ public class OptionsActivity extends Activity {
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
         switch (view.getId()){
-            case R.id.themeClassique :
-                scrollView.setBackgroundResource(R.drawable.background_classique);
-                editor.putString("theme", "classique");
+            case R.id.themePolytech :
+                scrollView.setBackgroundResource(R.drawable.background_polytech);
+                editor.putString("theme", "polytech");
                 editor.apply();break;
             case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd);
                 editor.putString("theme", "walking_dead");
+                editor.apply();break;
+            default:
+                scrollView.setBackgroundResource(R.drawable.background_classique);
+                editor.putString("theme", "classique");
                 editor.apply();break;
         }
 

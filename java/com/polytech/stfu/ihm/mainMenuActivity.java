@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.JeuClassique;
+import com.polytech.stfu.jeu.Mode;
+import com.polytech.stfu.score.Score;
 
 
 public class mainMenuActivity extends Activity {
@@ -102,6 +104,13 @@ public class mainMenuActivity extends Activity {
             editor.putString("acceleration", "NULLE");
             editor.apply();
         }
+
+
+        Score.save(Mode.CLASSIQUE, "jacki", 50, this);
+        Score.save(Mode.CLASSIQUE, "michel", 69, this);
+        Score.save(Mode.CLASSIQUE, "ben", 500, this);
+        Score.save(Mode.CLASSIQUE, "simon", 450, this);
+        Score.save(Mode.CLASSIQUE, "Adrien", 501, this);
 
     }
 

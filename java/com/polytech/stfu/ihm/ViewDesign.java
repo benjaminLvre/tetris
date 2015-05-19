@@ -176,7 +176,7 @@ public class ViewDesign {
 
         switch (themeRegisterValue){
             case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_classique);break;
-            case "polytech": themeP.setChecked(true);break;
+            case "polytech": themeP.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_polytech);break;
             case "walking_dead": themeWD.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_wd);break;
         }
 

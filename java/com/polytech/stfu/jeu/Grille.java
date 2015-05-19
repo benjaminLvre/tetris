@@ -98,19 +98,25 @@ public class Grille {
 	 * @return Renvoit vrai si la line a ete supprimee
 	 */
 	protected int removeLines(){
-		int ret = 0;
-		for(int line = plateau.length-1; line >= 0; line--){
-			if(isEmptyLine(line)){
-				break;
-			}
-			if(isFullLine(line)){
-				decalageLine(line);
+		int i = getBottomLinePiece();
+		int fin = getTopLinePiece();
+		int cmp = 0;
+		while(i != fin){
+			if(isFullLine(i)){
+				for(int l = i; l > 0; l--){
+					plateau[l] = plateau[l-1];
+				}
+				for(int l = 0; l<plateau[0].length; l++){
+					plateau[0][l] = TypePiece.None;
+				}
+				fin++;
+				cmp++;
 			}
 			else{
-				line++;
+				i--;
 			}
 		}
-		return ret;
+		return cmp;
 	}
 	
 	/**
@@ -149,7 +155,6 @@ public class Grille {
 	 */
 	protected boolean canRotatePiece(){
 		synchronized (this) {
-			Point[] tmpRotate = piece.getRotatePosition();
 			return isValidPosition(piece.getRotatePosition());
 		}
 	}
