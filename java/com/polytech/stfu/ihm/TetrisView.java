@@ -155,6 +155,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     public boolean onTouchEvent(MotionEvent event) {
         int quarter = getWidth()/4;
         // Clic sur l'ecran
+        Toast.makeText(mContext,"onTouch",Toast.LENGTH_SHORT);
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             if(event.getX()< quarter){
                 Jeu.getJeu().move(TypeMove.LEFT);

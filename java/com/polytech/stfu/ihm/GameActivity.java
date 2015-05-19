@@ -32,7 +32,7 @@ public class GameActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(tetrisView);
 
-        receiver = new GameReceiver(this,tetrisView, Jeu.getJeu());
+        receiver = new GameReceiver(this,tetrisView);
 
         Jeu.getJeu().startGame();
     }
@@ -41,15 +41,13 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG,"onPause");
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        //LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
     // EVENTS
@@ -63,7 +61,14 @@ public class GameActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(event.getKeyCode() == 4){
-            this.showPauseDialog();
+            if(Jeu.getJeu().isInPause()){
+                sendGameUnpause();
+            }
+            else{
+                sendGamePause();
+                this.showPauseDialog();
+            }
+
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -79,6 +84,7 @@ public class GameActivity extends Activity {
 
         adb.setPositiveButton("Reprendre", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                sendGameUnpause();
 
                 //Lorsque l'on cliquera sur le bouton reprendre on reprendra une partie
             }
@@ -86,17 +92,42 @@ public class GameActivity extends Activity {
         adb.setNeutralButton("Rejouer", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //Lorsque l'on cliquera sur le bouton rejouer on recommencera une partie
+                sendGameRestart();
             }
         });
         adb.setNegativeButton("Retourner au menu", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //Lorsque l'on cliquera sur Retourner au menu on retourna a la page du menu principal
+                finish();
                 Intent maineMenuActivity = new Intent(GameActivity.this, mainMenuActivity.class);
                 startActivity(maineMenuActivity);
             }
         });
         adb.show();
     }
+
+    private void sendGameRestart(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action", Jeu.GAME_RESTART);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendGamePause(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action", Jeu.GAME_PAUSE);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendGameUnpause(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action", Jeu.GAME_UNPAUSE);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+
     public void showScoresDialog(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View alertDialogView = factory.inflate(R.layout.dialog_highscores, null);

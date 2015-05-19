@@ -5,10 +5,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.polytech.stfu.jeu.Acceleration;
 import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.JeuChrono;
+import com.polytech.stfu.jeu.JeuClassique;
+import com.polytech.stfu.jeu.Vitesse;
 
 public class GameReceiver extends BroadcastReceiver {
 
@@ -16,13 +21,11 @@ public class GameReceiver extends BroadcastReceiver {
 
     private TetrisView mView;
     private Activity mActivity;
-    private Jeu jeu;
 
     public GameReceiver(){}
 
-    public GameReceiver(Activity pActivity, TetrisView view, Jeu jeu){
+    public GameReceiver(Activity pActivity, TetrisView view){
         this.mView = view;
-        this.jeu = jeu;
 
         this.mActivity = pActivity;
     }
@@ -41,33 +44,65 @@ public class GameReceiver extends BroadcastReceiver {
                 mActivity.runOnUiThread(mView.getmThread());
         	}
         }
-        else if(intent.getAction().equals(Jeu.GAME_END)){
+        else if(intent.getStringExtra("Action").equals(Jeu.GAME_END)){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Enlever les controles du Jeu
         		//Afficher le menu de fin
 
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){
-        		jeu.end();
+        		Jeu.getJeu().end();
         		//Enlever les controles du Jeu
         	}
         }
-        else if(intent.getAction().equals(Jeu.NEW_SCORE)){
+        else if(intent.getStringExtra("Action").equals(Jeu.NEW_SCORE)){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Afficher le nouveau score
         	}
         }
-        else if(intent.getAction().equals(Jeu.GAME_PAUSE)){
+        else if(intent.getStringExtra("Action").equals(Jeu.GAME_PAUSE)){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Enlever les controles du Jeu
-        		jeu.pause();
+                Jeu.getJeu().pause();
         	}
         }
-        else if(intent.getAction().equals(Jeu.GAME_UNPAUSE)){
+        else if(intent.getStringExtra("Action").equals(Jeu.GAME_UNPAUSE)){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Remettre les controles du Jeu
-        		jeu.restart();
+                Jeu.getJeu().restart();
         	}
+        }
+        else if(intent.getStringExtra("Action").equals(Jeu.GAME_RESTART)){
+            if(intent.getStringExtra("Source").equals("Ihm")){
+                // Lancer une nouvelle partie
+                SharedPreferences modeRegister = mActivity.getSharedPreferences("Mode", 0);
+                String modeRegisterValue = modeRegister.getString("mode", "classique");
+
+                SharedPreferences vitesseRegister = mActivity.getSharedPreferences("Vitesse", 0);
+                String vitesseRegisterValue = vitesseRegister.getString("vitesse", "FAIBLE");
+
+                SharedPreferences accelerationRegister = mActivity.getSharedPreferences("Acceleration", 0);
+                String accelerationRegisterValue = accelerationRegister.getString("acceleration", "NULLE");
+
+                Jeu jeu;
+
+                if(modeRegisterValue.equals("classique"))
+                   jeu = new JeuClassique(mActivity);
+                else jeu = new JeuChrono(mActivity);
+
+                switch (accelerationRegisterValue){
+                    case "NULLE": jeu.setAcceleration(Acceleration.NULLE); break;
+                    case "MODEREE": jeu.setAcceleration(Acceleration.MODEREE); break;
+                    case "FORTE": jeu.setAcceleration(Acceleration.FORTE); break;
+                }
+                switch (vitesseRegisterValue){
+                    case "FAIBLE": jeu.setVitesse(Vitesse.FAIBLE); break;
+                    case "NORMALE": jeu.setVitesse(Vitesse.NORMALE); break;
+                    case "ELEVEE": jeu.setVitesse(Vitesse.ELEVEE); break;
+                }
+
+                jeu.startGame();
+            }
         }
     }
 }

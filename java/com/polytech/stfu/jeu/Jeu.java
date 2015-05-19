@@ -32,6 +32,7 @@ public abstract class Jeu extends Thread{
 	public final static String GAME_END  = "com.polytech.stfu.jeu.GAME_END";
 	public final static String GAME_PAUSE  = "com.polytech.stfu.jeu.GAME_PAUSE";
 	public final static String GAME_UNPAUSE  = "com.polytech.stfu.jeu.GAME_UNPAUSE";
+	public final static String GAME_RESTART  = "com.polytech.stfu.jeu.RESTART";
 	
 	public Jeu(Context pContext){
 		pause = false;
@@ -61,7 +62,6 @@ public abstract class Jeu extends Thread{
 	public void rotate(){
 		if(grille.canRotatePiece()) {
 			grille.rotatePiece();
-			Jeu.getJeu().aff();
 			sendGameStateChange();
 		}
 	}
@@ -78,6 +78,7 @@ public abstract class Jeu extends Thread{
 
 	public void run(){
 		piece = createFuturPiece();
+		sendGameStateChange();
 		while(!fin){
 			lockPause();
 			try {
@@ -197,9 +198,15 @@ public abstract class Jeu extends Thread{
 	public Mode getMode(){
 		return mode;
 	}
-	
+
+	public boolean isInPause(){
+		synchronized (lockPause) {
+			return pause;
+		}
+	}
+
 	public void aff(){
-		Log.d(TAG, "grille : " + grille.toString());
+		Log.d(TAG, "grille : \n" + grille.toString());
 		//System.out.println(grille);
 
 	}
