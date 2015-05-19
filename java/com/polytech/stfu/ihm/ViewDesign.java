@@ -25,6 +25,7 @@ public class ViewDesign {
         Button bInstructions = (Button)pActivity.findViewById(R.id.instructions);
         Button bOptions = (Button)pActivity.findViewById(R.id.options);
         Button bScores = (Button)pActivity.findViewById(R.id.highscores);
+        Button bAbout = (Button)pActivity.findViewById(R.id.babout);
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
@@ -66,6 +67,10 @@ public class ViewDesign {
                     bScores.setTextSize(24.0f);
                     bScores.setTypeface(null, Typeface.NORMAL);
                     bScores.setPadding(15,0,0,0);
+
+                    bAbout.setTextColor(Color.parseColor("#02a9bd"));
+                    bAbout.setBackgroundResource(R.drawable.btn_about_polytech);
+                    bAbout.setTypeface(null, Typeface.NORMAL);
                 break;
 
                 case "walking_dead":
@@ -100,6 +105,9 @@ public class ViewDesign {
                     bScores.setTypeface(null, Typeface.BOLD);
                     bScores.setPadding(0,0,0,0);
 
+                    bAbout.setTextColor(Color.BLACK);
+                    bAbout.setBackgroundResource(R.drawable.btn_about_wd);
+                    bAbout.setTypeface(null, Typeface.BOLD);
                     break;
                 default:
                     layout.setBackgroundResource(R.drawable.background_classique);
@@ -134,6 +142,10 @@ public class ViewDesign {
                     bScores.setTextSize(24.0f);
                     bScores.setTypeface(null, Typeface.NORMAL);
                     bScores.setPadding(0,0,0,0);
+
+                    bAbout.setTextColor(Color.WHITE);
+                    bAbout.setBackgroundResource(R.drawable.btn_about);
+                    bAbout.setTypeface(null, Typeface.NORMAL);
                     break;
             }
 

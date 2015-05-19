@@ -10,14 +10,14 @@
 
     android:background="@drawable/background_classique">
 
+
     <ImageView
         android:contentDescription="Image Jeu"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/imageView2"
         android:src="@drawable/polytris_logo"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp" />
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:id="@+id/jouer"
@@ -84,4 +84,15 @@
     android:background="@drawable/btn_custom"
     android:textStyle="bold" -->
 
+    <Button
+        android:text="@string/aboutbtn"
+        android:id="@+id/babout"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:onClick="seeAbout"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:background="@drawable/btn_about"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp" />
 </LinearLayout>

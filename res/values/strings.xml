@@ -58,7 +58,16 @@
     <string name="title_activity_highscores">HighscoresActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="aboutbtn">\?</string>
+    <string name="title_activity_about">AboutActivity</string>
 
+    <string name="aboutPage">A Propos</string>
+        <string name="about1">
+            Polytris est une application créée par Adrien COUËRON, Benjamin LELIEVRE et Simon VERGNAUD et testée par Maxime GUILLOTEAU.
+        </string>
+        <string name="about2">
+            Cette application s'intègre dans le cadre d'un Projet en Java à Polytech Nantes, encadré par M. Antoine PIGEAU.
+        </string>
 
 
 

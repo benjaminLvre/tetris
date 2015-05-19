@@ -19,7 +19,7 @@ public class mainMenuActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activité
+     * @param savedInstanceState    Etat de l'activitï¿½
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +45,16 @@ public class mainMenuActivity extends Activity {
         startActivity(gameActivity);
     }
     /**
-     * Ouvre l'activité permettant de lire les instructions de jeu
-     * @param view  Le bouton cliqué
+     * Ouvre l'activitï¿½ permettant de lire les instructions de jeu
+     * @param view  Le bouton cliquï¿½
      */
     public void seeInstructions(View view){
         Intent instructionsActivity = new Intent(mainMenuActivity.this, InstructionsActivity.class);
         startActivity(instructionsActivity);
     }
     /**
-     * Ouvre l'activité permettant de modifier les options de l'application
-     * @param view  Le bouton cliqué
+     * Ouvre l'activitï¿½ permettant de modifier les options de l'application
+     * @param view  Le bouton cliquï¿½
      */
     public void changeOptions(View view){
         Intent optionsActivity = new Intent(mainMenuActivity.this, OptionsActivity.class);
@@ -64,6 +64,11 @@ public class mainMenuActivity extends Activity {
     public void seeHighscores(View view){
         Intent highscoresActivity = new Intent(mainMenuActivity.this, HighscoresActivity.class);
         startActivity(highscoresActivity);
+    }
+
+    public void seeAbout(View view){
+        Intent aboutActivity = new Intent(mainMenuActivity.this, AboutActivity.class);
+        startActivity(aboutActivity);
     }
 
     public void intialisationSharedFiles(){
