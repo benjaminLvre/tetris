@@ -33,6 +33,41 @@ public class ViewDesign {
         LinearLayout.LayoutParams params;
 
         switch (themeRegisterValue){
+                case "polytech":
+                    layout.setBackgroundResource(R.drawable.background_polytech);
+
+                    //params = (LinearLayout.LayoutParams)layout.getLayoutParams();
+                    //params.setMargins(0, 0, 0, 0);
+
+                    bJouer.setBackgroundResource(R.drawable.btn_polytech);
+                    //bJouer.setLayoutParams(params);
+                    bJouer.setTextColor(Color.BLACK);
+                    bJouer.setTextSize(24.0f);
+                    bJouer.setTypeface(null, Typeface.NORMAL);
+                    bJouer.setPadding(10,0,0,0);
+
+                    bInstructions.setBackgroundResource(R.drawable.btn_polytech);
+                    //bInstructions.setLayoutParams(params);
+                    bInstructions.setTextColor(Color.BLACK);
+                    bInstructions.setTextSize(20.0f);
+                    bInstructions.setTypeface(null, Typeface.NORMAL);
+                    bInstructions.setPadding(40,0,0,0);
+
+                    bOptions.setBackgroundResource(R.drawable.btn_polytech);
+                    //bOptions.setLayoutParams(params);
+                    bOptions.setTextColor(Color.BLACK);
+                    bOptions.setTextSize(24.0f);
+                    bOptions.setTypeface(null, Typeface.NORMAL);
+                    bOptions.setPadding(20,0,0,0);
+
+                    bScores.setBackgroundResource(R.drawable.btn_polytech);
+                    //bScores.setLayoutParams(params);
+                    bScores.setTextColor(Color.BLACK);
+                    bScores.setTextSize(24.0f);
+                    bScores.setTypeface(null, Typeface.NORMAL);
+                    bScores.setPadding(15,0,0,0);
+                break;
+
                 case "walking_dead":
                     layout.setBackgroundResource(R.drawable.background_wd);
                     //params = (LinearLayout.LayoutParams)layout.getLayoutParams();
@@ -43,23 +78,27 @@ public class ViewDesign {
                     bJouer.setTextColor(Color.BLACK);
                     bJouer.setTextSize(30.0f);
                     bJouer.setTypeface(null, Typeface.BOLD);
+                    bJouer.setPadding(0,0,0,0);
 
                     bInstructions.setBackgroundResource(R.drawable.btn_wd);
                     //bInstructions.setLayoutParams(params);
                     bInstructions.setTextColor(Color.BLACK);
                     bInstructions.setTextSize(30.0f);
                     bInstructions.setTypeface(null, Typeface.BOLD);
+                    bInstructions.setPadding(0,0,0,0);
 
                     bOptions.setBackgroundResource(R.drawable.btn_wd);
                     //bOptions.setLayoutParams(params);
                     bOptions.setTextColor(Color.BLACK);
                     bOptions.setTextSize(30.0f);
                     bOptions.setTypeface(null, Typeface.BOLD);
+                    bOptions.setPadding(0,0,0,0);
 
                     bScores.setBackgroundResource(R.drawable.btn_wd);
                     bScores.setTextColor(Color.BLACK);
                     bScores.setTextSize(30.0f);
                     bScores.setTypeface(null, Typeface.BOLD);
+                    bScores.setPadding(0,0,0,0);
 
                     break;
                 default:
@@ -73,24 +112,28 @@ public class ViewDesign {
                     bJouer.setTextColor(Color.WHITE);
                     bJouer.setTextSize(24.0f);
                     bJouer.setTypeface(null, Typeface.NORMAL);
+                    bJouer.setPadding(0,0,0,0);
 
                     bInstructions.setBackgroundResource(R.drawable.btn_classique);
                     //bInstructions.setLayoutParams(params);
                     bInstructions.setTextColor(Color.WHITE);
                     bInstructions.setTextSize(24.0f);
                     bInstructions.setTypeface(null, Typeface.NORMAL);
+                    bInstructions.setPadding(0,0,0,0);
 
                     bOptions.setBackgroundResource(R.drawable.btn_classique);
                     //bOptions.setLayoutParams(params);
                     bOptions.setTextColor(Color.WHITE);
                     bOptions.setTextSize(24.0f);
                     bOptions.setTypeface(null, Typeface.NORMAL);
+                    bOptions.setPadding(0,0,0,0);
 
                     bScores.setBackgroundResource(R.drawable.btn_classique);
                     //bScores.setLayoutParams(params);
                     bScores.setTextColor(Color.WHITE);
                     bScores.setTextSize(24.0f);
                     bScores.setTypeface(null, Typeface.NORMAL);
+                    bScores.setPadding(0,0,0,0);
                     break;
             }
 

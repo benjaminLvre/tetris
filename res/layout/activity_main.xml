@@ -25,12 +25,11 @@
         android:layout_height="wrap_content"
         android:text="@string/title_activity_game"
         android:onClick="launchGame"
-        android:padding="5dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="0dp"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        android:background="@drawable/btn_classique"/>
+        android:background="@drawable/btn_classique" />
     <!--
     android:textColor="@android:color/black"
     android:textSize="30sp"
@@ -44,9 +43,8 @@
         android:layout_gravity="center"
         android:text="@string/title_activity_page_intructions"
         android:onClick="seeInstructions"
-        android:padding="5dip"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="24dp"
         android:background="@drawable/btn_classique"/>
     <!--
     android:textColor="@android:color/black"
@@ -61,7 +59,6 @@
         android:layout_gravity="center"
         android:text="@string/title_activity_options"
         android:onClick="changeOptions"
-        android:padding="5dip"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:background="@drawable/btn_classique"/>
@@ -78,9 +75,8 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/highscores"
         android:onClick="seeHighscores"
-        android:padding="5dip"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:background="@drawable/btn_classique"/>
     <!--
     android:textColor="@android:color/black"
