@@ -149,6 +149,7 @@ public class Grille {
 	 */
 	protected boolean canRotatePiece(){
 		synchronized (this) {
+			Point[] tmpRotate = piece.getRotatePosition();
 			return isValidPosition(piece.getRotatePosition());
 		}
 	}
@@ -173,6 +174,7 @@ public class Grille {
 			removePieceToPlateau();
 			piece.rotate();
 			setPieceOnPlateau();
+			Jeu.getJeu().aff();
 		}
 	}
 	
