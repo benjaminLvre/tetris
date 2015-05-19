@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
 
@@ -41,6 +42,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG,"haha onResume");
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
 
@@ -68,7 +70,7 @@ public class GameActivity extends Activity {
                 sendGamePause();
                 this.showPauseDialog();
             }
-
+            return false;
         }
         return super.onKeyDown(keyCode, event);
     }

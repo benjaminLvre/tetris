@@ -34,12 +34,11 @@ public class GameReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG,"onReceive");
         if(intent.getStringExtra("Action").equals(Jeu.GAME_STATE_CHANGE)){
-            Log.d(TAG,"extra : Action");
+
         	if(intent.getStringExtra("Source").equals("Jeu")){
-                Log.d(TAG,"extra : Source");
         		//Actualiser l'affichage du jeu
                 //Toast.makeText(this.mActivity, "GAME_STATE_CHANGE ", Toast.LENGTH_SHORT).show();
-                //Jeu.getJeu().aff();
+
 
                 mActivity.runOnUiThread(mView.getmThread());
         	}

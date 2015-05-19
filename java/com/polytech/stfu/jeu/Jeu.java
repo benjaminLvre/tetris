@@ -68,6 +68,10 @@ public abstract class Jeu extends Thread{
 	
 	public void down(){
 		while(grille.canMovePiece(TypeMove.DOWN)){
+			try{
+				Thread.sleep(50);
+			}catch (InterruptedException e){}
+
 			grille.movePiece(TypeMove.DOWN);
 		}
 	}

@@ -181,7 +181,6 @@ public class Grille {
 			removePieceToPlateau();
 			piece.rotate();
 			setPieceOnPlateau();
-			Jeu.getJeu().aff();
 		}
 	}
 	
@@ -192,9 +191,7 @@ public class Grille {
 	protected void setNewPiece(Piece p){
 		piece = p;
 		synchronized (this) {
-			Jeu.getJeu().aff();
 			setPieceOnPlateau();
-			Jeu.getJeu().aff();
 		}
 	}
 	
