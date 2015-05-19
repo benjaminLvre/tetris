@@ -58,7 +58,7 @@ public class OptionsActivity extends Activity {
             switch (themeRegisterValue){
                 case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_cubes);break;
                 case "polytech": themeP.setChecked(true);break;
-                case "walking_dead": themeWD.setChecked(true);break;
+                case "walking_dead": themeWD.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_wd);break;
             }
         }
         SharedPreferences modeRegister = getApplicationContext().getSharedPreferences("Mode", 0);
@@ -110,10 +110,11 @@ public class OptionsActivity extends Activity {
         //Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
-        /*switch (view.getId()){
-            case R.id.themeClassique : setThemeClassique();break;
-        }*/
-        scrollView.setBackgroundResource(R.drawable.background_cubes);
+        switch (view.getId()){
+            case R.id.themeClassique : scrollView.setBackgroundResource(R.drawable.background_cubes);break;
+            case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd); break;
+        }
+
         // Jeu.THEME = view.getId();
     }
     /**

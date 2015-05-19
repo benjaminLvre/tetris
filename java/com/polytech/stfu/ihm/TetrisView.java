@@ -78,7 +78,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
 
-       // pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
+        pCanvas.drawRect(0.0f, 0.0f, (float) width, 50.0f, this.scoreBgc);
         pCanvas.drawText("Score : " + String.valueOf(Jeu.getJeu().getScore()), 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille

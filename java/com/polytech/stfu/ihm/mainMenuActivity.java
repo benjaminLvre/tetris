@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 
 import android.view.View;
+import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.JeuClassique;
@@ -46,7 +47,11 @@ public class mainMenuActivity extends Activity {
     public void changeOptions(View view){
         Intent optionsActivity = new Intent(mainMenuActivity.this, OptionsActivity.class);
         startActivity(optionsActivity);
+    }
 
+    public void seeHighscores(View view){
+        Intent highscoresActivity = new Intent(mainMenuActivity.this, HighscoresActivity.class);
+        startActivity(highscoresActivity);
     }
 
 }

@@ -1,33 +1,28 @@
 package com.polytech.stfu.ihm;
+
 import android.app.Activity;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.TextView;
 
 import com.polytech.stfu.jeu.Mode;
 import com.polytech.stfu.score.Couple;
 
-import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
 
-public class HighscoreActivity extends Activity {
+public class HighscoresActivity extends Activity {
 
-    /**
-     * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activit�
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscores);
     }
 
-    protected void displayHighscores(View view) {
+    public void displayHighscores(View view) {
         SortedSet<Couple> highscores = new TreeSet<Couple>();
 
 
@@ -58,5 +53,4 @@ public class HighscoreActivity extends Activity {
         }
 
     }
-
 }

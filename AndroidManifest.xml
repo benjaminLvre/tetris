@@ -40,5 +40,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.polytech.stfu.ihm.mainMenuActivity" />
         </activity>
+        <activity
+            android:name=".HighscoresActivity"
+            android:label="@string/title_activity_highscores"
+            android:parentActivityName=".mainMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.polytech.stfu.ihm.mainMenuActivity" />
+        </activity>
     </application>
+
 </manifest>

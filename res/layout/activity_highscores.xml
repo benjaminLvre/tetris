@@ -2,12 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.polytech.stfu.ihm.HighscoreActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="left"
         tools:context="com.polytech.stfu.ihm.HighscoreActivity">
 
@@ -25,7 +26,8 @@
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:background="@drawable/btn_custom"/>/>
+                android:background="@drawable/btn_custom"
+                android:onClick="displayHighscores"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -35,7 +37,8 @@
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:background="@drawable/btn_custom"/>/>
+                android:background="@drawable/btn_custom"
+                android:onClick="displayHighscores"/>
 
         </LinearLayout>
 
