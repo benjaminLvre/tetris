@@ -32,8 +32,10 @@ public class GameReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG,"onReceive");
-        if(intent.getStringExtra("Action").equals(Jeu.GAME_STATE_CHANGE)){
+        Log.d(TAG, "onReceive");
+
+
+        if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_STATE_CHANGE))){
 
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Actualiser l'affichage du jeu
@@ -43,7 +45,7 @@ public class GameReceiver extends BroadcastReceiver {
                 mActivity.runOnUiThread(mView.getmThread());
         	}
         }
-        else if(intent.getStringExtra("Action").equals(Jeu.GAME_END)){
+        else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_END))){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Enlever les controles du Jeu
         		//Afficher le menu de fin
@@ -54,24 +56,19 @@ public class GameReceiver extends BroadcastReceiver {
         		//Enlever les controles du Jeu
         	}
         }
-        else if(intent.getStringExtra("Action").equals(Jeu.NEW_SCORE)){
-        	if(intent.getStringExtra("Source").equals("Jeu")){
-        		//Afficher le nouveau score
-        	}
-        }
-        else if(intent.getStringExtra("Action").equals(Jeu.GAME_PAUSE)){
+        else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_PAUSE))){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Enlever les controles du Jeu
                 Jeu.getJeu().pause();
         	}
         }
-        else if(intent.getStringExtra("Action").equals(Jeu.GAME_UNPAUSE)){
+        else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_UNPAUSE))){
         	if(intent.getStringExtra("Source").equals("Ihm")){
         		//Remettre les controles du Jeu
                 Jeu.getJeu().restart();
         	}
         }
-        else if(intent.getStringExtra("Action").equals(Jeu.GAME_RESTART)){
+        else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_RESTART))){
             if(intent.getStringExtra("Source").equals("Ihm")){
                 // Lancer une nouvelle partie
                 SharedPreferences modeRegister = mActivity.getSharedPreferences("Mode", 0);
