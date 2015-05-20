@@ -218,13 +218,26 @@ public class ViewDesign {
     public static void changeInstruction(Activity pActivity){
         ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
 
+        LinearLayout linearInstructions1 = (LinearLayout)pActivity.findViewById(R.id.linearInstructions1);
+        LinearLayout linearInstructions2 = (LinearLayout)pActivity.findViewById(R.id.linearInstructions2);
+        LinearLayout linearInstructions3 = (LinearLayout)pActivity.findViewById(R.id.linearInstructions3);
+
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
 
         switch (themeRegisterValue){
-            case "classique": scrollViewInstructions.setBackgroundResource(R.drawable.background_classique);break;
-            case "polytech": scrollViewInstructions.setBackgroundResource(R.drawable.background_polytech);break;
-            case "walking_dead": scrollViewInstructions.setBackgroundResource(R.drawable.background_wd);break;
+            case "classique":
+                scrollViewInstructions.setBackgroundResource(R.drawable.background_classique);
+                linearInstructions1.setBackgroundResource(R.drawable.fond_classique);
+                break;
+            case "polytech":
+                scrollViewInstructions.setBackgroundResource(R.drawable.background_polytech);
+                linearInstructions2.setBackgroundResource(R.drawable.fond_polytech);
+                break;
+            case "walking_dead":
+                scrollViewInstructions.setBackgroundResource(R.drawable.background_wd);
+                linearInstructions3.setBackgroundResource(R.drawable.fond_wd);
+                break;
         }
 
     }

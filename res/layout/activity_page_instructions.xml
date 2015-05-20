@@ -3,41 +3,106 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollIntruction">
+    android:id="@+id/scrollIntruction"
+    android:background="@drawable/background_classique"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="com.polytech.stfu.ihm.InstructionsActivity"
-        android:id="@+id/linearInstructions"
+        android:id="@+id/linearInstructionsMain"
         >
-        <TextView
-            android:text="@string/textInstructionsClassique"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
-        <TextView
-            android:text="@string/textInstructionsCLM"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
-        <TextView
-            android:text="@string/textInstructionsEvents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
+            android:orientation="vertical"
+            tools:context="com.polytech.stfu.ihm.InstructionsActivity"
+            android:id="@+id/linearInstructions1"
+            android:background="@drawable/fond_classique"
+            android:alpha="0.75"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp">
 
+            <TextView
+                android:text="@string/classicModeString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:text="@string/textInstructionsClassique"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#1A1A1A"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="com.polytech.stfu.ihm.InstructionsActivity"
+            android:id="@+id/linearInstructions2"
+            android:background="@drawable/fond_classique"
+            android:alpha="0.75"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:text="@string/chronoModeString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:text="@string/textInstructionsCLM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#1A1A1A"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="com.polytech.stfu.ihm.InstructionsActivity"
+            android:id="@+id/linearInstructions3"
+            android:background="@drawable/fond_classique"
+            android:alpha="0.75"
+            android:padding="10dp"
+            >
+            <TextView
+                android:text="@string/howToPlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:text="@string/textInstructionsEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#1A1A1A"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
