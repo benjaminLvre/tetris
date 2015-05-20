@@ -55,6 +55,5 @@ public class HighscoresActivity extends Activity {
             tabScores[i].setText(String.valueOf(c.getScore()));
             i++;
         }
-
     }
 }

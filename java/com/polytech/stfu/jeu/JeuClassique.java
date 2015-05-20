@@ -18,7 +18,7 @@ public class JeuClassique extends Jeu {
 
 	
 	public JeuClassique(Context pContext){
-		super(pContext);
+		super(pContext, Mode.CLASSIQUE);
 		score = 0;
 		
 		lockScore = new Object();
