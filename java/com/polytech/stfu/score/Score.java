@@ -12,6 +12,9 @@ import java.util.TreeSet;
 
 /**
  * Classe gerant la sauvegarde des scores
+ *
+ * Interface du module Score permettant de gerer facilement une correspondance un highscore en 5 correspondances  pseudo/score.
+ *
  * @author Stfu
  *
  */

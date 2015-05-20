@@ -2,8 +2,10 @@ package com.polytech.stfu.jeu;
 
 /**
  * Classe representant une case de la grille
- * @author Stfu
  *
+ * Cette classe permet de gerer facilement les deplacements d'une case de la grille en determinant les futures positions apres un mouvement ou une rotation.
+ *
+ * @author Stfu
  */
 public class Point {
 	/**
