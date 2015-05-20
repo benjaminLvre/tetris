@@ -21,7 +21,7 @@ public class JeuChrono extends Jeu {
 	private Chrono chrono;
 	
 	public JeuChrono(Context pContext){
-		super(pContext);
+		super(pContext, Mode.CHRONO);
 		chrono = new Chrono();
 		tempsLimite = 60;
 		lockTempsLimite = new Object();

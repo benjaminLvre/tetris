@@ -9,6 +9,7 @@ import com.polytech.stfu.ihm.R;
 
 /**
  * Classe representant l'asbtraction d'une partie
+ * Elle est la seule interface proposée par le module
  * @author Stfu
  * @see Grille
  */
@@ -66,7 +67,7 @@ public abstract class Jeu extends Thread{
 	 */
 	private static Jeu jeu;
 	
-	public Jeu(Context pContext){
+	public Jeu(Context pContext, Mode mode){
 		pause = false;
 		lockPause = new Object();
 		lockMove = new Object();
@@ -77,6 +78,7 @@ public abstract class Jeu extends Thread{
 		acceleration = Acceleration.MODEREE;
 		grille = new Grille();
 		intervalTime = 500 * vitesse.getVal()/100;
+        this.mode = mode;
 		
 		Jeu.jeu = this;
 	}
@@ -301,7 +303,7 @@ public abstract class Jeu extends Thread{
 	private void sendGameStateChange(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", R.string.GAME_STATE_CHANGE);
+		intent.putExtra("Action", mContext.getString(R.string.GAME_STATE_CHANGE));
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 
@@ -311,7 +313,7 @@ public abstract class Jeu extends Thread{
 	private void sendGameEnd(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", R.string.GAME_END);
+		intent.putExtra("Action", mContext.getString(R.string.GAME_END));
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 }

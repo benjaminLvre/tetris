@@ -47,8 +47,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.mSurfaceHolder = getHolder();
         this.mSurfaceHolder.addCallback(this);
 
-        this.drawingThread = new DrawingThread();
-
         this.linePaint = new Paint();
 
         this.bgc = new Paint();
@@ -58,6 +56,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
         this.bgc.setColor(Color.WHITE);
         this.linePaint.setColor(Color.LTGRAY);
+
+        this.drawingThread = new DrawingThread();
     }
 
     /**
