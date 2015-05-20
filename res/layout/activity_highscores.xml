@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.polytech.stfu.ihm.HighscoreActivity"
-    android:background="@drawable/background_polytech"
+    android:background="@drawable/background_classique"
     android:fillViewport="false"
     android:padding="10dp">
 
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:textColor="#1A1A1A"
                 android:textSize="20sp"
-                android:background="@drawable/btn_polytech"
+                android:background="@drawable/btn_classique"
                 android:onClick="displayHighscores"
                 android:paddingLeft="24dp" />
 
@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:textColor="#1A1A1A"
                 android:textSize="20sp"
-                android:background="@drawable/btn_polytech"
+                android:background="@drawable/btn_classique"
                 android:onClick="displayHighscores"
                 android:paddingLeft="24dp" />
 
@@ -54,7 +54,7 @@
             android:stretchColumns="1"
             android:id="@+id/tableScore"
             android:padding="10dp"
-            android:background="@drawable/fond_polytech"
+            android:background="@drawable/fond_classique"
             android:alpha="0.75"
             android:orientation="vertical"
             android:layout_marginTop="50dp">
