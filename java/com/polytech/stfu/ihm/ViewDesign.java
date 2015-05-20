@@ -24,9 +24,15 @@ import java.util.SortedSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
+/**
+ * Classe permettant de gerer le design des différentes activités selon le theme choisi
+ */
 public class ViewDesign {
 
-
+    /**
+     * Permet de mettre en place le design du menu principal
+     * @param pActivity L'activité a modifiée
+     */
     public static void changeMain(Activity pActivity){
 
         LinearLayout layout = (LinearLayout)pActivity.findViewById(R.id.linearMain);
@@ -153,6 +159,10 @@ public class ViewDesign {
             }
 
     }
+    /**
+     * Permet de mettre en place le design de la page des options
+     * @param pActivity L'activité a modifiée
+     */
     public static void changeOptions(Activity pActivity){
         ScrollView scrollViewOption = (ScrollView)pActivity.findViewById(R.id.themeOptions);
 
@@ -247,6 +257,10 @@ public class ViewDesign {
 
 
     }
+    /**
+     * Permet de mettre en place le design de la page des instructions
+     * @param pActivity L'activité a modifiée
+     */
     public static void changeInstruction(Activity pActivity){
         ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
 
@@ -273,6 +287,10 @@ public class ViewDesign {
         }
 
     }
+    /**
+     * Permet de mettre en place le design de la page about
+     * @param pActivity L'activité a modifiée
+     */
     public static void changeAbout(Activity pActivity){
         LinearLayout linearAbout = (LinearLayout)pActivity.findViewById(R.id.linearAbout);
 
@@ -286,13 +304,16 @@ public class ViewDesign {
         }
 
     }
+    /**
+     * Permet de mettre en place le design de la page listant les meilleurs scores
+     * @param pActivity L'activité a modifiée
+     */
     public static void changeHighscore(Activity pActivity){
 
         ScrollView scrollViewHighscore = (ScrollView)pActivity.findViewById(R.id.scrollHighscore);
         Button bClassique = (Button)pActivity.findViewById(R.id.scoreClassique);
         Button bChrono = (Button)pActivity.findViewById(R.id.scoreChrono);
         TableLayout tScore = (TableLayout) pActivity.findViewById(R.id.tableScore);
-
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);

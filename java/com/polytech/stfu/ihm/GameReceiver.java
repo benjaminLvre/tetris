@@ -15,6 +15,9 @@ import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
 import com.polytech.stfu.jeu.Vitesse;
 
+/**
+ * Classe gerant le controleur des messages qui traversent l'application
+ */
 public class GameReceiver extends BroadcastReceiver {
 
     private static final String TAG = GameReceiver.class.getSimpleName();
@@ -32,11 +35,7 @@ public class GameReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "onReceive");
-
-
         if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_STATE_CHANGE))){
-
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Actualiser l'affichage du jeu
                 //Toast.makeText(this.mActivity, "GAME_STATE_CHANGE ", Toast.LENGTH_SHORT).show();

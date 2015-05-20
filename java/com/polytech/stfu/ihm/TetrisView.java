@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
@@ -17,7 +18,7 @@ import com.polytech.stfu.jeu.TypeMove;
 import com.polytech.stfu.jeu.TypePiece;
 
 /**
- * Classe permettant de cr�er la vue d'une partie
+ * Classe permettant de mettre en place la vue d'une partie
  */
 public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private static final String TAG = TetrisView.class.getSimpleName();
@@ -66,8 +67,12 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     protected void onDraw(Canvas pCanvas) {
+
+        if(pCanvas == null)
+            pCanvas = mSurfaceHolder.lockCanvas();
+
         float width = (float)getWidth();
-        float height = (float)getHeight();
+        float height = (float) getHeight();
         float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
         float verticalLargeLine = width / (float)(VERTICAL_LINES +1);
 
@@ -188,6 +193,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         @Override
         public void run() {
                 Canvas canvas = null;
+
                 try{
                     canvas = mSurfaceHolder.lockCanvas();
                     // Aucun autre thread n'a acces au Holder
