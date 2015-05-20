@@ -12,6 +12,7 @@
     <string name="highscore3">3. </string>
     <string name="highscore4">4. </string>
     <string name="highscore5">5. </string>
+    <string name="player_pseudo_edit">Votre pseudo..</string>
 
 
     <string name="title_activity_page_intructions">Instructions</string>
