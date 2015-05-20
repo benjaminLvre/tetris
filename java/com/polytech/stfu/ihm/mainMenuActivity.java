@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.polytech.stfu.jeu.JeuClassique;
 import com.polytech.stfu.jeu.Mode;
@@ -17,46 +17,50 @@ import com.polytech.stfu.score.Score;
 
 public class mainMenuActivity extends Activity {
 
+    private static final String TAG = mainMenuActivity.class.getSimpleName();
 
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activité
+     * @param savedInstanceState    Etat de l'activitï¿½
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         intialisationSharedFiles();
         ViewDesign.changeMain(this);
 
-        new JeuClassique(mainMenuActivity.this);
+        new JeuClassique(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         ViewDesign.changeMain(this);
+
     }
 
     public void launchGame(View view){
         Intent gameActivity = new Intent(mainMenuActivity.this, GameActivity.class);
         startActivity(gameActivity);
     }
+
+
     /**
-     * Ouvre l'activité permettant de lire les instructions de jeu
-     * @param view  Le bouton cliqué
+     * Ouvre l'activitÃ© permettant de lire les instructions de jeu
+     * @param view  Le bouton cliquÃ©
      */
     public void seeInstructions(View view){
         Intent instructionsActivity = new Intent(mainMenuActivity.this, InstructionsActivity.class);
         startActivity(instructionsActivity);
     }
     /**
-     * Ouvre l'activité permettant de modifier les options de l'application
-     * @param view  Le bouton cliqué
+     * Ouvre l'activitÃ© permettant de modifier les options de l'application
+     * @param view  Le bouton cliquÃ©
      */
     public void changeOptions(View view){
         Intent optionsActivity = new Intent(mainMenuActivity.this, OptionsActivity.class);
@@ -66,6 +70,11 @@ public class mainMenuActivity extends Activity {
     public void seeHighscores(View view){
         Intent highscoresActivity = new Intent(mainMenuActivity.this, HighscoresActivity.class);
         startActivity(highscoresActivity);
+    }
+
+    public void seeAbout(View view){
+        Intent aboutActivity = new Intent(mainMenuActivity.this, AboutActivity.class);
+        startActivity(aboutActivity);
     }
 
     public void intialisationSharedFiles(){
@@ -99,14 +108,6 @@ public class mainMenuActivity extends Activity {
             editor.putString("acceleration", "NULLE");
             editor.apply();
         }
-
-
-        Score.save(Mode.CLASSIQUE, "jacki", 50, this);
-        Score.save(Mode.CLASSIQUE, "michel", 69, this);
-        Score.save(Mode.CLASSIQUE, "ben", 500, this);
-        Score.save(Mode.CLASSIQUE, "simon", 450, this);
-        Score.save(Mode.CLASSIQUE, "Adrien", 501, this);
-
     }
 
 }

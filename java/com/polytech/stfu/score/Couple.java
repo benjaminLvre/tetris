@@ -70,12 +70,16 @@ public class Couple  implements Comparable<Couple>{
 	 */
 	@Override
 	public int compareTo(Couple o) {
+		int compare;
 		if(this.score < o.score){
-			return 1;
+			compare = 1;
 		}
 		else if(this.score == o.score){
-			return 0;
+			compare = 0;
 		}
-		return -1;
+		else{
+			compare = -1;
+		}
+		return compare;
 	}
 }

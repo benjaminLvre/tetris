@@ -66,7 +66,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     protected void onDraw(Canvas pCanvas) {
-        Log.d(TAG, "OnDraw canvas");
         float width = (float)getWidth();
         float height = (float)getHeight();
         float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
@@ -105,7 +104,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                         case I: caseColor.setColor(Color.CYAN);break;
                         default:break;
                     }
-                    Log.d(TAG, " draw un carré");
                     if(li == 0 && col == 0){
                         pCanvas.drawRect(0.0f,horizontalLargeLine,verticalLargeLine,horizontalLargeLine, caseColor);
                     }
@@ -160,9 +158,15 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                 Jeu.getJeu().move(TypeMove.LEFT);
             }
             else if(event.getX() > quarter && event.getX() < 3*quarter){
-                Jeu.getJeu().aff();
-                Jeu.getJeu().rotate();
-                Jeu.getJeu().aff();
+                float height = (float)getHeight();
+                float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
+                if(event.getY() > horizontalLargeLine* 20){
+                    Jeu.getJeu().down();
+                }
+                else{
+                    Jeu.getJeu().rotate();
+                }
+
             }
             else{
                 Jeu.getJeu().move(TypeMove.RIGHT);
@@ -188,7 +192,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                     canvas = mSurfaceHolder.lockCanvas();
                     // Aucun autre thread n'a acces au Holder
                     synchronized (mSurfaceHolder){
-                        Log.d(TAG, "draw thread canvas");
                         onDraw(canvas);
                     }
                 }

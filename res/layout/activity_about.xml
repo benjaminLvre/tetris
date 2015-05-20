@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/linearAbout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MenuPrincipal"
+
+    android:background="@drawable/background_classique"
+    android:padding="5dp">
+
+
+    <ImageView
+        android:contentDescription="Image Jeu"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/polytris_logo_9"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:text="@string/about1"
+        android:id="@+id/aboutText1"
+        android:layout_gravity="center_horizontal"
+        android:background="#AA000000"
+        android:padding="5dp"
+        android:gravity="center" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:text="@string/about2"
+        android:id="@+id/aboutText2"
+        android:layout_gravity="center_horizontal"
+        android:background="#AA000000"
+        android:padding="5dp"
+        android:textAlignment="0"
+        android:gravity="center" />
+    <ImageView
+        android:contentDescription="Image Polytech"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/logoPolytech"
+        android:src="@drawable/logo_polytech"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+
+</LinearLayout>

@@ -105,12 +105,18 @@ public abstract class Jeu extends Thread{
 	 * Methode pour faire tourner la piece
 	 */
 	public void rotate(){
+<<<<<<< HEAD
 		synchronized (lockMove) {
 			if (grille.canRotatePiece()) {
 				grille.rotatePiece();
 				Jeu.getJeu().aff();
 				sendGameStateChange();
 			}
+=======
+		if(grille.canRotatePiece()) {
+			grille.rotatePiece();
+			sendGameStateChange();
+>>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 		}
 	}
 
@@ -118,10 +124,19 @@ public abstract class Jeu extends Thread{
 	 * Methode pour faire chuter la piece
 	 */
 	public void down(){
+<<<<<<< HEAD
 		synchronized (lockMove) {
 			while (grille.canMovePiece(TypeMove.DOWN)) {
 				grille.movePiece(TypeMove.DOWN);
 			}
+=======
+		while(grille.canMovePiece(TypeMove.DOWN)){
+			try{
+				Thread.sleep(50);
+			}catch (InterruptedException e){}
+
+			grille.movePiece(TypeMove.DOWN);
+>>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 		}
 	}
 	
@@ -134,6 +149,7 @@ public abstract class Jeu extends Thread{
 	 */
 	public void run(){
 		piece = createFuturPiece();
+		sendGameStateChange();
 		while(!fin){
 			try {
 				sleep(intervalTime);
@@ -147,6 +163,10 @@ public abstract class Jeu extends Thread{
 			else{
 				int tmp = grille.removeLines();
 				updateScore(tmp);
+<<<<<<< HEAD
+=======
+				sendNewScore();
+>>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 				if(isFinish()){
 					sendGameEnd();
 					break;
@@ -279,9 +299,15 @@ public abstract class Jeu extends Thread{
 	public Mode getMode(){
 		return mode;
 	}
-	
+
+	public boolean isInPause(){
+		synchronized (lockPause) {
+			return pause;
+		}
+	}
+
 	public void aff(){
-		Log.d(TAG, "grille : " + grille.toString());
+		Log.d(TAG, "grille : \n" + grille.toString());
 		//System.out.println(grille);
 
 	}

@@ -22,10 +22,12 @@ public class HighscoresActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_highscores);
+
+        ViewDesign.changeHighscore(this);
     }
 
     public void displayHighscores(View view) {
-        SortedSet<Couple> highscores = new TreeSet<Couple>();
+        SortedSet<Couple> highscores;
 
         if(view.getId() == R.id.scoreClassique) {
             highscores = getHighScoreList(Mode.CLASSIQUE,this);
@@ -50,7 +52,7 @@ public class HighscoresActivity extends Activity {
         int i = 0;
         for(Couple c : highscores) {
             tabNames[i].setText(c.getPseudo());
-            tabScores[i].setText(c.getScore());
+            tabScores[i].setText(String.valueOf(c.getScore()));
             i++;
         }
 
