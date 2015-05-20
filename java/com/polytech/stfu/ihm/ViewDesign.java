@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.app.Activity;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.polytech.stfu.jeu.Acceleration;
@@ -245,6 +246,7 @@ public class ViewDesign {
         ScrollView scrollViewHighscore = (ScrollView)pActivity.findViewById(R.id.scrollHighscore);
         Button bClassique = (Button)pActivity.findViewById(R.id.scoreClassique);
         Button bChrono = (Button)pActivity.findViewById(R.id.scoreChrono);
+        TableLayout tScore = (TableLayout) pActivity.findViewById(R.id.tableScore);
 
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
@@ -271,6 +273,8 @@ public class ViewDesign {
                 bChrono.setTextSize(24.0f);
                 bChrono.setTypeface(null, Typeface.NORMAL);
                 bChrono.setPadding(0,0,0,0);
+
+                tScore.setBackgroundResource(R.drawable.fond_classique);
                 break;
             case "polytech":
                 scrollViewHighscore.setBackgroundResource(R.drawable.background_polytech);
@@ -288,6 +292,8 @@ public class ViewDesign {
                 bChrono.setTextSize(24.0f);
                 bChrono.setTypeface(null, Typeface.NORMAL);
                 bChrono.setPadding(10,0,0,0);
+
+                tScore.setBackgroundResource(R.drawable.fond_polytech);
                 break;
             case "walking_dead":
                 scrollViewHighscore.setBackgroundResource(R.drawable.background_wd);
@@ -304,6 +310,8 @@ public class ViewDesign {
                 bChrono.setTextSize(30.0f);
                 bChrono.setTypeface(null, Typeface.BOLD);
                 bChrono.setPadding(0,0,0,0);
+
+                tScore.setBackgroundResource(R.drawable.fond_wd);
                 break;
         }
 
