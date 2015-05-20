@@ -3,12 +3,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-
+/**
+ * Permet d'afficher les instructions sur l'ecran
+ */
 public class InstructionsActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activité
+     * @param savedInstanceState    Etat de l'activitï¿½
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

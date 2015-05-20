@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-
+/**
+ * Classe permettant de mettre en place la page about
+ */
 public class AboutActivity extends Activity {
 
     @Override

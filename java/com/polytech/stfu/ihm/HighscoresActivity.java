@@ -14,7 +14,9 @@ import java.util.TreeSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
-
+/**
+ * Permet d'afficher l'activite Highscore sur l'ecran
+ */
 public class HighscoresActivity extends Activity {
 
     @Override
@@ -26,6 +28,10 @@ public class HighscoresActivity extends Activity {
         ViewDesign.changeHighscore(this);
     }
 
+    /**
+     * Permet d'afficher les scores
+     * @param view
+     */
     public void displayHighscores(View view) {
         SortedSet<Couple> highscores;
 

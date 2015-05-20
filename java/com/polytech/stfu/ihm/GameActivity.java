@@ -23,7 +23,9 @@ import java.util.SortedSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
-
+/**
+ * Classe permettant de mettre en place la page de la partie
+ */
 public class GameActivity extends Activity {
 
     private static final String TAG = GameActivity.class.getSimpleName();
@@ -43,7 +45,6 @@ public class GameActivity extends Activity {
         Jeu.getJeu().startGame();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -53,11 +54,12 @@ public class GameActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        //LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
-    // EVENTS
-
+    /**
+     * Clic sur la bouton de retour
+     */
     @Override
     public void onBackPressed() {
         if(Jeu.getJeu().isInPause()){
@@ -65,14 +67,14 @@ public class GameActivity extends Activity {
         }
         else{
             sendGamePause();
-            this.showScoresDialog();
+            this.showPauseDialog();
         }
     }
 
 
-
-
-    // DIALOG BOX
+    /**
+     * Permet de lancer une boite de dialogue qui met le jeu en pause
+     */
     public void showPauseDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
@@ -124,6 +126,10 @@ public class GameActivity extends Activity {
 
         adb.show();
     }
+
+    /**
+     * Permet de lancer une boite de dialogue qui affiche les scores en fin de partie
+     */
     public void showScoresDialog(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View alertDialogView = factory.inflate(R.layout.dialog_highscores, null);
@@ -174,6 +180,9 @@ public class GameActivity extends Activity {
         });
         adb.show();
     }
+    /**
+     * Permet de lancer une boite de dialogue qui permet au joueur d'enregistrer son score
+     */
     public void showNewScoreDialog(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View alertDialogView = factory.inflate(R.layout.dialog_new_score, null);
@@ -200,18 +209,27 @@ public class GameActivity extends Activity {
         adb.show();
     }
 
+    /**
+     * Permet de lancer un message a travers l'application pour relancer une partie
+     */
     private void sendGameRestart(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
         intent.putExtra("Action", R.string.GAME_RESTART);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
+    /**
+     * Permet de lancer un message a travers l'application pour mettre une partie en pause
+     */
     private void sendGamePause(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
         intent.putExtra("Action", R.string.GAME_PAUSE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
+    /**
+     * Permet de lancer un message a travers l'application pour reprendre une partie
+     */
     private void sendGameUnpause(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");

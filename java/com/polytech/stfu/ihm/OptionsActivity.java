@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 
@@ -17,11 +18,14 @@ import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
 import com.polytech.stfu.jeu.Vitesse;
 
+/**
+ * Permet d'afficher les options sur l'ecran
+ */
 public class OptionsActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activité
+     * @param savedInstanceState    Etat de l'activitï¿½
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,10 @@ public class OptionsActivity extends Activity {
 
     /**
      * Modifie la variable concernant le theme de l'application dans le class Jeu
-     * @param view  Le radioButton sélectionné"
+     * @param view  Le radioButton sï¿½lectionnï¿½"
      */
     public void changeTheme(View view){
-        //Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Theme modifiï¿½", Toast.LENGTH_SHORT).show();
         SharedPreferences themeRegister = this.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
         SharedPreferences.Editor editor;
@@ -51,28 +55,52 @@ public class OptionsActivity extends Activity {
 
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
+
+        LinearLayout linearOptions1 = (LinearLayout)findViewById(R.id.linearOptions1);
+        LinearLayout linearOptions2 = (LinearLayout)findViewById(R.id.linearOptions2);
+        LinearLayout linearOptions3 = (LinearLayout)findViewById(R.id.linearOptions3);
+        LinearLayout linearOptions4 = (LinearLayout)findViewById(R.id.linearOptions4);
+        LinearLayout linearOptions5 = (LinearLayout)findViewById(R.id.linearOptions5);
         switch (view.getId()){
             case R.id.themePolytech :
                 scrollView.setBackgroundResource(R.drawable.background_polytech);
                 editor.putString("theme", "polytech");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions4.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions5.setBackgroundResource(R.drawable.fond_polytech);
+                break;
             case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd);
                 editor.putString("theme", "walking_dead");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions2.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions3.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions4.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions5.setBackgroundResource(R.drawable.fond_wd);
+                break;
             default:
                 scrollView.setBackgroundResource(R.drawable.background_classique);
                 editor.putString("theme", "classique");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions2.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions3.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions4.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions5.setBackgroundResource(R.drawable.fond_classique);
+                break;
         }
 
         // Jeu.THEME = view.getId();
     }
     /**
      * Modifie la variable concernant le mode de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeMode(View view){
-        //Toast.makeText(OptionsActivity.this, "Mode modifié", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Mode modifiï¿½", Toast.LENGTH_SHORT).show();
         saveMode(view.getId(), getApplicationContext());
         if(view.getId() == R.id.modeClassique) new JeuClassique(this);
         else new JeuChrono(this);
@@ -80,10 +108,10 @@ public class OptionsActivity extends Activity {
 
     /**
      * Modifie la variable concernant la vitesse de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeVitesse(View view){
-        //Toast.makeText(OptionsActivity.this, "Vitesse modifiée", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Vitesse modifiï¿½e", Toast.LENGTH_SHORT).show();
         saveVitesse(view.getId(), getApplicationContext());
         switch (view.getId()){
             case R.id.vit1 : Jeu.getJeu().setVitesse(Vitesse.FAIBLE); break;
@@ -93,11 +121,11 @@ public class OptionsActivity extends Activity {
     }
 
     /**
-     * Modifie la variable concernant l'accélaration de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * Modifie la variable concernant l'accï¿½laration de l'application dans le class Jeu
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeAcceleration(View view){
-        //Toast.makeText(OptionsActivity.this, "Acceleration modifiée", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Acceleration modifiï¿½e", Toast.LENGTH_SHORT).show();
         saveAcceleration(view.getId(), getApplicationContext());
         switch (view.getId()){
             case R.id.accel0 : Jeu.getJeu().setAcceleration(Acceleration.NULLE); break;

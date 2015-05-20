@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
@@ -17,7 +18,7 @@ import com.polytech.stfu.jeu.TypeMove;
 import com.polytech.stfu.jeu.TypePiece;
 
 /**
- * Classe permettant de créer la vue d'une partie
+ * Classe permettant de mettre en place la vue d'une partie
  */
 public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private static final String TAG = TetrisView.class.getSimpleName();
@@ -66,12 +67,16 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     protected void onDraw(Canvas pCanvas) {
+
+        if(pCanvas == null)
+            pCanvas = mSurfaceHolder.lockCanvas();
+
         float width = (float)getWidth();
-        float height = (float)getHeight();
+        float height = (float) getHeight();
         float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
         float verticalLargeLine = width / (float)(VERTICAL_LINES +1);
 
-        // Fond de l'écran
+        // Fond de l'ï¿½cran
         pCanvas.drawColor(this.bgc.getColor());
 
         this.scoreColor.setColor(Color.WHITE);
@@ -120,7 +125,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         }
     }
     /**
-     * Lancée lorsque l'ecran subit un changement, non utilisé ici
+     * Lancï¿½e lorsque l'ecran subit un changement, non utilisï¿½ ici
      */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -128,16 +133,16 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     /**
-     * Lancée quand la vue se créée.
-     * @param pHolder   Permet de contrôler la surface
+     * Lancï¿½e quand la vue se crï¿½ï¿½e.
+     * @param pHolder   Permet de contrï¿½ler la surface
      */
     @Override
     public void surfaceCreated(SurfaceHolder pHolder) {
         ((Activity)mContext).runOnUiThread(getmThread());
     }
     /**
-     * Lancée quand la vue est détruite.
-     * @param pHolder Permet de contrôler la surface
+     * Lancï¿½e quand la vue est dï¿½truite.
+     * @param pHolder Permet de contrï¿½ler la surface
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder pHolder) {
@@ -145,8 +150,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     /**
-     * Operation réalisé lors du clic sur l'ecran de jeu
-     * @param event L'évènement
+     * Operation rï¿½alisï¿½ lors du clic sur l'ecran de jeu
+     * @param event L'ï¿½vï¿½nement
      * @return boolean
      */
     @Override
@@ -188,6 +193,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         @Override
         public void run() {
                 Canvas canvas = null;
+
                 try{
                     canvas = mSurfaceHolder.lockCanvas();
                     // Aucun autre thread n'a acces au Holder

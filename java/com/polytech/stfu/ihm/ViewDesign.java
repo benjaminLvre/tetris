@@ -24,9 +24,15 @@ import java.util.SortedSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
+/**
+ * Classe permettant de gerer le design des diff�rentes activit�s selon le theme choisi
+ */
 public class ViewDesign {
 
-
+    /**
+     * Permet de mettre en place le design du menu principal
+     * @param pActivity L'activit� a modifi�e
+     */
     public static void changeMain(Activity pActivity){
 
         LinearLayout layout = (LinearLayout)pActivity.findViewById(R.id.linearMain);
@@ -153,6 +159,10 @@ public class ViewDesign {
             }
 
     }
+    /**
+     * Permet de mettre en place le design de la page des options
+     * @param pActivity L'activit� a modifi�e
+     */
     public static void changeOptions(Activity pActivity){
         ScrollView scrollViewOption = (ScrollView)pActivity.findViewById(R.id.themeOptions);
 
@@ -172,15 +182,47 @@ public class ViewDesign {
         RadioButton accel1 = (RadioButton)pActivity.findViewById(R.id.accel1);
         RadioButton accel2 = (RadioButton)pActivity.findViewById(R.id.accel2);
 
-
+        LinearLayout linearOptions1 = (LinearLayout)pActivity.findViewById(R.id.linearOptions1);
+        LinearLayout linearOptions2 = (LinearLayout)pActivity.findViewById(R.id.linearOptions2);
+        LinearLayout linearOptions3 = (LinearLayout)pActivity.findViewById(R.id.linearOptions3);
+        LinearLayout linearOptions4 = (LinearLayout)pActivity.findViewById(R.id.linearOptions4);
+        LinearLayout linearOptions5 = (LinearLayout)pActivity.findViewById(R.id.linearOptions5);
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
 
         switch (themeRegisterValue){
-            case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_classique);break;
-            case "polytech": themeP.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_polytech);break;
-            case "walking_dead": themeWD.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_wd);break;
+            case "classique":
+                themeC.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_classique);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions2.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions3.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions4.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions5.setBackgroundResource(R.drawable.fond_classique);
+
+                break;
+            case "polytech":
+                themeP.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_polytech);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions4.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions5.setBackgroundResource(R.drawable.fond_polytech);
+                break;
+            case "walking_dead":
+                themeWD.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_wd);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions2.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions3.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions4.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions5.setBackgroundResource(R.drawable.fond_wd);
+                break;
         }
 
         SharedPreferences modeRegister = pActivity.getSharedPreferences("Mode", 0);
@@ -215,6 +257,10 @@ public class ViewDesign {
 
 
     }
+    /**
+     * Permet de mettre en place le design de la page des instructions
+     * @param pActivity L'activit� a modifi�e
+     */
     public static void changeInstruction(Activity pActivity){
         ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
 
@@ -229,18 +275,28 @@ public class ViewDesign {
             case "classique":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_classique);
                 linearInstructions1.setBackgroundResource(R.drawable.fond_classique);
+                linearInstructions2.setBackgroundResource(R.drawable.fond_classique);
+                linearInstructions3.setBackgroundResource(R.drawable.fond_classique);
                 break;
             case "polytech":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_polytech);
+                linearInstructions1.setBackgroundResource(R.drawable.fond_polytech);
                 linearInstructions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearInstructions3.setBackgroundResource(R.drawable.fond_polytech);
                 break;
             case "walking_dead":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_wd);
+                linearInstructions1.setBackgroundResource(R.drawable.fond_wd);
+                linearInstructions2.setBackgroundResource(R.drawable.fond_wd);
                 linearInstructions3.setBackgroundResource(R.drawable.fond_wd);
                 break;
         }
 
     }
+    /**
+     * Permet de mettre en place le design de la page about
+     * @param pActivity L'activit� a modifi�e
+     */
     public static void changeAbout(Activity pActivity){
         LinearLayout linearAbout = (LinearLayout)pActivity.findViewById(R.id.linearAbout);
 
@@ -254,13 +310,16 @@ public class ViewDesign {
         }
 
     }
+    /**
+     * Permet de mettre en place le design de la page listant les meilleurs scores
+     * @param pActivity L'activit� a modifi�e
+     */
     public static void changeHighscore(Activity pActivity){
 
         ScrollView scrollViewHighscore = (ScrollView)pActivity.findViewById(R.id.scrollHighscore);
         Button bClassique = (Button)pActivity.findViewById(R.id.scoreClassique);
         Button bChrono = (Button)pActivity.findViewById(R.id.scoreChrono);
         TableLayout tScore = (TableLayout) pActivity.findViewById(R.id.tableScore);
-
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);

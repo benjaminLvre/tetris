@@ -31,8 +31,7 @@
                 android:textColor="#1A1A1A"
                 android:textSize="20sp"
                 android:background="@drawable/btn_classique"
-                android:onClick="displayHighscores"
-                android:paddingLeft="24dp" />
+                android:onClick="displayHighscores"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -43,8 +42,7 @@
                 android:textColor="#1A1A1A"
                 android:textSize="20sp"
                 android:background="@drawable/btn_classique"
-                android:onClick="displayHighscores"
-                android:paddingLeft="24dp" />
+                android:onClick="displayHighscores"/>
 
         </LinearLayout>
 
