@@ -16,6 +16,7 @@
 
 
     <string name="title_activity_page_intructions">Instructions</string>
+    <string name="classicModeString">Mode Classique</string>
         <string name="textInstructionsClassique">
             En mode classique, Tetris met le joueur au défi de réaliser des lignes complètes en déplaçant des pièces de formes
             différentes, les tétriminos, qui défilent depuis le haut vers le bas de l\'écran. Les lignes complétées disparaissent tout en
@@ -23,12 +24,14 @@
             lorsqu\'un tétrimino reste bloqué en haut. Il doit donc résister le plus longtemps à la chute continue des tétriminos, afin de
             réaliser le meilleur score possible.
         </string>
+    <string name="chronoModeString">Mode Contre-la-montre</string>
         <string name="textInstructionsCLM">
             En mode contre-la-montre, les règles sont relativement les même sauf que le but est de marquer le plus de points possible dans le
             temps imparti. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
         </string>
+    <string name="howToPlay">Comment jouer ?</string>
         <string name="textInstructionsEvents">Pour déplacer une pièce il suffit de cliquer sur un des côtés de l\'écran, la pièce se déplacera du côté cliqué.
-            En cliquant au centre de l\'écran, la pièce subira une rotation de 90° dans le sens horaire. Un mouvement de glisser vers le bas,au centre de l\'écran, entraînera une chute rapide et irréversible de la pièce.
+            En cliquant au centre de l\'écran, la pièce subira une rotation de 90° dans le sens horaire. Un clic au bas de l\'écran,au centre, entraînera une chute rapide et instantanée de la pièce.
         </string>
 
     <string name="title_activity_options">Options</string>
