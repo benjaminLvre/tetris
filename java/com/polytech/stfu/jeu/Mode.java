@@ -1,5 +1,8 @@
 package com.polytech.stfu.jeu;
 
+/**
+ * Enumeration des modes de jeu
+ */
 public enum Mode {
 	CLASSIQUE("classique"),
 	CHRONO("chrono");
