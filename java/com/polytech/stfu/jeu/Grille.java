@@ -7,7 +7,6 @@ import java.util.List;
  * @author Stfu
  * @see Piece
  * @see Point
- * 
  */
 public class Grille {
 	/**
@@ -95,7 +94,7 @@ public class Grille {
 	
 	/**
 	 * Methode supprimant les lignes completes et rabaissent celle superieure
-	 * @return Renvoit vrai si la line a ete supprimee
+	 * @return Renvoit le nombre de lignes supprimees
 	 */
 	protected int removeLines(){
 		int i = getBottomLinePiece();
@@ -106,7 +105,7 @@ public class Grille {
 				for(int l = i; l > 0; l--){
 					plateau[l] = plateau[l-1];
 				}
-				plateau[0] = new TypePiece[12];
+				plateau[0] = new TypePiece[plateau[0].length];
 				for(int l = 0; l<plateau[0].length; l++){
 					plateau[0][l] = TypePiece.None;
 				}
@@ -221,13 +220,20 @@ public class Grille {
 			setTypeOnCase(p, piece.getTypePiece());
 		}
 	}
-	
+
+	/**
+	 * Methode pour savoir si la ligne du haut est vide
+	 */
 	protected boolean topLineIsEmpty(){
 		synchronized (this) {
 			return isEmptyLine(0);
 		}
 	}
-	
+
+	/**
+	 * Methode pour avoir la ligne la plus haute sur laquelle est la piece
+	 * @return Le numero de ligne
+	 */
 	protected int getTopLinePiece(){
 		int ret = plateau.length-1;
 		for(Point c : piece.getPosition()){
@@ -237,7 +243,11 @@ public class Grille {
 		}
 		return ret;
 	}
-	
+
+	/**
+	 * Methode pour avoir la ligne la plus basse sur laquelle est la piece
+	 * @return Le numero de ligne
+	 */
 	protected int getBottomLinePiece(){
 		int ret = 0;
 		for(Point c : piece.getPosition()){
@@ -247,11 +257,16 @@ public class Grille {
 		}
 		return ret;
 	}
-	
+
+	/**
+	 * Methode pour savoir si une case est sur la grille
+	 * @param p La case a tester
+	 * @return Si la case est sur le plateau
+	 */
 	private boolean isInPlateau(Point p){
 		return 0 <= p.getX() && p.getX() < plateau[0].length && 0 <= p.getY() && p.getY() < plateau.length;
 	}
-	
+
 	public TypePiece[][] getPlateau(){
 		return plateau;
 	}
@@ -265,11 +280,5 @@ public class Grille {
 			s.append('\n');
 		}
 		return s.toString();
-	}
-	
-	private void decalageLine(int line){
-		for(int i = line; i > 0; i--){
-			plateau[i] = plateau[i-1];
-		}
 	}
 }

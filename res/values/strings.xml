@@ -62,6 +62,11 @@
     <string name="aboutbtn">\?</string>
     <string name="title_activity_about">AboutActivity</string>
 
+    <string name="GAME_STATE_CHANGE">com.polytech.stfu.jeu.GAME_STATE_CHANGE</string>
+    <string name="GAME_PAUSE">com.polytech.stfu.jeu.GAME_PAUSE</string>
+    <string name="GAME_END">com.polytech.stfu.jeu.GAME_END</string>
+    <string name="GAME_UNPAUSE">com.polytech.stfu.jeu.GAME_UNPAUSE</string>
+
     <string name="aboutPage">A Propos</string>
         <string name="about1">
             Polytris est une application créée par Adrien COUËRON, Benjamin LELIEVRE et Simon VERGNAUD et testée par Maxime GUILLOTEAU.
@@ -69,7 +74,6 @@
         <string name="about2">
             Cette application s\'intègre dans le cadre d\'un Projet en Java à Polytech Nantes, encadré par M. Antoine PIGEAU.
         </string>
-
 
 
 </resources>
