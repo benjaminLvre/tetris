@@ -27,7 +27,6 @@ public class HighscoresActivity extends Activity {
     public void displayHighscores(View view) {
         SortedSet<Couple> highscores = new TreeSet<Couple>();
 
-
         if(view.getId() == R.id.scoreClassique) {
             highscores = getHighScoreList(Mode.CLASSIQUE,this);
         } else {
@@ -52,6 +51,7 @@ public class HighscoresActivity extends Activity {
         for(Couple c : highscores) {
             tabNames[i].setText(c.getPseudo());
             tabScores[i].setText(c.getScore());
+            i++;
         }
 
     }

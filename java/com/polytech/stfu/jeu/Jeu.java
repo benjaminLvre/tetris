@@ -8,34 +8,71 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public abstract class Jeu extends Thread{
+import com.polytech.stfu.ihm.R;
 
+/**
+ * Classe representant l'asbtraction d'une partie
+ * @author Stfu
+ * @see Grille
+ */
+public abstract class Jeu extends Thread{
 	private static final String TAG = Jeu.class.getSimpleName();
 
+	/**
+	 * Option de vitesse de la partie
+	 */
 	protected Vitesse vitesse;
+	/**
+	 * Option d'acceleration de la partie
+	 */
 	protected Acceleration acceleration;
+	/**
+	 * Grille du jeu
+	 */
 	protected Grille grille;
+	/**
+	 * Type de la piece courante
+	 */
 	protected TypePiece piece;
+	/**
+	 * Intervale de temps entre deux chutes de la piece
+	 */
 	protected int intervalTime;
+	/**
+	 * Mode de jeu de la partie en cours
+	 */
 	private Mode mode;
 
+	/**
+	 * Context courant de la partie
+	 */
 	private Context mContext;
-
+	/**
+	 * Booleen pour savoir si la partie est finie
+	 */
 	protected boolean fin;
+	/**
+	 * Booleen pour savoir si la partie est en pause
+	 */
 	protected boolean pause;
+	/**
+	 * Lock pour l'exclusion mutuel sur pause
+	 */
 	protected Object lockPause;
-	
-	private static Jeu jeu;
+	/**
+	 * Lock pour l'exclusion mutel des mouvement
+	 */
+	protected Object lockMove;
 
-	public final static String GAME_STATE_CHANGE  = "com.polytech.stfu.jeu.GAME_STATE_CHANGE";
-	public final static String NEW_SCORE  = "com.polytech.stfu.jeu.NEW_SCORE";
-	public final static String GAME_END  = "com.polytech.stfu.jeu.GAME_END";
-	public final static String GAME_PAUSE  = "com.polytech.stfu.jeu.GAME_PAUSE";
-	public final static String GAME_UNPAUSE  = "com.polytech.stfu.jeu.GAME_UNPAUSE";
+	/**
+	 * Jeu courant, il ne peut y en avoir qu'un parallelement
+	 */
+	private static Jeu jeu;
 	
 	public Jeu(Context pContext){
 		pause = false;
 		lockPause = new Object();
+		lockMove = new Object();
 
 		mContext = pContext;
 		fin = false;
@@ -50,25 +87,41 @@ public abstract class Jeu extends Thread{
 	public static Jeu getJeu(){
 		return jeu;
 	}
-	
+
+	/**
+	 * Methode pour deplacer la piece
+	 * @param move La direction voulue
+	 */
 	public void move(TypeMove move){
-		if(grille.canMovePiece(move)){
-			grille.movePiece(move);
-			sendGameStateChange();
+		synchronized (lockMove) {
+			if (grille.canMovePiece(move)) {
+				grille.movePiece(move);
+				sendGameStateChange();
+			}
 		}
 	}
 
+	/**
+	 * Methode pour faire tourner la piece
+	 */
 	public void rotate(){
-		if(grille.canRotatePiece()) {
-			grille.rotatePiece();
-			Jeu.getJeu().aff();
-			sendGameStateChange();
+		synchronized (lockMove) {
+			if (grille.canRotatePiece()) {
+				grille.rotatePiece();
+				Jeu.getJeu().aff();
+				sendGameStateChange();
+			}
 		}
 	}
-	
+
+	/**
+	 * Methode pour faire chuter la piece
+	 */
 	public void down(){
-		while(grille.canMovePiece(TypeMove.DOWN)){
-			grille.movePiece(TypeMove.DOWN);
+		synchronized (lockMove) {
+			while (grille.canMovePiece(TypeMove.DOWN)) {
+				grille.movePiece(TypeMove.DOWN);
+			}
 		}
 	}
 	
@@ -76,62 +129,93 @@ public abstract class Jeu extends Thread{
 		return piece;
 	}
 
+	/**
+	 * Methode qui déroule la partie
+	 */
 	public void run(){
 		piece = createFuturPiece();
 		while(!fin){
-			lockPause();
 			try {
 				sleep(intervalTime);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			lockPause();
 			if(grille.canMovePiece(TypeMove.DOWN)){
 				grille.movePiece(TypeMove.DOWN);
 			}
 			else{
-				updateScore(grille.removeLines());
-				sendNewScore();
+				int tmp = grille.removeLines();
+				updateScore(tmp);
 				if(isFinish()){
 					sendGameEnd();
 					break;
 				}
 				piece = createFuturPiece();
-				intervalTime *= 0.01 * acceleration.getVal();
+				if(acceleration.getVal() != 0)
+					intervalTime *= 0.01 * acceleration.getVal();
 			}
 			sendGameStateChange();
 		}
 	}
-	
+
+	/**
+	 * Methode pour lancer le jeu
+	 */
 	public void startGame(){
 		start();
 	}
-	
+
+	/**
+	 * Methode pour mettre le jeu en pause
+	 */
 	public void pause(){
 		synchronized (lockPause) {
 			pause = true;
 		}
 	}
-	
+
+	/**
+	 * Methode pour reprendre la partie
+	 */
 	public void restart(){
 		synchronized (lockPause) {
 			pause = false;
 		}
 	}
-	
+
+	/**
+	 * Methode pour cloturer la partie
+	 */
 	public void end(){
 		fin = true;
 	}
-	
+
+	/**
+	 * Methode mettant en pause la partie si elle est active
+	 */
 	protected void lockPause(){
 		while(pause){
 			yield();
 		}
 	}
-	
+
+	/**
+	 * Methode pour savoir si la partie est finie
+	 * @return Si la partie est finie
+	 */
 	protected abstract boolean isFinish();
-	
+
+	/**
+	 * Methode pour mettre a jour les scores
+	 * @param line Nombre de lignes supprimees
+	 */
 	protected abstract void updateScore(int line);
-	
+
+	/**
+	 * Creation de la nouvelle piece courante et ajout de celle ci sur la grille
+	 * @return le type de la piece
+	 */
 	protected TypePiece createFuturPiece(){
 		int type = (int)(Math.random()*7);
 		Point pointInitial = new Point(5,0);
@@ -202,25 +286,23 @@ public abstract class Jeu extends Thread{
 
 	}
 
+	/**
+	 * Methode pour envoyer un evenement pour anoncer que l'etat du jeu a changer
+	 */
 	private void sendGameStateChange(){
-		Log.d(TAG,"sendGameStateChange");
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", GAME_STATE_CHANGE);
+		intent.putExtra("Action", R.string.GAME_STATE_CHANGE);
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 
-	private void sendNewScore(){
-		Intent intent = new Intent("TETRIS");
-		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", NEW_SCORE);
-		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-	}
-
+	/**
+	 * Methode pour envoyer un evenement pour anoncer que le jeu est fini
+	 */
 	private void sendGameEnd(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", GAME_END);
+		intent.putExtra("Action", R.string.GAME_END);
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 }

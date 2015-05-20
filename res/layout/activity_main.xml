@@ -44,7 +44,7 @@
         android:text="@string/title_activity_page_intructions"
         android:onClick="seeInstructions"
         android:textColor="@android:color/white"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:background="@drawable/btn_classique"/>
     <!--
     android:textColor="@android:color/black"

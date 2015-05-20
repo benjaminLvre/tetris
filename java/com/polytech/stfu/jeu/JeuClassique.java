@@ -2,9 +2,18 @@ package com.polytech.stfu.jeu;
 
 import android.content.Context;
 
+/**
+ * Classe représentant une partie de type classique
+ * @author Stfu
+ */
 public class JeuClassique extends Jeu {
+	/**
+	 * Score courant de la partie
+	 */
 	private int score;
-	
+	/**
+	 * Lock servant pour l'exclusion mutuel sur le score
+	 */
 	private Object lockScore;
 
 	
@@ -14,11 +23,19 @@ public class JeuClassique extends Jeu {
 		
 		lockScore = new Object();
 	}
-	
+
+	/**
+	 * Methode pour savoir si le jeu est fini
+	 * @return Si le jeu est fini
+	 */
 	protected boolean isFinish(){
 		return !grille.topLineIsEmpty();
 	}
-	
+
+	/**
+	 * Methode mettant a jour le score de la partie suivant le nombre de lignes supprimees
+	 * @param line Nombre de lignes supprimees
+	 */
 	protected void updateScore(int line){
 		synchronized (lockScore) {
 			switch(line){

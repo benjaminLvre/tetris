@@ -35,8 +35,9 @@ public class Point {
 	 * @param centreRotation Le centre de la rotation
 	 */
 	public void setRotatePosition(Point centreRotation){
-		x = centreRotation.y-this.y + centreRotation.x;
+		int tmpX = -centreRotation.y+this.y + centreRotation.x;
 		y = centreRotation.x-this.x +centreRotation.y;
+		x = tmpX;
 	}
 
 	/**
@@ -75,12 +76,15 @@ public class Point {
 	public int getX() {
 		return x;
 	}
+
 	public void setX(int x) {
 		this.x = x;
 	}
+
 	public int getY() {
 		return y;
 	}
+
 	public void setY(int y) {
 		this.y = y;
 	}

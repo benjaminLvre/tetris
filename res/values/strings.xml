@@ -59,7 +59,10 @@
 
     <string name="hello_world">Hello world!</string>
 
-
+    <string name="GAME_STATE_CHANGE">com.polytech.stfu.jeu.GAME_STATE_CHANGE</string>
+    <string name="GAME_PAUSE">com.polytech.stfu.jeu.GAME_PAUSE</string>
+    <string name="GAME_END">com.polytech.stfu.jeu.GAME_END</string>
+    <string name="GAME_UNPAUSE">com.polytech.stfu.jeu.GAME_UNPAUSE</string>
 
 
 </resources>

@@ -67,7 +67,7 @@ public abstract class Score {
             editor.putInt(mode.getNom()+"score"+i, c.getScore());
             i++;
         }
-        editor.commit();
+        editor.apply();
     }
 
 }
