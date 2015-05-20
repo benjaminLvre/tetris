@@ -1,16 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pauseName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center">
 
-    <EditText
-        android:hint="Votre pseudo.."
-        android:id="@+id/player_pseudo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="1"
+        android:id="@+id/tableScore">
+
+        <TableRow>
+            <TextView
+                android:text="#"
+                />
+            <TextView
+                android:text="Pseudo"
+                />
+            <TextView
+                android:text="Score"
+                />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090"
+            />
+        <TableRow>
+            <TextView
+                android:text="@string/highscore1"
+                />
+            <TextView
+                android:id="@+id/highscore_name1"
+                />
+            <TextView
+                android:id="@+id/highscore_score1"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="@string/highscore2"
+                />
+            <TextView
+                android:id="@+id/highscore_name2"
+                />
+            <TextView
+                android:id="@+id/highscore_score2"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="@string/highscore3"
+                />
+            <TextView
+                android:id="@+id/highscore_name3"
+                />
+            <TextView
+                android:id="@+id/highscore_score3"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="@string/highscore4"
+                />
+            <TextView
+                android:id="@+id/highscore_name4"
+                />
+            <TextView
+                android:id="@+id/highscore_score4"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="@string/highscore5"
+                />
+            <TextView
+                android:id="@+id/highscore_name5"
+                />
+            <TextView
+                android:id="@+id/highscore_score5"
+                />
+        </TableRow>
+    </TableLayout>
+
     <TextView
         android:id="@+id/highscore1"
         android:text="@string/highscore1"

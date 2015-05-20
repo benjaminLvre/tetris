@@ -1,10 +1,7 @@
 package com.polytech.stfu.ihm;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.WindowManager;
 
 
@@ -15,5 +12,7 @@ public class AboutActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_about);
+
+        ViewDesign.changeAbout(this);
     }
 }

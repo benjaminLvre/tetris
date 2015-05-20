@@ -106,6 +106,7 @@ public class Grille {
 				for(int l = i; l > 0; l--){
 					plateau[l] = plateau[l-1];
 				}
+				plateau[0] = new TypePiece[12];
 				for(int l = 0; l<plateau[0].length; l++){
 					plateau[0][l] = TypePiece.None;
 				}
@@ -124,6 +125,7 @@ public class Grille {
 	 * @param testedPosition La position a tester
 	 */
 	private boolean isValidPosition(Point[] testedPosition){
+
 		for(Point pTest : testedPosition){
 			if(!isInPlateau(pTest) || (!isEmptyCase(pTest) && !piece.isOn(pTest))){
 				return false;
@@ -179,7 +181,6 @@ public class Grille {
 			removePieceToPlateau();
 			piece.rotate();
 			setPieceOnPlateau();
-			Jeu.getJeu().aff();
 		}
 	}
 	

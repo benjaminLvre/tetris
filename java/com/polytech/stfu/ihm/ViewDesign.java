@@ -3,17 +3,25 @@ package com.polytech.stfu.ihm;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.app.Activity;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.polytech.stfu.jeu.Acceleration;
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
+import com.polytech.stfu.jeu.Mode;
 import com.polytech.stfu.jeu.Vitesse;
+import com.polytech.stfu.score.Couple;
+
+import java.util.SortedSet;
+
+import static com.polytech.stfu.score.Score.getHighScoreList;
 
 public class ViewDesign {
 
@@ -31,38 +39,37 @@ public class ViewDesign {
         String themeRegisterValue = themeRegister.getString("theme", null);
 
 
-        LinearLayout.LayoutParams params;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.bottomMargin = 10;
 
         switch (themeRegisterValue){
                 case "polytech":
                     layout.setBackgroundResource(R.drawable.background_polytech);
 
-                    //params = (LinearLayout.LayoutParams)layout.getLayoutParams();
-                    //params.setMargins(0, 0, 0, 0);
-
                     bJouer.setBackgroundResource(R.drawable.btn_polytech);
-                    //bJouer.setLayoutParams(params);
+                    bJouer.setLayoutParams(params);
                     bJouer.setTextColor(Color.BLACK);
                     bJouer.setTextSize(24.0f);
                     bJouer.setTypeface(null, Typeface.NORMAL);
-                    bJouer.setPadding(10,0,0,0);
+                    bJouer.setPadding(10, 0, 0, 0);
 
                     bInstructions.setBackgroundResource(R.drawable.btn_polytech);
-                    //bInstructions.setLayoutParams(params);
+                    bInstructions.setLayoutParams(params);
                     bInstructions.setTextColor(Color.BLACK);
                     bInstructions.setTextSize(20.0f);
                     bInstructions.setTypeface(null, Typeface.NORMAL);
-                    bInstructions.setPadding(40,0,0,0);
+                    bInstructions.setPadding(40, 0, 0, 0);
 
                     bOptions.setBackgroundResource(R.drawable.btn_polytech);
-                    //bOptions.setLayoutParams(params);
+                    bOptions.setLayoutParams(params);
                     bOptions.setTextColor(Color.BLACK);
                     bOptions.setTextSize(24.0f);
                     bOptions.setTypeface(null, Typeface.NORMAL);
-                    bOptions.setPadding(20,0,0,0);
+                    bOptions.setPadding(20, 0, 0, 0);
 
                     bScores.setBackgroundResource(R.drawable.btn_polytech);
-                    //bScores.setLayoutParams(params);
+                    bScores.setLayoutParams(params);
                     bScores.setTextColor(Color.BLACK);
                     bScores.setTextSize(24.0f);
                     bScores.setTypeface(null, Typeface.NORMAL);
@@ -75,25 +82,23 @@ public class ViewDesign {
 
                 case "walking_dead":
                     layout.setBackgroundResource(R.drawable.background_wd);
-                    //params = (LinearLayout.LayoutParams)layout.getLayoutParams();
-                    //params.setMargins(0, 0, 0, 10);
 
-                    //bJouer.setLayoutParams(params);
+                    bJouer.setLayoutParams(params);
                     bJouer.setBackgroundResource(R.drawable.btn_wd);
                     bJouer.setTextColor(Color.BLACK);
                     bJouer.setTextSize(30.0f);
                     bJouer.setTypeface(null, Typeface.BOLD);
-                    bJouer.setPadding(0,0,0,0);
+                    bJouer.setPadding(0, 0, 0, 0);
 
                     bInstructions.setBackgroundResource(R.drawable.btn_wd);
-                    //bInstructions.setLayoutParams(params);
+                    bInstructions.setLayoutParams(params);
                     bInstructions.setTextColor(Color.BLACK);
                     bInstructions.setTextSize(30.0f);
                     bInstructions.setTypeface(null, Typeface.BOLD);
-                    bInstructions.setPadding(0,0,0,0);
+                    bInstructions.setPadding(0, 0, 0, 0);
 
                     bOptions.setBackgroundResource(R.drawable.btn_wd);
-                    //bOptions.setLayoutParams(params);
+                    bOptions.setLayoutParams(params);
                     bOptions.setTextColor(Color.BLACK);
                     bOptions.setTextSize(30.0f);
                     bOptions.setTypeface(null, Typeface.BOLD);
@@ -112,32 +117,29 @@ public class ViewDesign {
                 default:
                     layout.setBackgroundResource(R.drawable.background_classique);
 
-                    //params = (LinearLayout.LayoutParams)layout.getLayoutParams();
-                    //params.setMargins(0, 0, 0, 0);
-
                     bJouer.setBackgroundResource(R.drawable.btn_classique);
-                    //bJouer.setLayoutParams(params);
+                    bJouer.setLayoutParams(params);
                     bJouer.setTextColor(Color.WHITE);
                     bJouer.setTextSize(24.0f);
                     bJouer.setTypeface(null, Typeface.NORMAL);
-                    bJouer.setPadding(0,0,0,0);
+                    bJouer.setPadding(0, 0, 0, 0);
 
                     bInstructions.setBackgroundResource(R.drawable.btn_classique);
-                    //bInstructions.setLayoutParams(params);
+                    bInstructions.setLayoutParams(params);
                     bInstructions.setTextColor(Color.WHITE);
                     bInstructions.setTextSize(24.0f);
                     bInstructions.setTypeface(null, Typeface.NORMAL);
-                    bInstructions.setPadding(0,0,0,0);
+                    bInstructions.setPadding(0, 0, 0, 0);
 
                     bOptions.setBackgroundResource(R.drawable.btn_classique);
-                    //bOptions.setLayoutParams(params);
+                    bOptions.setLayoutParams(params);
                     bOptions.setTextColor(Color.WHITE);
                     bOptions.setTextSize(24.0f);
                     bOptions.setTypeface(null, Typeface.NORMAL);
-                    bOptions.setPadding(0,0,0,0);
+                    bOptions.setPadding(0, 0, 0, 0);
 
                     bScores.setBackgroundResource(R.drawable.btn_classique);
-                    //bScores.setLayoutParams(params);
+                    bScores.setLayoutParams(params);
                     bScores.setTextColor(Color.WHITE);
                     bScores.setTextSize(24.0f);
                     bScores.setTypeface(null, Typeface.NORMAL);
@@ -170,9 +172,9 @@ public class ViewDesign {
         RadioButton accel2 = (RadioButton)pActivity.findViewById(R.id.accel2);
 
 
+
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
-        SharedPreferences.Editor editor;
 
         switch (themeRegisterValue){
             case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_classique);break;
@@ -211,5 +213,122 @@ public class ViewDesign {
         }
 
 
+    }
+    public static void changeInstruction(Activity pActivity){
+        ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
+
+        SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
+
+        switch (themeRegisterValue){
+            case "classique": scrollViewInstructions.setBackgroundResource(R.drawable.background_classique);break;
+            case "polytech": scrollViewInstructions.setBackgroundResource(R.drawable.background_polytech);break;
+            case "walking_dead": scrollViewInstructions.setBackgroundResource(R.drawable.background_wd);break;
+        }
+
+    }
+    public static void changeAbout(Activity pActivity){
+        LinearLayout linearAbout = (LinearLayout)pActivity.findViewById(R.id.linearAbout);
+
+        SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
+
+        switch (themeRegisterValue){
+            case "classique": linearAbout.setBackgroundResource(R.drawable.background_classique);break;
+            case "polytech": linearAbout.setBackgroundResource(R.drawable.background_polytech);break;
+            case "walking_dead": linearAbout.setBackgroundResource(R.drawable.background_wd);break;
+        }
+
+    }
+    public static void changeHighscore(Activity pActivity){
+
+        ScrollView scrollViewHighscore = (ScrollView)pActivity.findViewById(R.id.scrollHighscore);
+        Button bClassique = (Button)pActivity.findViewById(R.id.scoreClassique);
+        Button bChrono = (Button)pActivity.findViewById(R.id.scoreChrono);
+
+
+        SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.bottomMargin = 10;
+
+        switch (themeRegisterValue){
+            case "classique":
+                scrollViewHighscore.setBackgroundResource(R.drawable.background_classique);
+
+                bClassique.setBackgroundResource(R.drawable.btn_classique);
+                bClassique.setLayoutParams(params);
+                bClassique.setTextColor(Color.WHITE);
+                bClassique.setTextSize(24.0f);
+                bClassique.setTypeface(null, Typeface.NORMAL);
+                bClassique.setPadding(0, 0, 0, 0);
+
+                bChrono.setBackgroundResource(R.drawable.btn_classique);
+                bChrono.setLayoutParams(params);
+                bChrono.setTextColor(Color.WHITE);
+                bChrono.setTextSize(24.0f);
+                bChrono.setTypeface(null, Typeface.NORMAL);
+                bChrono.setPadding(0,0,0,0);
+                break;
+            case "polytech":
+                scrollViewHighscore.setBackgroundResource(R.drawable.background_polytech);
+
+                bClassique.setBackgroundResource(R.drawable.btn_polytech);
+                bClassique.setLayoutParams(params);
+                bClassique.setTextColor(Color.BLACK);
+                bClassique.setTextSize(24.0f);
+                bClassique.setTypeface(null, Typeface.NORMAL);
+                bClassique.setPadding(10, 0, 0, 0);
+
+                bChrono.setBackgroundResource(R.drawable.btn_polytech);
+                bChrono.setLayoutParams(params);
+                bChrono.setTextColor(Color.BLACK);
+                bChrono.setTextSize(24.0f);
+                bChrono.setTypeface(null, Typeface.NORMAL);
+                bChrono.setPadding(10,0,0,0);
+                break;
+            case "walking_dead":
+                scrollViewHighscore.setBackgroundResource(R.drawable.background_wd);
+                bClassique.setBackgroundResource(R.drawable.btn_wd);
+                bClassique.setLayoutParams(params);
+                bClassique.setTextColor(Color.BLACK);
+                bClassique.setTextSize(30.0f);
+                bClassique.setTypeface(null, Typeface.BOLD);
+                bClassique.setPadding(0, 0, 0, 0);
+
+                bChrono.setBackgroundResource(R.drawable.btn_wd);
+                bChrono.setLayoutParams(params);
+                bChrono.setTextColor(Color.BLACK);
+                bChrono.setTextSize(30.0f);
+                bChrono.setTypeface(null, Typeface.BOLD);
+                bChrono.setPadding(0,0,0,0);
+                break;
+        }
+
+        SortedSet<Couple> highscores = getHighScoreList(Mode.CLASSIQUE,pActivity);
+
+
+        TextView textName1 = (TextView)pActivity.findViewById(R.id.name1);
+        TextView textName2 = (TextView)pActivity.findViewById(R.id.name2);
+        TextView textName3 = (TextView)pActivity.findViewById(R.id.name3);
+        TextView textName4 = (TextView)pActivity.findViewById(R.id.name4);
+        TextView textName5 = (TextView)pActivity.findViewById(R.id.name5);
+        TextView tabNames[] = {textName1,textName2,textName3,textName4,textName5};
+
+        TextView textScore1 = (TextView)pActivity.findViewById(R.id.score1);
+        TextView textScore2 = (TextView)pActivity.findViewById(R.id.score2);
+        TextView textScore3 = (TextView)pActivity.findViewById(R.id.score3);
+        TextView textScore4 = (TextView)pActivity.findViewById(R.id.score4);
+        TextView textScore5 = (TextView)pActivity.findViewById(R.id.score5);
+        TextView tabScores[] = {textScore1,textScore2,textScore3,textScore4,textScore5};
+
+        int i = 0;
+        for(Couple c : highscores) {
+            tabNames[i].setText(c.getPseudo());
+            tabScores[i].setText(String.valueOf(c.getScore()));
+            i++;
+        }
     }
 }
