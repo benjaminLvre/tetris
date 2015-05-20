@@ -7,15 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.support.v4.content.LocalBroadcastManager;
+import android.widget.TextView;
 
 import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.score.Couple;
 import com.polytech.stfu.score.Score;
 
 import java.util.SortedSet;
@@ -38,7 +39,6 @@ public class GameActivity extends Activity {
         setContentView(tetrisView);
 
         receiver = new GameReceiver(this,tetrisView);
-
 
         Jeu.getJeu().startGame();
     }
