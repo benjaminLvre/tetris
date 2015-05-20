@@ -182,15 +182,47 @@ public class ViewDesign {
         RadioButton accel1 = (RadioButton)pActivity.findViewById(R.id.accel1);
         RadioButton accel2 = (RadioButton)pActivity.findViewById(R.id.accel2);
 
-
+        LinearLayout linearOptions1 = (LinearLayout)pActivity.findViewById(R.id.linearOptions1);
+        LinearLayout linearOptions2 = (LinearLayout)pActivity.findViewById(R.id.linearOptions2);
+        LinearLayout linearOptions3 = (LinearLayout)pActivity.findViewById(R.id.linearOptions3);
+        LinearLayout linearOptions4 = (LinearLayout)pActivity.findViewById(R.id.linearOptions4);
+        LinearLayout linearOptions5 = (LinearLayout)pActivity.findViewById(R.id.linearOptions5);
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
 
         switch (themeRegisterValue){
-            case "classique": themeC.setChecked(true); scrollViewOption.setBackgroundResource(R.drawable.background_classique);break;
-            case "polytech": themeP.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_polytech);break;
-            case "walking_dead": themeWD.setChecked(true);scrollViewOption.setBackgroundResource(R.drawable.background_wd);break;
+            case "classique":
+                themeC.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_classique);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions2.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions3.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions4.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions5.setBackgroundResource(R.drawable.fond_classique);
+
+                break;
+            case "polytech":
+                themeP.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_polytech);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions4.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions5.setBackgroundResource(R.drawable.fond_polytech);
+                break;
+            case "walking_dead":
+                themeWD.setChecked(true);
+                scrollViewOption.setBackgroundResource(R.drawable.background_wd);
+
+                linearOptions1.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions2.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions3.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions4.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions5.setBackgroundResource(R.drawable.fond_wd);
+                break;
         }
 
         SharedPreferences modeRegister = pActivity.getSharedPreferences("Mode", 0);
