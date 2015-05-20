@@ -17,11 +17,14 @@ import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
 import com.polytech.stfu.jeu.Vitesse;
 
+/**
+ * Permet d'afficher les options sur l'ecran
+ */
 public class OptionsActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activité
+     * @param savedInstanceState    Etat de l'activitï¿½
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,10 @@ public class OptionsActivity extends Activity {
 
     /**
      * Modifie la variable concernant le theme de l'application dans le class Jeu
-     * @param view  Le radioButton sélectionné"
+     * @param view  Le radioButton sï¿½lectionnï¿½"
      */
     public void changeTheme(View view){
-        //Toast.makeText(OptionsActivity.this, "Theme modifié", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Theme modifiï¿½", Toast.LENGTH_SHORT).show();
         SharedPreferences themeRegister = this.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
         SharedPreferences.Editor editor;
@@ -69,10 +72,10 @@ public class OptionsActivity extends Activity {
     }
     /**
      * Modifie la variable concernant le mode de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeMode(View view){
-        //Toast.makeText(OptionsActivity.this, "Mode modifié", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Mode modifiï¿½", Toast.LENGTH_SHORT).show();
         saveMode(view.getId(), getApplicationContext());
         if(view.getId() == R.id.modeClassique) new JeuClassique(this);
         else new JeuChrono(this);
@@ -80,10 +83,10 @@ public class OptionsActivity extends Activity {
 
     /**
      * Modifie la variable concernant la vitesse de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeVitesse(View view){
-        //Toast.makeText(OptionsActivity.this, "Vitesse modifiée", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Vitesse modifiï¿½e", Toast.LENGTH_SHORT).show();
         saveVitesse(view.getId(), getApplicationContext());
         switch (view.getId()){
             case R.id.vit1 : Jeu.getJeu().setVitesse(Vitesse.FAIBLE); break;
@@ -93,11 +96,11 @@ public class OptionsActivity extends Activity {
     }
 
     /**
-     * Modifie la variable concernant l'accélaration de l'application dans le class Jeu
-     * @param view  Le radioButton cliqué
+     * Modifie la variable concernant l'accï¿½laration de l'application dans le class Jeu
+     * @param view  Le radioButton cliquï¿½
      */
     public void changeAcceleration(View view){
-        //Toast.makeText(OptionsActivity.this, "Acceleration modifiée", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OptionsActivity.this, "Acceleration modifiï¿½e", Toast.LENGTH_SHORT).show();
         saveAcceleration(view.getId(), getApplicationContext());
         switch (view.getId()){
             case R.id.accel0 : Jeu.getJeu().setAcceleration(Acceleration.NULLE); break;
