@@ -2,11 +2,8 @@ package com.polytech.stfu.jeu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.CrossProcessCursor;
-import android.os.Parcelable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.polytech.stfu.ihm.R;
 
@@ -105,18 +102,12 @@ public abstract class Jeu extends Thread{
 	 * Methode pour faire tourner la piece
 	 */
 	public void rotate(){
-<<<<<<< HEAD
 		synchronized (lockMove) {
 			if (grille.canRotatePiece()) {
 				grille.rotatePiece();
 				Jeu.getJeu().aff();
 				sendGameStateChange();
 			}
-=======
-		if(grille.canRotatePiece()) {
-			grille.rotatePiece();
-			sendGameStateChange();
->>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 		}
 	}
 
@@ -124,19 +115,15 @@ public abstract class Jeu extends Thread{
 	 * Methode pour faire chuter la piece
 	 */
 	public void down(){
-<<<<<<< HEAD
 		synchronized (lockMove) {
 			while (grille.canMovePiece(TypeMove.DOWN)) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				grille.movePiece(TypeMove.DOWN);
 			}
-=======
-		while(grille.canMovePiece(TypeMove.DOWN)){
-			try{
-				Thread.sleep(50);
-			}catch (InterruptedException e){}
-
-			grille.movePiece(TypeMove.DOWN);
->>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 		}
 	}
 	
@@ -163,10 +150,6 @@ public abstract class Jeu extends Thread{
 			else{
 				int tmp = grille.removeLines();
 				updateScore(tmp);
-<<<<<<< HEAD
-=======
-				sendNewScore();
->>>>>>> 0a0ae0838ac3a6a44bb5387a6777fe4e056f3c6b
 				if(isFinish()){
 					sendGameEnd();
 					break;
