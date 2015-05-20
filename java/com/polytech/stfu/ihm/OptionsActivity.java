@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 
@@ -54,18 +55,42 @@ public class OptionsActivity extends Activity {
 
         saveTheme(view.getId(),getApplicationContext());
         ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
+
+        LinearLayout linearOptions1 = (LinearLayout)findViewById(R.id.linearOptions1);
+        LinearLayout linearOptions2 = (LinearLayout)findViewById(R.id.linearOptions2);
+        LinearLayout linearOptions3 = (LinearLayout)findViewById(R.id.linearOptions3);
+        LinearLayout linearOptions4 = (LinearLayout)findViewById(R.id.linearOptions4);
+        LinearLayout linearOptions5 = (LinearLayout)findViewById(R.id.linearOptions5);
         switch (view.getId()){
             case R.id.themePolytech :
                 scrollView.setBackgroundResource(R.drawable.background_polytech);
                 editor.putString("theme", "polytech");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions4.setBackgroundResource(R.drawable.fond_polytech);
+                linearOptions5.setBackgroundResource(R.drawable.fond_polytech);
+                break;
             case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd);
                 editor.putString("theme", "walking_dead");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions2.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions3.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions4.setBackgroundResource(R.drawable.fond_wd);
+                linearOptions5.setBackgroundResource(R.drawable.fond_wd);
+                break;
             default:
                 scrollView.setBackgroundResource(R.drawable.background_classique);
                 editor.putString("theme", "classique");
-                editor.apply();break;
+                editor.apply();
+                linearOptions1.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions2.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions3.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions4.setBackgroundResource(R.drawable.fond_classique);
+                linearOptions5.setBackgroundResource(R.drawable.fond_classique);
+                break;
         }
 
         // Jeu.THEME = view.getId();
