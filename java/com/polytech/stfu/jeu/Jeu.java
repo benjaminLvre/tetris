@@ -303,7 +303,7 @@ public abstract class Jeu extends Thread{
 	private void sendGameStateChange(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", R.string.GAME_STATE_CHANGE);
+		intent.putExtra("Action", mContext.getString(R.string.GAME_STATE_CHANGE));
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 
@@ -313,7 +313,7 @@ public abstract class Jeu extends Thread{
 	private void sendGameEnd(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
-		intent.putExtra("Action", R.string.GAME_END);
+		intent.putExtra("Action", mContext.getString(R.string.GAME_END));
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
 }
