@@ -19,6 +19,7 @@ import com.polytech.stfu.jeu.TypePiece;
 
 /**
  * Classe permettant de mettre en place la vue d'une partie
+ * @see Jeu
  */
 public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private static final String TAG = TetrisView.class.getSimpleName();

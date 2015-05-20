@@ -17,6 +17,8 @@ import com.polytech.stfu.jeu.Vitesse;
 
 /**
  * Classe gerant le controleur des messages qui traversent l'application
+ * @see TetrisView
+ * @see
  */
 public class GameReceiver extends BroadcastReceiver {
 
@@ -27,20 +29,31 @@ public class GameReceiver extends BroadcastReceiver {
 
     public GameReceiver(){}
 
+    /**
+     * Contructeur
+     * @param pActivity Activité d'ou provient le receiver
+     * @param view  La vue appartenant a l'activité
+     */
     public GameReceiver(Activity pActivity, TetrisView view){
         this.mView = view;
 
         this.mActivity = pActivity;
     }
 
+    /**
+     * Fonction permettant de gerer les messages reçu :
+     * GAME_STATE_CHANGE LE plateau a changé
+     * GAME_END LA partie est finie
+     * GAME_PAUSE La partie est mise en pause
+     * GAME_UNPAUSE La partie reprend
+     * GAME_RESTART L partie est recommencé
+     * @param context   Le context du receiver
+     * @param intent    Intent envoyé par l'événement
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_STATE_CHANGE))){
         	if(intent.getStringExtra("Source").equals("Jeu")){
-        		//Actualiser l'affichage du jeu
-                //Toast.makeText(this.mActivity, "GAME_STATE_CHANGE ", Toast.LENGTH_SHORT).show();
-
-
                 mActivity.runOnUiThread(mView.getmThread());
         	}
         }

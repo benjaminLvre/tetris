@@ -16,9 +16,14 @@ import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
  * Permet d'afficher l'activite Highscore sur l'ecran
+ * @see ViewDesign
  */
 public class HighscoresActivity extends Activity {
 
+    /**
+     * Mise en place des composants de l'interface lors de son ouverture
+     * @param savedInstanceState    Etat de l'activitï¿½
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +35,7 @@ public class HighscoresActivity extends Activity {
 
     /**
      * Permet d'afficher les scores
-     * @param view
+     * @param view  Le bouton cliqué
      */
     public void displayHighscores(View view) {
         SortedSet<Couple> highscores;

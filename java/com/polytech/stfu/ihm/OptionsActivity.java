@@ -19,6 +19,7 @@ import com.polytech.stfu.jeu.Vitesse;
 
 /**
  * Permet d'afficher les options sur l'ecran
+ * @see ViewDesign
  */
 public class OptionsActivity extends Activity {
 

@@ -44,11 +44,14 @@ public class mainMenuActivity extends Activity {
 
     }
 
+    /**
+     * Permet de lancer l'activité d'une partie
+     * @param view Le bouton a cliqué
+     */
     public void launchGame(View view){
         Intent gameActivity = new Intent(mainMenuActivity.this, GameActivity.class);
         startActivity(gameActivity);
     }
-
 
     /**
      * Ouvre l'activité permettant de lire les instructions de jeu
@@ -67,16 +70,27 @@ public class mainMenuActivity extends Activity {
         startActivity(optionsActivity);
     }
 
+    /**
+     * Ouvre l'activité permettant de voirs les meilleurs scores
+     * @param view  Le bouton cliqué
+     */
     public void seeHighscores(View view){
         Intent highscoresActivity = new Intent(mainMenuActivity.this, HighscoresActivity.class);
         startActivity(highscoresActivity);
     }
 
+    /**
+     * Ouvre l'activité permettant d'avoir des informations sur l'application
+     * @param view  Le bouton cliqué
+     */
     public void seeAbout(View view){
         Intent aboutActivity = new Intent(mainMenuActivity.this, AboutActivity.class);
         startActivity(aboutActivity);
     }
 
+    /**
+     * Permet d'initialiser tous les fichiers de sauvegarde de l'application.
+     */
     public void intialisationSharedFiles(){
 
         SharedPreferences themeRegister =this.getSharedPreferences("Theme", 0);

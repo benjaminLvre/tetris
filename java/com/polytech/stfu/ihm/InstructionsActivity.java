@@ -5,6 +5,7 @@ import android.view.WindowManager;
 
 /**
  * Permet d'afficher les instructions sur l'ecran
+ * @see ViewDesign
  */
 public class InstructionsActivity extends Activity {
 

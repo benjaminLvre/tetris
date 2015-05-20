@@ -25,6 +25,8 @@ import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
  * Classe permettant de mettre en place la page de la partie
+ * @see GameReceiver
+ * @see TetrisView
  */
 public class GameActivity extends Activity {
 
@@ -32,6 +34,10 @@ public class GameActivity extends Activity {
 
     private GameReceiver receiver;
 
+    /**
+     * Mise en place des composants de l'interface lors de son ouverture
+     * @param savedInstanceState    Etat de l'activitï¿½
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,19 +50,22 @@ public class GameActivity extends Activity {
 
         Jeu.getJeu().startGame();
     }
-
+    /**
+     * Lancer lors de la réouverture de l'activité. LE controleur des messages est reouvert
+     */
     @Override
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
-
+    /**
+     * Lancé lors de la mise en pause de l'activité. Le controleur des messages est fermé
+     */
     @Override
     protected void onPause() {
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
-
     /**
      * Clic sur la bouton de retour
      */
@@ -70,8 +79,6 @@ public class GameActivity extends Activity {
             this.showPauseDialog();
         }
     }
-
-
     /**
      * Permet de lancer une boite de dialogue qui met le jeu en pause
      */
@@ -126,7 +133,6 @@ public class GameActivity extends Activity {
 
         adb.show();
     }
-
     /**
      * Permet de lancer une boite de dialogue qui affiche les scores en fin de partie
      */
@@ -208,7 +214,6 @@ public class GameActivity extends Activity {
         });
         adb.show();
     }
-
     /**
      * Permet de lancer un message a travers l'application pour relancer une partie
      */

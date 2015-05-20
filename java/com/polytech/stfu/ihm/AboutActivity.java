@@ -6,9 +6,14 @@ import android.view.WindowManager;
 
 /**
  * Classe permettant de mettre en place la page about
+ * @see ViewDesign
  */
 public class AboutActivity extends Activity {
 
+    /**
+     * Mise en place des composants de l'interface lors de son ouverture
+     * @param savedInstanceState    Etat de l'activit�
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
