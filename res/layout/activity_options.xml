@@ -52,7 +52,7 @@
                     android:text="@string/themeClassique"
                     android:onClick="changeTheme"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/themePolytech"
                     android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                     android:text="@string/themePolytech"
                     android:onClick="changeTheme"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/themeWalkingDead"
                     android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:text="@string/themeWalkingDead"
                     android:onClick="changeTheme"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </RadioGroup>
     </LinearLayout>
     <LinearLayout
@@ -108,7 +108,7 @@
                     android:text="@string/modeClassique"
                     android:onClick="changeMode"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/modeCLM"
                     android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                     android:text="@string/modeCLM"
                     android:onClick="changeMode"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
@@ -156,7 +156,7 @@
                     android:text="@string/vit1"
                     android:onClick="changeVitesse"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/vit2"
                     android:layout_width="wrap_content"
@@ -166,7 +166,7 @@
                     android:layout_marginLeft="30dp"
                     android:onClick="changeVitesse"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/vit3"
                     android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
                     android:layout_marginLeft="30dp"
                     android:onClick="changeVitesse"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
@@ -218,7 +218,7 @@
                     android:gravity="center|center_horizontal"
                     android:onClick="changeAcceleration"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/accel1"
                     android:layout_width="wrap_content"
@@ -228,7 +228,7 @@
                     android:layout_marginLeft="30dp"
                     android:onClick="changeAcceleration"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
                 <RadioButton
                     android:id="@+id/accel2"
                     android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                     android:layout_marginLeft="30dp"
                     android:onClick="changeAcceleration"
                     android:textColor="#1A1A1A"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </RadioGroup>
         </LinearLayout>
         <LinearLayout

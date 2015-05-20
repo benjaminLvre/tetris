@@ -2,6 +2,13 @@ package com.polytech.stfu.jeu;
 
 /**
  * Classe represente une piece de Tetris
+ *
+ * Cette classe offre une interface de gestion de piece de tetris.</br>
+ * Elle offre des possibilites de creation de piece personnalisee:</br>
+ * -Ajout dans l'enum TypePiece du nouveau Type</br>
+ * -Implementation d'un methode static Piece createPiece"NouveauType"(Point) qui place les cases de la piece par rapport a une base reference, il est possible de mettre plus de 4 case. Il faut ensuite definir un point de rotation et un TypePiece.</br>
+ * La classe permet gere automatiquement le comportement de la piece (move, rotate)
+ *
  * @author Stfu
  * @see Point
  *

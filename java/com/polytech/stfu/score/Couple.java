@@ -2,6 +2,7 @@ package com.polytech.stfu.score;
 
 /**
  * Classe representant un couple (pseudo, score)
+ *
  * @author Stfu
  *
  */

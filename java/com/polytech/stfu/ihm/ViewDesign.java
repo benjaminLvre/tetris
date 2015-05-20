@@ -25,13 +25,13 @@ import java.util.SortedSet;
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
- * Classe permettant de gerer le design des différentes activités selon le theme choisi
+ * Classe permettant de gerer le design des diffï¿½rentes activitï¿½s selon le theme choisi
  */
 public class ViewDesign {
 
     /**
      * Permet de mettre en place le design du menu principal
-     * @param pActivity L'activité a modifiée
+     * @param pActivity L'activitï¿½ a modifiï¿½e
      */
     public static void changeMain(Activity pActivity){
 
@@ -161,7 +161,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page des options
-     * @param pActivity L'activité a modifiée
+     * @param pActivity L'activitï¿½ a modifiï¿½e
      */
     public static void changeOptions(Activity pActivity){
         ScrollView scrollViewOption = (ScrollView)pActivity.findViewById(R.id.themeOptions);
@@ -259,7 +259,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page des instructions
-     * @param pActivity L'activité a modifiée
+     * @param pActivity L'activitï¿½ a modifiï¿½e
      */
     public static void changeInstruction(Activity pActivity){
         ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
@@ -275,13 +275,19 @@ public class ViewDesign {
             case "classique":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_classique);
                 linearInstructions1.setBackgroundResource(R.drawable.fond_classique);
+                linearInstructions2.setBackgroundResource(R.drawable.fond_classique);
+                linearInstructions3.setBackgroundResource(R.drawable.fond_classique);
                 break;
             case "polytech":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_polytech);
+                linearInstructions1.setBackgroundResource(R.drawable.fond_polytech);
                 linearInstructions2.setBackgroundResource(R.drawable.fond_polytech);
+                linearInstructions3.setBackgroundResource(R.drawable.fond_polytech);
                 break;
             case "walking_dead":
                 scrollViewInstructions.setBackgroundResource(R.drawable.background_wd);
+                linearInstructions1.setBackgroundResource(R.drawable.fond_wd);
+                linearInstructions2.setBackgroundResource(R.drawable.fond_wd);
                 linearInstructions3.setBackgroundResource(R.drawable.fond_wd);
                 break;
         }
@@ -289,7 +295,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page about
-     * @param pActivity L'activité a modifiée
+     * @param pActivity L'activitï¿½ a modifiï¿½e
      */
     public static void changeAbout(Activity pActivity){
         LinearLayout linearAbout = (LinearLayout)pActivity.findViewById(R.id.linearAbout);
@@ -306,7 +312,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page listant les meilleurs scores
-     * @param pActivity L'activité a modifiée
+     * @param pActivity L'activitï¿½ a modifiï¿½e
      */
     public static void changeHighscore(Activity pActivity){
 

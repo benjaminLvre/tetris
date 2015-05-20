@@ -142,11 +142,11 @@ public class GameActivity extends Activity {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
-        //On affecte la vue personnalisé que l'on a cr?e ? notre AlertDialog
+        //On affecte la vue personnalise que l'on a cree ? notre AlertDialog
         adb.setView(alertDialogView);
         adb.setTitle("Tableau des scores");
 
-        //On modifie l'ic?ne de l'AlertDialog
+        //On modifie l'icone de l'AlertDialog
         adb.setIcon(android.R.drawable.ic_dialog_alert);
         SortedSet<Couple> highscores = getHighScoreList(Jeu.getJeu().getMode(), GameActivity.this);
 

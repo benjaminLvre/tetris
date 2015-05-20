@@ -9,7 +9,10 @@ import com.polytech.stfu.ihm.R;
 
 /**
  * Classe representant l'asbtraction d'une partie
- * Elle est la seule interface proposée par le module
+ *
+ * Elle represente l'interface du module. Cette abstraction du moteur de jeu permet de rendre son utilisation intuitive (stratGame, pause, move, rotate...).
+ * Cette classe commande intégralement la classe grille, qui elle fournit elle même une abstraction forte de la gestion de la grille de jeu.
+ *
  * @author Stfu
  * @see Grille
  */

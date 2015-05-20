@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * Classe représentant la grille du Tetris
+ *
+ * Cette abstraction d'une grille de Tetris permet sa gestion simplifie en fournissant possibilite de personnalisation de dimension de grille et des manipulations securises des piece.
+ *
+ *
  * @author Stfu
  * @see Piece
  * @see Point
