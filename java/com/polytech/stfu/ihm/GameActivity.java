@@ -7,19 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.polytech.stfu.jeu.Jeu;
-import com.polytech.stfu.jeu.Mode;
-import com.polytech.stfu.score.Couple;
 import com.polytech.stfu.score.Score;
 
 import java.util.SortedSet;
@@ -212,21 +208,21 @@ public class GameActivity extends Activity {
     private void sendGameRestart(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", Jeu.GAME_RESTART);
+        intent.putExtra("Action", R.string.GAME_RESTART);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendGamePause(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", Jeu.GAME_PAUSE);
+        intent.putExtra("Action", R.string.GAME_PAUSE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendGameUnpause(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", Jeu.GAME_UNPAUSE);
+        intent.putExtra("Action", R.string.GAME_UNPAUSE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 

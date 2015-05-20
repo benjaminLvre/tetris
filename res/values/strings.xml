@@ -66,6 +66,7 @@
     <string name="GAME_PAUSE">com.polytech.stfu.jeu.GAME_PAUSE</string>
     <string name="GAME_END">com.polytech.stfu.jeu.GAME_END</string>
     <string name="GAME_UNPAUSE">com.polytech.stfu.jeu.GAME_UNPAUSE</string>
+    <string name="GAME_RESTART">com.polytech.stfu.jeu.GAME_RESTART</string>
 
     <string name="aboutPage">A Propos</string>
         <string name="about1">
