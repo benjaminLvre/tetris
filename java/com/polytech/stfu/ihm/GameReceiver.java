@@ -54,7 +54,8 @@ public class GameReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_STATE_CHANGE))){
         	if(intent.getStringExtra("Source").equals("Jeu")){
-                mActivity.runOnUiThread(mView.getmThread());
+                if(mView.getCreated())
+                    mView.gThread().run();
         	}
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_END))){

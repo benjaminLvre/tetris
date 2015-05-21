@@ -24,8 +24,7 @@ import com.polytech.stfu.jeu.TypePiece;
 public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private static final String TAG = TetrisView.class.getSimpleName();
     // Holder
-    private SurfaceHolder mSurfaceHolder;
-    private Runnable drawingThread;
+    final private SurfaceHolder mSurfaceHolder;
 
     private Paint linePaint;
     private Paint bgc;
@@ -37,7 +36,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     final int  HORIZONTAL_LINES = 21;
     final int VERTICAL_LINES = 11;
 
+    private DrawingThread drawingThread;
+
     Context mContext;
+    private boolean created;
 
     /**
      * Constructeur
@@ -51,6 +53,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
         this.linePaint = new Paint();
 
+        this.drawingThread = new DrawingThread();
+
         this.bgc = new Paint();
         this.scoreBgc = new Paint();
         this.scoreColor = new Paint();
@@ -59,7 +63,42 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         this.bgc.setColor(Color.WHITE);
         this.linePaint.setColor(Color.LTGRAY);
 
-        this.drawingThread = new DrawingThread();
+        created = false;
+
+    }
+    /**
+     * Lance quand la vue se cr��e.
+     * @param pHolder   Permet de contr�ler la surface
+     */
+    @Override
+    public void surfaceCreated(SurfaceHolder pHolder) {
+        Log.d(TAG, "created");
+        created = true;
+        drawingThread.start();
+    }
+    /**
+     * Lance lorsque l'ecran subit un changement, non utilis� ici
+     */
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        // Ne fait rien
+        Log.d(TAG, "changed");
+    }
+    /**
+     * Lance quand la vue est d�truite.
+     * @param pHolder Permet de contr�ler la surface
+     */
+    @Override
+    public void surfaceDestroyed(SurfaceHolder pHolder) {
+        boolean retry = true;
+        while(retry){
+            try{
+                drawingThread.join();
+                retry = false;
+                created = false;
+            }
+            catch (InterruptedException e){}
+        }
     }
 
     /**
@@ -68,9 +107,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      */
     @Override
     protected void onDraw(Canvas pCanvas) {
-
-        if(pCanvas == null)
-            pCanvas = mSurfaceHolder.lockCanvas();
 
         float width = (float)getWidth();
         float height = (float) getHeight();
@@ -125,33 +161,9 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
-    /**
-     * Lanc�e lorsque l'ecran subit un changement, non utilis� ici
-     */
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // Ne fait rien
-    }
 
     /**
-     * Lanc�e quand la vue se cr��e.
-     * @param pHolder   Permet de contr�ler la surface
-     */
-    @Override
-    public void surfaceCreated(SurfaceHolder pHolder) {
-        ((Activity)mContext).runOnUiThread(getmThread());
-    }
-    /**
-     * Lanc�e quand la vue est d�truite.
-     * @param pHolder Permet de contr�ler la surface
-     */
-    @Override
-    public void surfaceDestroyed(SurfaceHolder pHolder) {
-
-    }
-
-    /**
-     * Operation r�alis� lors du clic sur l'ecran de jeu
+     * Operation realisee lors du clic sur l'ecran de jeu
      * @param event L'�v�nement
      * @return boolean
      */
@@ -181,20 +193,32 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         return super.onTouchEvent(event);
     }
 
-    public Runnable getmThread(){
+    public Runnable lauchThread(){
         return new DrawingThread();
     }
+    public Thread gThread(){
+        return drawingThread;
+    }
+    public void setThread(){
+        drawingThread = new DrawingThread();
+    }
 
+    public boolean getCreated(){return created;}
 
     /**
      * Classe Thread interne permettant de dessiner la vue du jeu
      */
-    private class DrawingThread implements Runnable{
+    private class DrawingThread extends Thread{
 
         @Override
         public void run() {
                 Canvas canvas = null;
-
+                if(!this.isAlive()){
+                    Log.d(TAG,"lock donc initialiser canvas = null");
+                }
+                else{
+                    Log.d(TAG,"faire unlock");
+                }
                 try{
                     canvas = mSurfaceHolder.lockCanvas();
                     // Aucun autre thread n'a acces au Holder

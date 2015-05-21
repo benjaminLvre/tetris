@@ -79,6 +79,42 @@ public class GameActivity extends Activity {
             this.showPauseDialog();
         }
     }
+
+    @Override
+    protected void onUserLeaveHint() {
+            sendGamePause();
+
+    }
+
+    /**
+     * Permet de lancer un message a travers l'application pour relancer une partie
+     */
+    private void sendGameRestart(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action",  getResources().getString(R.string.GAME_RESTART));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+    /**
+     * Permet de lancer un message a travers l'application pour mettre une partie en pause
+     */
+    private void sendGamePause(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action", getResources().getString(R.string.GAME_PAUSE));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+    /**
+     * Permet de lancer un message a travers l'application pour reprendre une partie
+     */
+    private void sendGameUnpause(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action",  getResources().getString(R.string.GAME_UNPAUSE));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+
     /**
      * Permet de lancer une boite de dialogue qui met le jeu en pause
      */
@@ -86,7 +122,6 @@ public class GameActivity extends Activity {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
         adb.setTitle("Menu pause");
-
 
         adb.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
@@ -100,9 +135,8 @@ public class GameActivity extends Activity {
 
         adb.setPositiveButton("Reprendre", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                sendGameUnpause();
-
                 //Lorsque l'on cliquera sur le bouton reprendre on reprendra une partie
+                sendGameUnpause();
             }
         });
         adb.setNeutralButton("Rejouer", new DialogInterface.OnClickListener() {
@@ -114,18 +148,15 @@ public class GameActivity extends Activity {
         adb.setNegativeButton("Retourner au menu", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //Lorsque l'on cliquera sur Retourner au menu on retourna a la page du menu principal
-                //Intent mainMenuActivity = new Intent(GameActivity.this, mainMenuActivity.class);
-                //startActivity(mainMenuActivity);
                 finish();
             }
         });
         /*adb.setOnDismissListener(new DialogInterface.OnDismissListener(){
-
         });*/
         adb.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if(keyCode == 4)
+                if (keyCode == 4)
                     sendGameUnpause();
                 return false;
             }
@@ -207,39 +238,12 @@ public class GameActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
 
                 //Lorsque l'on cliquera sur le bouton "OK", on r?cup?re l'EditText correspondant ? notre vue personnalis?e (cad ? alertDialogView)
-                EditText et = (EditText)alertDialogView.findViewById(R.id.player_pseudo);
+                EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
                 Score.save(Jeu.getJeu().getMode(), et.getText().toString(), Jeu.getJeu().getScore(), GameActivity.this);
 
             }
         });
         adb.show();
-    }
-    /**
-     * Permet de lancer un message a travers l'application pour relancer une partie
-     */
-    private void sendGameRestart(){
-        Intent intent = new Intent("TETRIS");
-        intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", R.string.GAME_RESTART);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-    /**
-     * Permet de lancer un message a travers l'application pour mettre une partie en pause
-     */
-    private void sendGamePause(){
-        Intent intent = new Intent("TETRIS");
-        intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", R.string.GAME_PAUSE);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-    /**
-     * Permet de lancer un message a travers l'application pour reprendre une partie
-     */
-    private void sendGameUnpause(){
-        Intent intent = new Intent("TETRIS");
-        intent.putExtra("Source", "Ihm");
-        intent.putExtra("Action", R.string.GAME_UNPAUSE);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
 }

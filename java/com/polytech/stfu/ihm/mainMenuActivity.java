@@ -6,18 +6,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
-import com.polytech.stfu.jeu.Mode;
-import com.polytech.stfu.score.Score;
 
 
-public class mainMenuActivity extends Activity {
+public class MainMenuActivity extends Activity {
 
-    private static final String TAG = mainMenuActivity.class.getSimpleName();
+    private static final String TAG = MainMenuActivity.class.getSimpleName();
 
 
     /**
@@ -41,7 +39,12 @@ public class mainMenuActivity extends Activity {
     protected void onResume() {
         super.onResume();
         ViewDesign.changeMain(this);
+        SharedPreferences modeRegister =this.getSharedPreferences("Mode", 0);
+        String modeRegisterValue = modeRegister.getString("mode", null);
 
+        if(modeRegisterValue.equals("classique"))
+            new JeuClassique(MainMenuActivity.this);
+        else new JeuChrono(MainMenuActivity.this);
     }
 
     /**
@@ -49,7 +52,15 @@ public class mainMenuActivity extends Activity {
      * @param view Le bouton a cliqué
      */
     public void launchGame(View view){
-        Intent gameActivity = new Intent(mainMenuActivity.this, GameActivity.class);
+        SharedPreferences modeRegister =this.getSharedPreferences("Mode", 0);
+        String modeRegisterValue = modeRegister.getString("mode", null);
+
+        if(modeRegisterValue.equals("classique"))
+            new JeuClassique(MainMenuActivity.this);
+        else new JeuChrono(MainMenuActivity.this);
+
+
+        Intent gameActivity = new Intent(MainMenuActivity.this, GameActivity.class);
         startActivity(gameActivity);
     }
 
@@ -58,7 +69,7 @@ public class mainMenuActivity extends Activity {
      * @param view  Le bouton cliqué
      */
     public void seeInstructions(View view){
-        Intent instructionsActivity = new Intent(mainMenuActivity.this, InstructionsActivity.class);
+        Intent instructionsActivity = new Intent(MainMenuActivity.this, InstructionsActivity.class);
         startActivity(instructionsActivity);
     }
     /**
@@ -66,7 +77,7 @@ public class mainMenuActivity extends Activity {
      * @param view  Le bouton cliqué
      */
     public void changeOptions(View view){
-        Intent optionsActivity = new Intent(mainMenuActivity.this, OptionsActivity.class);
+        Intent optionsActivity = new Intent(MainMenuActivity.this, OptionsActivity.class);
         startActivity(optionsActivity);
     }
 
@@ -75,7 +86,7 @@ public class mainMenuActivity extends Activity {
      * @param view  Le bouton cliqué
      */
     public void seeHighscores(View view){
-        Intent highscoresActivity = new Intent(mainMenuActivity.this, HighscoresActivity.class);
+        Intent highscoresActivity = new Intent(MainMenuActivity.this, HighscoresActivity.class);
         startActivity(highscoresActivity);
     }
 
@@ -84,7 +95,7 @@ public class mainMenuActivity extends Activity {
      * @param view  Le bouton cliqué
      */
     public void seeAbout(View view){
-        Intent aboutActivity = new Intent(mainMenuActivity.this, AboutActivity.class);
+        Intent aboutActivity = new Intent(MainMenuActivity.this, AboutActivity.class);
         startActivity(aboutActivity);
     }
 
