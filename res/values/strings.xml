@@ -26,8 +26,7 @@
         </string>
     <string name="chronoModeString">Mode Contre-la-montre</string>
         <string name="textInstructionsCLM">
-            En mode contre-la-montre, les règles sont relativement les même sauf que le but est de marquer le plus de points possible dans le
-            temps imparti. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
+            En mode contre-la-montre, les règles sont relativement les même sauf que le but est de résister le pluys longtemps possible. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
         </string>
     <string name="howToPlay">Comment jouer ?</string>
         <string name="textInstructionsEvents">Pour déplacer une pièce il suffit de cliquer sur un des côtés de l\'écran, la pièce se déplacera du côté cliqué.
@@ -35,33 +34,31 @@
         </string>
 
     <string name="title_activity_options">Options</string>
-    <string name="themes">Thème</string>
-    <string name="themeClassique">Classique</string>
-    <string name="themePolytech">Polytech\'</string>
-    <string name="themeWalkingDead">Walking Dead</string>
-    <string name="mode">Mode</string>
-    <string name="modeClassique">Classique</string>
-    <string name="modeCLM">Contre-la-montre</string>
-    <string name="vit">Vitesse</string>
-    <string name="vit1">1</string>
-    <string name="vit2">2</string>
-    <string name="vit3">3</string>
-    <string name="accel">Accélération</string>
-    <string name="accel0">0</string>
-    <string name="accel1">1</string>
-    <string name="accel2">2</string>
-    <string name="musique">Musique</string>
-    <string name="openMusique">Choisir une musique</string>
+        <string name="themes">Thème</string>
+        <string name="themeClassique">Classique</string>
+        <string name="themePolytech">Polytech</string>
+        <string name="themeWalkingDead">Walking Dead</string>
+        <string name="mode">Mode</string>
+        <string name="modeClassique">Classique</string>
+        <string name="modeCLM">Contre-la-montre</string>
+        <string name="vit">Vitesse</string>
+        <string name="vit1">1</string>
+        <string name="vit2">2</string>
+        <string name="vit3">3</string>
+        <string name="accel">Accélération</string>
+        <string name="accel0">0</string>
+        <string name="accel1">1</string>
+        <string name="accel2">2</string>
+        <string name="musique">Musique</string>
+        <string name="openMusique">Choisir une musique</string>
 
 
     <string name="highscores">Top 5</string>
     <string name="scoreClassique">Classique</string>
     <string name="scoreChrono">Chrono</string>
 
-    <string name="action_settings">Mettre en pause</string>
     <string name="title_activity_highscores">HighscoresActivity</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="aboutbtn">\?</string>
     <string name="title_activity_about">AboutActivity</string>
 

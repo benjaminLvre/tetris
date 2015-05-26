@@ -1,17 +1,17 @@
 package com.polytech.stfu.ihm;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.TypeMove;
@@ -38,8 +38,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
     private DrawingThread drawingThread;
 
-    Context mContext;
+    private Context mContext;
     private boolean created;
+    private Drawable designCase;
+    private Rect cube;
 
     /**
      * Constructeur
@@ -48,20 +50,22 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     public TetrisView(Context pContext){
         super(pContext);
         mContext = pContext;
-        this.mSurfaceHolder = getHolder();
-        this.mSurfaceHolder.addCallback(this);
+        mSurfaceHolder = getHolder();
+        mSurfaceHolder.addCallback(this);
 
-        this.linePaint = new Paint();
+        linePaint = new Paint();
 
-        this.drawingThread = new DrawingThread();
+        drawingThread = new DrawingThread();
 
-        this.bgc = new Paint();
-        this.scoreBgc = new Paint();
-        this.scoreColor = new Paint();
-        this.caseColor = new Paint();
+        bgc = new Paint();
+        scoreBgc = new Paint();
+        scoreColor = new Paint();
+        caseColor = new Paint();
+        cube = new Rect();
 
-        this.bgc.setColor(Color.WHITE);
-        this.linePaint.setColor(Color.LTGRAY);
+
+        bgc.setColor(Color.WHITE);
+        linePaint.setColor(Color.LTGRAY);
 
         created = false;
 
@@ -132,31 +136,64 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), height, this.linePaint);
         }
 
+        SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
+
+
         // Dessine une case
         for(int li=1; li<= HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
                 if(Jeu.getJeu().getGrille()[li][col] != TypePiece.None){
-                    switch (Jeu.getJeu().getGrille()[li][col]){
-                        case L : caseColor.setColor(Color.RED);break;
-                        case O: caseColor.setColor(Color.BLUE);break;
-                        case S: caseColor.setColor(Color.GREEN);break;
-                        case Z: caseColor.setColor(Color.YELLOW);break;
-                        case T: caseColor.setColor(Color.MAGENTA);break;
-                        case J: caseColor.setColor(Color.BLACK);break;
-                        case I: caseColor.setColor(Color.CYAN);break;
-                        default:break;
+                    switch (themeRegisterValue){
+                        case "polytech" :
+                            switch (Jeu.getJeu().getGrille()[li][col]){
+                                case L : designCase = getResources().getDrawable(R.drawable.red_cube);break;
+                                case O: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
+                                case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
+                                case Z: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
+                                case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
+                                case J: designCase = getResources().getDrawable(R.drawable.orange_cube);break;
+                                case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                                default:break;
+                            }break;
+                        case "walking_dead": switch (Jeu.getJeu().getGrille()[li][col]){
+                            case L : designCase = getResources().getDrawable(R.drawable.red_cube);break;
+                            case O: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
+                            case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
+                            case Z: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
+                            case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
+                            case J: designCase = getResources().getDrawable(R.drawable.orange_cube);break;
+                            case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                            default:break;
+                        }break;
+                        default: switch (Jeu.getJeu().getGrille()[li][col]){
+                            case L : designCase = getResources().getDrawable(R.drawable.red_cube);break;
+                            case O: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
+                            case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
+                            case Z: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
+                            case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
+                            case J: designCase = getResources().getDrawable(R.drawable.orange_cube);break;
+                            case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                            default:break;
+                        }break;
                     }
+
                     if(li == 0 && col == 0){
-                        pCanvas.drawRect(0.0f,horizontalLargeLine,verticalLargeLine,horizontalLargeLine, caseColor);
-                    }
+                        cube.set(0, (int) horizontalLargeLine, (int) verticalLargeLine, (int) horizontalLargeLine);
+}
                     else if(col == 0){
-                        pCanvas.drawRect(0.0f,horizontalLargeLine*li,verticalLargeLine,horizontalLargeLine*(li+1), caseColor);
+                        cube.set(0,(int)horizontalLargeLine*li,(int)verticalLargeLine, (int)horizontalLargeLine*(li+1));
+
+                        //pCanvas.drawRect(0.0f,horizontalLargeLine*li,verticalLargeLine,horizontalLargeLine*(li+1), caseColor);
                     }else if(li == 0) {
-                        pCanvas.drawRect(verticalLargeLine*col,horizontalLargeLine,verticalLargeLine*(col+1),horizontalLargeLine, caseColor);
-                    }
+                        cube.set((int)verticalLargeLine*col,(int)horizontalLargeLine,(int)verticalLargeLine*(col+1), (int)horizontalLargeLine);
+}
                     else{
-                        pCanvas.drawRect(verticalLargeLine*col,horizontalLargeLine*li,verticalLargeLine*(col+1),horizontalLargeLine*(li+1), caseColor);
-                    }
+                        cube.set((int)verticalLargeLine*col,(int)horizontalLargeLine *li,(int)verticalLargeLine*(col+1), (int)horizontalLargeLine*(li+1));
+}
+                    designCase.setBounds(cube);
+                    designCase.draw(pCanvas);
+
                 }
             }
         }
@@ -170,37 +207,28 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int quarter = getWidth()/4;
+        float height = (float)getHeight();
+        float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
         // Clic sur l'ecran
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            if(event.getX()< quarter){
+            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20){
                 Jeu.getJeu().move(TypeMove.LEFT);
             }
-            else if(event.getX() > quarter && event.getX() < 3*quarter){
-                float height = (float)getHeight();
-                float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
-                if(event.getY() > horizontalLargeLine* 20){
-                    Jeu.getJeu().down();
-                }
-                else{
+            else if(event.getX() > quarter && event.getX() < 3*quarter && event.getY() < horizontalLargeLine* 20){
                     Jeu.getJeu().rotate();
-                }
-
+            }
+            else if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20){
+                    Jeu.getJeu().move(TypeMove.RIGHT);
             }
             else{
-                Jeu.getJeu().move(TypeMove.RIGHT);
+                Jeu.getJeu().down();
             }
         }
         return super.onTouchEvent(event);
     }
 
-    public Runnable lauchThread(){
-        return new DrawingThread();
-    }
     public Thread gThread(){
         return drawingThread;
-    }
-    public void setThread(){
-        drawingThread = new DrawingThread();
     }
 
     public boolean getCreated(){return created;}

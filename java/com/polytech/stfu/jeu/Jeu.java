@@ -128,7 +128,7 @@ public abstract class Jeu extends Thread{
 		synchronized (lockMove) {
 			while (grille.canMovePiece(TypeMove.DOWN)) {
 				try {
-					Thread.sleep(50);
+					Thread.sleep(40);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
