@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,7 +14,10 @@ import com.polytech.stfu.jeu.Acceleration;
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
+import com.polytech.stfu.jeu.Mode;
 import com.polytech.stfu.jeu.Vitesse;
+
+import static com.polytech.stfu.score.Score.isHighScore;
 
 /**
  * Classe gerant le controleur des messages qui traversent l'application
@@ -61,12 +65,19 @@ public class GameReceiver extends BroadcastReceiver {
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_END))){
         	if(intent.getStringExtra("Source").equals("Jeu")){
         		//Enlever les controles du Jeu
-        		//Afficher le menu de fin
-
+        		//Afficher le menu d'enregistrement d'un score
+                if(isHighScore(Jeu.getJeu().getMode(), Jeu.getJeu().getScore(), mActivity)){
+                    GameActivity.showNewScoreDialog();
+                }
+                else{
+                    GameActivity.showScoresDialog();
+                }
+                LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(this);
+                Jeu.getJeu().end();
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){
-        		Jeu.getJeu().end();
-        		//Enlever les controles du Jeu
+                //Enlever les controles du Jeu
+                LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(this);
         	}
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_PAUSE))){
@@ -104,10 +115,17 @@ public class GameReceiver extends BroadcastReceiver {
                     case "MODEREE": jeu.setAcceleration(Acceleration.MODEREE); break;
                     case "FORTE": jeu.setAcceleration(Acceleration.FORTE); break;
                 }
-                switch (vitesseRegisterValue){
-                    case "FAIBLE": jeu.setVitesse(Vitesse.FAIBLE); break;
-                    case "NORMALE": jeu.setVitesse(Vitesse.NORMALE); break;
-                    case "ELEVEE": jeu.setVitesse(Vitesse.ELEVEE); break;
+
+                switch (vitesseRegisterValue) {
+                    case "FAIBLE":
+                        jeu.setVitesse(Vitesse.FAIBLE);
+                        break;
+                    case "NORMALE":
+                        jeu.setVitesse(Vitesse.NORMALE);
+                        break;
+                    case "ELEVEE":
+                        jeu.setVitesse(Vitesse.ELEVEE);
+                        break;
                 }
 
                 jeu.startGame();
