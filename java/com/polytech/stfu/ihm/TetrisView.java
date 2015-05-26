@@ -214,18 +214,14 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20){
                 Jeu.getJeu().move(TypeMove.LEFT);
             }
-            else if(event.getX() > quarter && event.getX() < 3*quarter){
-                if(event.getY() > horizontalLargeLine* 20){
-                    Jeu.getJeu().down();
-                }
-                else{
+            else if(event.getX() > quarter && event.getX() < 3*quarter && event.getY() < horizontalLargeLine* 20){
                     Jeu.getJeu().rotate();
-                }
+            }
+            else if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20){
+                    Jeu.getJeu().move(TypeMove.RIGHT);
             }
             else{
-                if(event.getY() < horizontalLargeLine* 20) {
-                    Jeu.getJeu().move(TypeMove.RIGHT);
-                }
+                Jeu.getJeu().down();
             }
         }
         return super.onTouchEvent(event);
