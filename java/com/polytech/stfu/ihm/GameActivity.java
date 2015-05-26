@@ -181,7 +181,6 @@ public class GameActivity extends Activity {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(mActivity);
 
-
         //On affecte la vue personnalise que l'on a cree ? notre AlertDialog
         adb.setView(alertDialogView);
         adb.setCancelable(false);
@@ -212,16 +211,16 @@ public class GameActivity extends Activity {
             i++;
         }
 
-        //On cr2e un bouton "Rejour" ? notre AlertDialog et on lui affecte un ?v?nement
+        //On cree un bouton "Rejouer" a notre AlertDialog et on lui affecte un evenement
         adb.setPositiveButton("Rejouer", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur rejouer une partie est relanc?e
+                //Lorsque l'on cliquera sur rejouer une partie est relancee
                 mActivity.sendGameRestart();
             }
         });
         adb.setNeutralButton("Retourner au menu", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur rejouer une partie est relanc?e
+                //Lorsque l'on cliquera sur rejouer une partie est relancee
                 mActivity.finish();
             }
         });

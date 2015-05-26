@@ -115,7 +115,7 @@ public abstract class Jeu extends Thread{
 		synchronized (lockMove) {
 			if (grille.canRotatePiece()) {
 				grille.rotatePiece();
-				Jeu.getJeu().aff();
+				//Jeu.getJeu().aff();
 				sendGameStateChange();
 			}
 		}
