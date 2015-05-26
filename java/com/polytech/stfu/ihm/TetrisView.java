@@ -31,8 +31,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private  Paint scoreBgc;
     private Paint scoreColor;
 
-    private Paint caseColor;
-
     final int  HORIZONTAL_LINES = 21;
     final int VERTICAL_LINES = 11;
 
@@ -60,9 +58,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         bgc = new Paint();
         scoreBgc = new Paint();
         scoreColor = new Paint();
-        caseColor = new Paint();
         cube = new Rect();
-
 
         bgc.setColor(Color.WHITE);
         linePaint.setColor(Color.LTGRAY);
@@ -112,33 +108,33 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     protected void onDraw(Canvas pCanvas) {
 
-        float width = (float)getWidth();
-        float height = (float) getHeight();
-        float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
-        float verticalLargeLine = width / (float)(VERTICAL_LINES +1);
+        int width = getWidth();
+        int height = getHeight();
+        int horizontalLargeLine = height / (HORIZONTAL_LINES +2);
+        int verticalLargeLine = width / (VERTICAL_LINES +1);
 
-        // Fond de l'�cran
+        // Fond de l'ecran
         pCanvas.drawColor(this.bgc.getColor());
 
         this.scoreColor.setColor(Color.WHITE);
         this.scoreBgc.setColor(Color.BLACK);
+
+        SharedPreferences modeRegister = mContext.getSharedPreferences("Mode", 0);
+        String modeRegisterValue = modeRegister.getString("mode", null);
 
         pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
         pCanvas.drawText("Score : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
 
         // Dessin de la grille
         for(int hl=2; hl<=HORIZONTAL_LINES +1; hl++){
-
             pCanvas.drawLine(0.0f,horizontalLargeLine*(hl), width,horizontalLargeLine*(hl), this.linePaint);
         }
         for(int vl=1; vl<=VERTICAL_LINES; vl++){
-                    //srtX,srtY, spx, spY
             pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), height, this.linePaint);
         }
 
         SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
-
 
         // Dessine une case
         for(int li=1; li<= HORIZONTAL_LINES +1; li++){
@@ -179,21 +175,18 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                     }
 
                     if(li == 0 && col == 0){
-                        cube.set(0, (int) horizontalLargeLine, (int) verticalLargeLine, (int) horizontalLargeLine);
-}
+                        cube.set(0, horizontalLargeLine, verticalLargeLine, horizontalLargeLine);
+                    }
                     else if(col == 0){
-                        cube.set(0,(int)horizontalLargeLine*li,(int)verticalLargeLine, (int)horizontalLargeLine*(li+1));
-
-                        //pCanvas.drawRect(0.0f,horizontalLargeLine*li,verticalLargeLine,horizontalLargeLine*(li+1), caseColor);
+                        cube.set(0, horizontalLargeLine*li, verticalLargeLine,  horizontalLargeLine*(li+1));
                     }else if(li == 0) {
-                        cube.set((int)verticalLargeLine*col,(int)horizontalLargeLine,(int)verticalLargeLine*(col+1), (int)horizontalLargeLine);
-}
+                        cube.set( verticalLargeLine*col, horizontalLargeLine, verticalLargeLine*(col+1),  horizontalLargeLine);
+                    }
                     else{
-                        cube.set((int)verticalLargeLine*col,(int)horizontalLargeLine *li,(int)verticalLargeLine*(col+1), (int)horizontalLargeLine*(li+1));
-}
+                        cube.set( verticalLargeLine*col, horizontalLargeLine *li, verticalLargeLine*(col+1),  horizontalLargeLine*(li+1));
+                    }
                     designCase.setBounds(cube);
                     designCase.draw(pCanvas);
-
                 }
             }
         }

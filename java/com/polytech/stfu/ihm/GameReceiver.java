@@ -72,7 +72,6 @@ public class GameReceiver extends BroadcastReceiver {
                 else{
                     GameActivity.showScoresDialog();
                 }
-                LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(this);
                 Jeu.getJeu().end();
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){

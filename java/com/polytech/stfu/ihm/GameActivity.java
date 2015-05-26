@@ -54,7 +54,7 @@ public class GameActivity extends Activity {
         Jeu.getJeu().startGame();
     }
     /**
-     * Lancer lors de la reouverture de l'activité. LE controleur des messages est reouvert
+     * Lancer lors de la reouverture de l'activite. Le controleur des messages est reouvert
      */
     @Override
     protected void onResume() {
@@ -118,8 +118,6 @@ public class GameActivity extends Activity {
         intent.putExtra("Action",  getResources().getString(R.string.GAME_UNPAUSE));
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
-
-
     /**
      * Permet de lancer une boite de dialogue qui met le jeu en pause
      */
