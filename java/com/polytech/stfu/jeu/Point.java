@@ -29,7 +29,7 @@ public class Point {
 	public Point getRotatePosition(Point centreRotation){
 		int x = centreRotation.x-this.x;
 		int y = centreRotation.y-this.y;
-		return new Point(y + centreRotation.x, -x + centreRotation.y);
+		return new Point(-y + centreRotation.x, x + centreRotation.y);
 	}
 	
 	/**
@@ -37,8 +37,8 @@ public class Point {
 	 * @param centreRotation Le centre de la rotation
 	 */
 	public void setRotatePosition(Point centreRotation){
-		int tmpX = -centreRotation.y+this.y + centreRotation.x;
-		y = centreRotation.x-this.x +centreRotation.y;
+		int tmpX = centreRotation.y-this.y + centreRotation.x;
+		y = -centreRotation.x+this.x +centreRotation.y;
 		x = tmpX;
 	}
 

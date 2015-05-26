@@ -96,9 +96,14 @@ public abstract class Jeu extends Thread{
 	 */
 	public void move(TypeMove move){
 		synchronized (lockMove) {
-			if (grille.canMovePiece(move)) {
+			if (grille.canMovePiece(move)){
 				grille.movePiece(move);
 				sendGameStateChange();
+				try {
+					Thread.sleep(40);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -149,19 +154,20 @@ public abstract class Jeu extends Thread{
 				e.printStackTrace();
 			}
 			lockPause();
-			if(grille.canMovePiece(TypeMove.DOWN)){
-				grille.movePiece(TypeMove.DOWN);
-			}
-			else{
-				int tmp = grille.removeLines();
-				updateScore(tmp);
-				if(isFinish()){
-					sendGameEnd();
-					break;
+			synchronized (lockMove) {
+				if (grille.canMovePiece(TypeMove.DOWN)) {
+					grille.movePiece(TypeMove.DOWN);
+				} else {
+					int tmp = grille.removeLines();
+					updateScore(tmp);
+					if (isFinish()) {
+						sendGameEnd();
+						break;
+					}
+					piece = createFuturPiece();
+					if (acceleration.getVal() != 0)
+						intervalTime *= 0.01 * acceleration.getVal();
 				}
-				piece = createFuturPiece();
-				if(acceleration.getVal() != 0)
-					intervalTime *= 0.01 * acceleration.getVal();
 			}
 			sendGameStateChange();
 		}

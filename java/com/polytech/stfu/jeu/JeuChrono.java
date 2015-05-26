@@ -103,4 +103,8 @@ public class JeuChrono extends Jeu {
 			return tempsLimite - chrono.getTemps();
 		}
 	}
+
+	public int getTempsTotal(){
+			return chrono.getTemps();
+	}
 }
