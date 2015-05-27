@@ -155,9 +155,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             for(int col=0; col<VERTICAL_LINES +1; col++){
                 if(Jeu.getJeu().getGrille()[li][col] != TypePiece.None){
                     int rand = (int)(Math.random()*4);
-
                     switch (themeRegisterValue){
-                        case "polytech" :
+                        case "classique" :
                             switch (Jeu.getJeu().getGrille()[li][col]){
                                 case L : designCase = getResources().getDrawable(R.drawable.orange_cube);break;
                                 case O: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
@@ -216,7 +215,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                                 }break;
                                 default:break;
                         }break;
-                        default:
+                        case "polytech":
                             switch (Jeu.getJeu().getGrille()[li][col]){
                                 case L : switch (rand%2){
                                     case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech11);break;
@@ -248,6 +247,17 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                                 }break;
                                 default:break;
                         }break;
+                        default:
+                            switch (Jeu.getJeu().getGrille()[li][col]){
+                                case L : designCase = getResources().getDrawable(R.drawable.orange_cube);break;
+                                case O: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
+                                case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
+                                case Z: designCase = getResources().getDrawable(R.drawable.red_cube);break;
+                                case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
+                                case J: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
+                                case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                                default:break;
+                            }
                     }
 
                     if(li == 0 && col == 0){
