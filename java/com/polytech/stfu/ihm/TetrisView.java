@@ -147,6 +147,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
 
+        int rand = (int)(Math.random()*4);
+
+
+
         // Dessine une case
         for(int li=1; li<= HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
@@ -165,24 +169,82 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                             }break;
                         case "walking_dead":
                             switch (Jeu.getJeu().getGrille()[li][col]){
-                                case L : designCase = getResources().getDrawable(R.drawable.red_cube);break;
-                                case O: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
-                                case S: designCase = getResources().getDrawable(R.drawable.green_cube);break;
-                                case Z: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
-                                case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
-                                case J: designCase = getResources().getDrawable(R.drawable.orange_cube);break;
-                                case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                                case L :
+                                    switch (rand){
+                                        case 0: designCase = getResources().getDrawable(R.drawable.orange_cube_wd1);break;
+                                        case 1: designCase = getResources().getDrawable(R.drawable.orange_cube_wd2);break;
+                                        case 2: designCase = getResources().getDrawable(R.drawable.orange_cube_wd3);break;
+                                        case 3: designCase = getResources().getDrawable(R.drawable.orange_cube_wd4);break;
+                                    };
+                                    break;
+                                case O: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.blue_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.blue_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.blue_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.blue_cube_wd4);break;
+                                };break;
+                                case S: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.green_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.green_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.green_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.green_cube_wd4);break;
+                                }break;
+                                case Z: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.yellow_ycube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd4);break;
+                                }break;
+                                case T: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.purple_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.purple_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.purple_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.purple_cube_wd4);break;
+                                }break;
+                                case J: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.orange_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.orange_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.orange_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.orange_cube_wd4);break;
+                                }break;
+                                case I: switch (rand){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.turquoiz_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.turquoiz_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.turquoiz_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.turquoiz_cube_wd4);break;
+                                }break;
                                 default:break;
                         }break;
                         default:
                             switch (Jeu.getJeu().getGrille()[li][col]){
-                                case L : designCase = getResources().getDrawable(R.drawable.red_cube);break;
-                                case O: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
-                                case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
-                                case Z: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
-                                case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
-                                case J: designCase = getResources().getDrawable(R.drawable.orange_cube);break;
-                                case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
+                                case L : switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech11);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech12);break;
+                                }break;
+                                case O:  switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech21);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech22);break;
+                                }break;
+                                case S: switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech31);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech32);break;
+                                }break;
+                                case Z:  switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech41);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech42);break;
+                                }break;
+                                case T:  switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech51);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech52);break;
+                                }break;
+                                case J:  switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech61);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech62);break;
+                                }break;
+                                case I:  switch (rand%2){
+                                    case 0: designCase = getResources().getDrawable(R.drawable.cube_polytech71);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.cube_polytech72);break;
+                                }break;
                                 default:break;
                         }break;
                     }
