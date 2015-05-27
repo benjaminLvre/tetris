@@ -93,7 +93,7 @@
                     android:textColor="#1A1A1A"
                     android:maxLength="10" />
                 <TextView
-                    android:text="3561"
+                    android:text="0"
                     android:id="@+id/score1"
                     android:textSize="24dp"
                     android:layout_gravity="center_horizontal"
@@ -113,7 +113,7 @@
                     android:textColor="#1A1A1A"
                     android:maxLength="10" />
                 <TextView
-                    android:text="3562"
+                    android:text="0"
                     android:id="@+id/score2"
                     android:textSize="22dp"
                     android:layout_gravity="center_horizontal"
@@ -133,7 +133,7 @@
                     android:textColor="#1A1A1A"
                     android:maxLength="10" />
                 <TextView
-                    android:text="3563"
+                    android:text="0"
                     android:id="@+id/score3"
                     android:textSize="20dp"
                     android:layout_gravity="center_horizontal"
@@ -153,7 +153,7 @@
                     android:textColor="#1A1A1A"
                     android:maxLength="10" />
                 <TextView
-                    android:text="3565"
+                    android:text="0"
                     android:id="@+id/score4"
                     android:textSize="18dp"
                     android:layout_gravity="center_horizontal"
@@ -174,7 +174,7 @@
                     android:textColor="#1A1A1A"
                     android:maxLength="10" />
                 <TextView
-                    android:text="3564"
+                    android:text="0"
                     android:id="@+id/score5"
                     android:textSize="16dp"
                     android:layout_gravity="center_horizontal"

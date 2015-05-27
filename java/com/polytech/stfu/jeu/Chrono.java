@@ -36,7 +36,7 @@ public class Chrono extends Thread{
 				yield();
 			}
 			try {
-				sleep(900);
+				sleep(15);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
