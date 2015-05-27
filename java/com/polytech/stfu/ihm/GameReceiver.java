@@ -75,8 +75,14 @@ public class GameReceiver extends BroadcastReceiver {
                 Jeu.getJeu().end();
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){
-                //Enlever les controles du Jeu
-                LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(this);
+                if(isHighScore(Jeu.getJeu().getMode(), Jeu.getJeu().getScore(), mActivity)){
+                    GameActivity.showNewScoreDialog();
+                }
+                else{
+                    GameActivity.showScoresDialog();
+                }
+                Jeu.getJeu().end();
+
         	}
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_PAUSE))){

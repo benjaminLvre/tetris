@@ -122,15 +122,24 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         SharedPreferences modeRegister = mContext.getSharedPreferences("Mode", 0);
         String modeRegisterValue = modeRegister.getString("mode", null);
 
+        pCanvas.drawRect(0.0f,horizontalLargeLine*23, width, height, this.scoreBgc);
         pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
-        pCanvas.drawText("Score : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
+        pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
+
+        if(modeRegisterValue.equals("classique")){
+            pCanvas.drawText("Score : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
+        }
+        else{
+            pCanvas.drawText("Temps restant : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
+        }
+
 
         // Dessin de la grille
         for(int hl=2; hl<=HORIZONTAL_LINES +1; hl++){
             pCanvas.drawLine(0.0f,horizontalLargeLine*(hl), width,horizontalLargeLine*(hl), this.linePaint);
         }
         for(int vl=1; vl<=VERTICAL_LINES; vl++){
-            pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), height, this.linePaint);
+            pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), horizontalLargeLine*23, this.linePaint);
         }
 
         SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);

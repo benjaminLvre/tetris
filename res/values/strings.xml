@@ -26,7 +26,7 @@
         </string>
     <string name="chronoModeString">Mode Contre-la-montre</string>
         <string name="textInstructionsCLM">
-            En mode contre-la-montre, les règles sont relativement les même sauf que le but est de résister le pluys longtemps possible. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
+            En mode contre-la-montre, les règles sont relativement les mêmes sauf que le but est de résister le plus longtemps possible. Le temps en début de parti est de 60 secondes et il est possible de gagner du temps à chaque ligne réalisée.
         </string>
     <string name="howToPlay">Comment jouer ?</string>
         <string name="textInstructionsEvents">Pour déplacer une pièce il suffit de cliquer sur un des côtés de l\'écran, la pièce se déplacera du côté cliqué.

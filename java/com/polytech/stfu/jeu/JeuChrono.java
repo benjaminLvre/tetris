@@ -58,7 +58,7 @@ public class JeuChrono extends Jeu {
 	}
 
 	/**
-	 * Methode cluturant la partie
+	 * Methode cloturant la partie
 	 */
 	public void end(){
 		chrono.end();

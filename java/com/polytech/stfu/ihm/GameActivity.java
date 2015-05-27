@@ -119,6 +119,15 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
+     * Permet de lancer un message a travers l'application pour stopper une partie
+     */
+    protected void sendGameEnd(){
+        Intent intent = new Intent("TETRIS");
+        intent.putExtra("Source", "Ihm");
+        intent.putExtra("Action",  getResources().getString(R.string.GAME_END));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+    /**
      * Permet de lancer une boite de dialogue qui met le jeu en pause
      */
     public static void showPauseDialog() {
@@ -148,16 +157,15 @@ public class GameActivity extends Activity {
                 mActivity.sendGameRestart();
             }
         });
-        adb.setNegativeButton("Retourner au menu", new DialogInterface.OnClickListener() {
+        adb.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //Lorsque l'on cliquera sur Retourner au menu on retourna a la page du menu principal
-                mActivity.finish();
+                mActivity.sendGameEnd();
             }
         });
         adb.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                Log.d(TAG, "keyCode : " + keyCode);
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                     mActivity.sendGamePause();
                     return false;
