@@ -20,38 +20,22 @@
         <activity
             android:name=".GameActivity"
             android:label="@string/title_activity_game"
-            android:parentActivityName=".MainMenuActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainMenuActivity" />
         </activity>
         <activity
             android:name=".InstructionsActivity"
             android:label="@string/title_activity_page_intructions"
-            android:parentActivityName=".MainMenuActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainMenuActivity" />
         </activity>
         <activity
             android:name=".OptionsActivity"
             android:label="@string/title_activity_options"
-            android:parentActivityName=".MainMenuActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainMenuActivity" />
         </activity>
         <activity
             android:name=".HighscoresActivity"
             android:label="@string/title_activity_highscores"
-            android:parentActivityName=".MainMenuActivity"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainMenuActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"

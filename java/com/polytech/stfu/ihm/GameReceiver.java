@@ -103,36 +103,12 @@ public class GameReceiver extends BroadcastReceiver {
                 SharedPreferences modeRegister = mActivity.getSharedPreferences("Mode", 0);
                 String modeRegisterValue = modeRegister.getString("mode", "classique");
 
-                SharedPreferences vitesseRegister = mActivity.getSharedPreferences("Vitesse", 0);
-                String vitesseRegisterValue = vitesseRegister.getString("vitesse", "FAIBLE");
-
-                SharedPreferences accelerationRegister = mActivity.getSharedPreferences("Acceleration", 0);
-                String accelerationRegisterValue = accelerationRegister.getString("acceleration", "NULLE");
+                Jeu.getJeu().end();
 
                 Jeu jeu;
-
                 if(modeRegisterValue.equals("classique"))
                    jeu = new JeuClassique(mActivity);
                 else jeu = new JeuChrono(mActivity);
-
-                switch (accelerationRegisterValue){
-                    case "NULLE": jeu.setAcceleration(Acceleration.NULLE); break;
-                    case "MODEREE": jeu.setAcceleration(Acceleration.MODEREE); break;
-                    case "FORTE": jeu.setAcceleration(Acceleration.FORTE); break;
-                }
-
-                switch (vitesseRegisterValue) {
-                    case "FAIBLE":
-                        jeu.setVitesse(Vitesse.FAIBLE);
-                        break;
-                    case "NORMALE":
-                        jeu.setVitesse(Vitesse.NORMALE);
-                        break;
-                    case "ELEVEE":
-                        jeu.setVitesse(Vitesse.ELEVEE);
-                        break;
-                }
-
                 jeu.startGame();
             }
         }
