@@ -132,7 +132,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             pCanvas.drawText("Score : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
         }
         else{
-            pCanvas.drawText("Temps restant : " + Jeu.getJeu().getScore(), 15.0f, 25.0f, this.scoreColor);
+            pCanvas.drawText("Temps restant : " + Jeu.getJeu().getTempsRestant(), 15.0f, 25.0f, this.scoreColor);
         }
 
 

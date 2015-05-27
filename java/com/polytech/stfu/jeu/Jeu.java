@@ -320,6 +320,10 @@ public abstract class Jeu extends Thread{
 		return mode;
 	}
 
+	public int getTempsRestant(){
+		return 0;
+	}
+
 	public boolean isInPause(){
 		synchronized (lockPause) {
 			return pause;

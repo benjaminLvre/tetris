@@ -40,29 +40,31 @@ public class Chrono extends Thread{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			synchronized (lockTemps) {
-				temps += System.currentTimeMillis()-tempsCourant;
-			}
-			synchronized (lockTempsCourant) {
-				tempsCourant = System.currentTimeMillis();
+			synchronized (lockPause) {
+				synchronized (lockTemps) {
+					temps += System.currentTimeMillis() - tempsCourant;
+				}
+				synchronized (lockTempsCourant) {
+					tempsCourant = System.currentTimeMillis();
+				}
 			}
 		}
 	}
 	
 	public void pause(){
-		synchronized (lockTemps){
-			temps += (System.currentTimeMillis()-tempsCourant);
-		}
 		synchronized (lockPause){
+			/*synchronized (lockTemps){
+				temps += (System.currentTimeMillis()-tempsCourant);
+			}*/
 			pause = true;
 		}
 	}
 	
 	public void restart(){
-		synchronized (lockTempsCourant) {
-			tempsCourant = System.currentTimeMillis();
-		}
 		synchronized (lockPause) {
+			synchronized (lockTempsCourant) {
+				tempsCourant = System.currentTimeMillis();
+			}
 			pause = false;
 		}
 	}

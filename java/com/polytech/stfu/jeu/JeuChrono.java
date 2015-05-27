@@ -107,9 +107,11 @@ public class JeuChrono extends Jeu {
 	}
 	
 	public int getScore(){
-		synchronized (lockPause) {
-			return tempsLimite - chrono.getTemps();
-		}
+		return chrono.getTemps();
+	}
+
+	public int getTempsRestant(){
+		return tempsLimite - chrono.getTemps();
 	}
 
 	public int getTempsTotal(){
