@@ -93,6 +93,7 @@ public abstract class Jeu extends Thread{
 				break;
 			default:
 				vitesse = Vitesse.NORMALE;
+				break;
 		}
 		tmp = saveAcceleration.getString("acceleration", "");
 		switch(tmp){
