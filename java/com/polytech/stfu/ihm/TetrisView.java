@@ -73,8 +73,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceCreated(SurfaceHolder pHolder) {
         Log.d(TAG, "created");
-        created = true;
-        drawingThread.start();
+        if(!created){
+            created = true;
+            drawingThread.start();
+        }
     }
     /**
      * Lance lorsque l'ecran subit un changement, non utilis� ici
@@ -122,7 +124,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         SharedPreferences modeRegister = mContext.getSharedPreferences("Mode", 0);
         String modeRegisterValue = modeRegister.getString("mode", null);
 
-        pCanvas.drawRect(0.0f,horizontalLargeLine*23, width, height, this.scoreBgc);
+        pCanvas.drawRect(0.0f, horizontalLargeLine*23, width, height, this.scoreBgc);
         pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
         pCanvas.drawRect(0.0f, 0.0f, width, horizontalLargeLine, this.scoreBgc);
 
@@ -205,7 +207,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
     /**
      * Operation realisee lors du clic sur l'ecran de jeu
-     * @param event L'�v�nement
+     * @param event L'evenement
      * @return boolean
      */
     @Override

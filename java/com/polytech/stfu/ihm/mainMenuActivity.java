@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.JeuChrono;
 import com.polytech.stfu.jeu.JeuClassique;
 
@@ -20,7 +22,7 @@ public class MainMenuActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activit�
+     * @param savedInstanceState    Etat de l'activite
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +34,14 @@ public class MainMenuActivity extends Activity {
         intialisationSharedFiles();
         ViewDesign.changeMain(this);
 
-        new JeuClassique(this);
+        if(Jeu.getJeu() == null){
+            Log.d(TAG,"va faire new game quand laucheGame");
+        }
+        else{
+            Log.d(TAG,"restaurer la partie");
+        }
+
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ViewDesign.changeMain(this);
-        SharedPreferences modeRegister =this.getSharedPreferences("Mode", 0);
-        String modeRegisterValue = modeRegister.getString("mode", null);
-
-        if(modeRegisterValue.equals("classique"))
-            new JeuClassique(MainMenuActivity.this);
-        else new JeuChrono(MainMenuActivity.this);
-    }
-
     /**
      * Permet de lancer l'activité d'une partie
      * @param view Le bouton a cliqué
