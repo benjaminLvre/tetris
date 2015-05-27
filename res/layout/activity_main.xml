@@ -10,7 +10,6 @@
 
     android:background="@drawable/background_classique">
 
-
     <ImageView
         android:contentDescription="Image Jeu"
         android:layout_width="match_parent"

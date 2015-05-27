@@ -147,7 +147,6 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
 
-        int rand = (int)(Math.random()*4);
 
 
 
@@ -155,6 +154,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         for(int li=1; li<= HORIZONTAL_LINES +1; li++){
             for(int col=0; col<VERTICAL_LINES +1; col++){
                 if(Jeu.getJeu().getGrille()[li][col] != TypePiece.None){
+                    int rand = (int)(Math.random()*4);
+
                     switch (themeRegisterValue){
                         case "polytech" :
                             switch (Jeu.getJeu().getGrille()[li][col]){
