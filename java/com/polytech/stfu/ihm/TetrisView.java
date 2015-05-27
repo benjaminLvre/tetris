@@ -190,7 +190,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                                     case 3: designCase = getResources().getDrawable(R.drawable.green_cube_wd4);break;
                                 }break;
                                 case Z: switch (rand){
-                                    case 0: designCase = getResources().getDrawable(R.drawable.yellow_ycube_wd1);break;
+                                    case 0: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd1);break;
                                     case 1: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd2);break;
                                     case 2: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd3);break;
                                     case 3: designCase = getResources().getDrawable(R.drawable.yellow_cube_wd4);break;
@@ -202,10 +202,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                                     case 3: designCase = getResources().getDrawable(R.drawable.purple_cube_wd4);break;
                                 }break;
                                 case J: switch (rand){
-                                    case 0: designCase = getResources().getDrawable(R.drawable.orange_cube_wd1);break;
-                                    case 1: designCase = getResources().getDrawable(R.drawable.orange_cube_wd2);break;
-                                    case 2: designCase = getResources().getDrawable(R.drawable.orange_cube_wd3);break;
-                                    case 3: designCase = getResources().getDrawable(R.drawable.orange_cube_wd4);break;
+                                    case 0: designCase = getResources().getDrawable(R.drawable.blue_cube_wd1);break;
+                                    case 1: designCase = getResources().getDrawable(R.drawable.blue_cube_wd2);break;
+                                    case 2: designCase = getResources().getDrawable(R.drawable.blue_cube_wd3);break;
+                                    case 3: designCase = getResources().getDrawable(R.drawable.blue_cube_wd4);break;
                                 }break;
                                 case I: switch (rand){
                                     case 0: designCase = getResources().getDrawable(R.drawable.turquoiz_cube_wd1);break;
