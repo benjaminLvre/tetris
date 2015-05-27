@@ -34,17 +34,16 @@ public class MainMenuActivity extends Activity {
         intialisationSharedFiles();
         ViewDesign.changeMain(this);
 
-        if(Jeu.getJeu() == null){
-            Log.d(TAG,"va faire new game quand laucheGame");
-        }
-        else{
+        if(Jeu.getJeu() != null){
             Log.d(TAG,"restaurer la partie");
+            Intent gameActivity = new Intent(MainMenuActivity.this, GameActivity.class);
+            startActivity(gameActivity);
         }
 
     }
     /**
-     * Permet de lancer l'activitÃ© d'une partie
-     * @param view Le bouton a cliquÃ©
+     * Permet de lancer l'activité d'une partie
+     * @param view Le bouton a cliqué
      */
     public void launchGame(View view){
         SharedPreferences modeRegister =this.getSharedPreferences("Mode", 0);
@@ -60,16 +59,16 @@ public class MainMenuActivity extends Activity {
     }
 
     /**
-     * Ouvre l'activitÃ© permettant de lire les instructions de jeu
-     * @param view  Le bouton cliquÃ©
+     * Ouvre l'activité permettant de lire les instructions de jeu
+     * @param view  Le bouton cliqué
      */
     public void seeInstructions(View view){
         Intent instructionsActivity = new Intent(MainMenuActivity.this, InstructionsActivity.class);
         startActivity(instructionsActivity);
     }
     /**
-     * Ouvre l'activitÃ© permettant de modifier les options de l'application
-     * @param view  Le bouton cliquÃ©
+     * Ouvre l'activité permettant de modifier les options de l'application
+     * @param view  Le bouton cliqué
      */
     public void changeOptions(View view){
         Intent optionsActivity = new Intent(MainMenuActivity.this, OptionsActivity.class);
@@ -77,8 +76,8 @@ public class MainMenuActivity extends Activity {
     }
 
     /**
-     * Ouvre l'activitÃ© permettant de voirs les meilleurs scores
-     * @param view  Le bouton cliquÃ©
+     * Ouvre l'activité permettant de voirs les meilleurs scores
+     * @param view  Le bouton cliqué
      */
     public void seeHighscores(View view){
         Intent highscoresActivity = new Intent(MainMenuActivity.this, HighscoresActivity.class);
@@ -86,8 +85,8 @@ public class MainMenuActivity extends Activity {
     }
 
     /**
-     * Ouvre l'activitÃ© permettant d'avoir des informations sur l'application
-     * @param view  Le bouton cliquÃ©
+     * Ouvre l'activité permettant d'avoir des informations sur l'application
+     * @param view  Le bouton cliqué
      */
     public void seeAbout(View view){
         Intent aboutActivity = new Intent(MainMenuActivity.this, AboutActivity.class);
