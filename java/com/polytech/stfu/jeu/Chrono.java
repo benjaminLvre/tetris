@@ -50,10 +50,10 @@ public class Chrono extends Thread{
 	}
 	
 	public void pause(){
-		synchronized (lockTemps) {
-			temps += (System.currentTimeMillis()-tempsCourant)/1000;
+		synchronized (lockTemps){
+			temps += (System.currentTimeMillis()-tempsCourant);
 		}
-		synchronized (lockPause) {
+		synchronized (lockPause){
 			pause = true;
 		}
 	}

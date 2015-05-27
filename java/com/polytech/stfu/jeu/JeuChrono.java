@@ -33,8 +33,16 @@ public class JeuChrono extends Jeu {
 	 */
 	public boolean isFinish(){
 		synchronized (lockPause) {
-			return tempsLimite < chrono.getTemps();
+			return tempsLimite < chrono.getTemps() || super.isFinish();
 		}
+	}
+
+	/**
+	 * Methode pour lancer le jeu
+	 */
+	public void startGame(){
+		super.startGame();
+		chrono.start();
 	}
 
 	/**

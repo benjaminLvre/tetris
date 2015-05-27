@@ -128,11 +128,6 @@ public abstract class Jeu extends Thread{
 			if (grille.canMovePiece(move)){
 				grille.movePiece(move);
 				sendGameStateChange();
-				try {
-					Thread.sleep(40);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -144,7 +139,6 @@ public abstract class Jeu extends Thread{
 		synchronized (lockMove) {
 			if (grille.canRotatePiece()) {
 				grille.rotatePiece();
-				//Jeu.getJeu().aff();
 				sendGameStateChange();
 			}
 		}
@@ -195,7 +189,7 @@ public abstract class Jeu extends Thread{
 					}
 					piece = createFuturPiece();
 					if (acceleration.getVal() != 0)
-						intervalTime *= 0.01 * acceleration.getVal();
+						intervalTime *= (1 - (0.01 * acceleration.getVal()/100));
 				}
 			}
 			sendGameStateChange();
@@ -247,7 +241,9 @@ public abstract class Jeu extends Thread{
 	 * Methode pour savoir si la partie est finie
 	 * @return Si la partie est finie
 	 */
-	protected abstract boolean isFinish();
+	protected boolean isFinish(){
+		return !grille.topLineIsEmpty();
+	}
 
 	/**
 	 * Methode pour mettre a jour les scores
