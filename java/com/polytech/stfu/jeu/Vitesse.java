@@ -6,9 +6,9 @@ package com.polytech.stfu.jeu;
  *
  */
 public enum Vitesse{
-	FAIBLE(50),
+	FAIBLE(125),
 	NORMALE(100),
-	ELEVEE(150);
+	ELEVEE(75);
 	
 	/**
 	 * Pourcentage de la vitesse par rapport a celle normale (100)
