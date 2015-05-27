@@ -1,5 +1,7 @@
 package com.polytech.stfu.jeu;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -101,23 +103,24 @@ public class Grille {
 	 * @return Renvoit le nombre de lignes supprimees
 	 */
 	protected int removeLines(){
-		int i = getBottomLinePiece();
-		int fin = getTopLinePiece();
 		int cmp = 0;
-		while(i != fin){
-			if(isFullLine(i)){
-				for(int l = i; l > 0; l--){
-					plateau[l] = plateau[l-1];
+		synchronized (this){
+			int i = getBottomLinePiece();
+			int fin = getTopLinePiece();
+			while (i != fin) {
+				if (isFullLine(i)) {
+					for (int l = i; l > 0; l--) {
+						plateau[l] = plateau[l - 1];
+					}
+					plateau[0] = new TypePiece[plateau[0].length];
+					for (int l = 0; l < plateau[0].length; l++) {
+						plateau[0][l] = TypePiece.None;
+					}
+					fin++;
+					cmp++;
+				} else {
+					i--;
 				}
-				plateau[0] = new TypePiece[plateau[0].length];
-				for(int l = 0; l<plateau[0].length; l++){
-					plateau[0][l] = TypePiece.None;
-				}
-				fin++;
-				cmp++;
-			}
-			else{
-				i--;
 			}
 		}
 		return cmp;
@@ -128,7 +131,6 @@ public class Grille {
 	 * @param testedPosition La position a tester
 	 */
 	private boolean isValidPosition(Point[] testedPosition){
-
 		for(Point pTest : testedPosition){
 			if(!isInPlateau(pTest) || (!isEmptyCase(pTest) && !piece.isOn(pTest))){
 				return false;
