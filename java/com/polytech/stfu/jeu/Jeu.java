@@ -2,6 +2,7 @@ package com.polytech.stfu.jeu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -77,8 +78,36 @@ public abstract class Jeu extends Thread{
 
 		mContext = pContext;
 		fin = false;
-		vitesse = Vitesse.NORMALE;
-		acceleration = Acceleration.MODEREE;
+		SharedPreferences saveAcceleration = mContext.getSharedPreferences("Acceleration", 0);
+		SharedPreferences saveVitesse = mContext.getSharedPreferences("Vitesse", 0);
+		String tmp = saveVitesse.getString("vitesse", "");
+		switch(tmp){
+			case "FAIBLE":
+				vitesse = Vitesse.FAIBLE;
+				break;
+			case "NORMALE":
+				vitesse = Vitesse.NORMALE;
+				break;
+			case "ELEVEE":
+				vitesse = Vitesse.ELEVEE;
+				break;
+			default:
+				vitesse = Vitesse.NORMALE;
+		}
+		tmp = saveAcceleration.getString("acceleration", "");
+		switch(tmp){
+			case "NULLE":
+				acceleration = Acceleration.NULLE;
+				break;
+			case "MODEREE":
+				acceleration = Acceleration.MODEREE;
+				break;
+			case "FORTE":
+				acceleration = Acceleration.FORTE;
+				break;
+			default:
+				acceleration = Acceleration.MODEREE;
+		}
 		grille = new Grille();
 		intervalTime = 500 * vitesse.getVal()/100;
         this.mode = mode;
