@@ -155,7 +155,6 @@ public class ViewDesign {
                     bAbout.setTextColor(Color.WHITE);
                     bAbout.setBackgroundResource(R.drawable.btn_about);
                     bAbout.setTypeface(null, Typeface.NORMAL);
-                    break;
             }
 
     }
