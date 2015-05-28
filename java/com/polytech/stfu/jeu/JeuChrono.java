@@ -31,9 +31,9 @@ public class JeuChrono extends Jeu {
 	 * Methode pour savoir si le jeu est fini
 	 * @return Si le jeu est fini
 	 */
-	public boolean isFinish(){
+	public boolean isTimesUp(){
 		synchronized (lockPause) {
-			return tempsLimite < chrono.getTemps() || super.isFinish();
+			return tempsLimite <= chrono.getTemps();
 		}
 	}
 
