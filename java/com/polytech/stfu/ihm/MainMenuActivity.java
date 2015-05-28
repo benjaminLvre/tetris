@@ -41,9 +41,16 @@ public class MainMenuActivity extends Activity {
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewDesign.changeMain(this);
+    }
+
     /**
-     * Permet de lancer l'activité d'une partie
-     * @param view Le bouton a cliqué
+     * Permet de lancer l'activite d'une partie
+     * @param view Le bouton a cliquer
      */
     public void launchGame(View view){
         SharedPreferences modeRegister =this.getSharedPreferences("Mode", 0);
@@ -53,22 +60,21 @@ public class MainMenuActivity extends Activity {
             new JeuClassique(MainMenuActivity.this);
         else new JeuChrono(MainMenuActivity.this);
 
-
         Intent gameActivity = new Intent(MainMenuActivity.this, GameActivity.class);
         startActivity(gameActivity);
     }
 
     /**
-     * Ouvre l'activité permettant de lire les instructions de jeu
-     * @param view  Le bouton cliqué
+     * Ouvre l'activite permettant de lire les instructions de jeu
+     * @param view  Le bouton cliquer
      */
     public void seeInstructions(View view){
         Intent instructionsActivity = new Intent(MainMenuActivity.this, InstructionsActivity.class);
         startActivity(instructionsActivity);
     }
     /**
-     * Ouvre l'activité permettant de modifier les options de l'application
-     * @param view  Le bouton cliqué
+     * Ouvre l'activite permettant de modifier les options de l'application
+     * @param view  Le bouton cliquer
      */
     public void changeOptions(View view){
         Intent optionsActivity = new Intent(MainMenuActivity.this, OptionsActivity.class);
@@ -76,8 +82,8 @@ public class MainMenuActivity extends Activity {
     }
 
     /**
-     * Ouvre l'activité permettant de voirs les meilleurs scores
-     * @param view  Le bouton cliqué
+     * Ouvre l'activite permettant de voir les meilleurs scores
+     * @param view  Le bouton cliquer
      */
     public void seeHighscores(View view){
         Intent highscoresActivity = new Intent(MainMenuActivity.this, HighscoresActivity.class);
@@ -85,8 +91,8 @@ public class MainMenuActivity extends Activity {
     }
 
     /**
-     * Ouvre l'activité permettant d'avoir des informations sur l'application
-     * @param view  Le bouton cliqué
+     * Ouvre l'activite permettant d'avoir des informations sur l'application
+     * @param view  Le bouton cliquer
      */
     public void seeAbout(View view){
         Intent aboutActivity = new Intent(MainMenuActivity.this, AboutActivity.class);
