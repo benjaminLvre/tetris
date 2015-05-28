@@ -172,6 +172,10 @@ public abstract class Jeu extends Thread{
 		piece = createFuturPiece();
 		sendGameStateChange();
 		while(!fin){
+			if (isTimesUp()) {
+				sendGameEnd();
+				break;
+			}
 			try {
 				sleep(intervalTime);
 			} catch (InterruptedException e) {
@@ -184,7 +188,7 @@ public abstract class Jeu extends Thread{
 				} else {
 					int tmp = grille.removeLines();
 					updateScore(tmp);
-					if (isFinish()) {
+					if(isFinish()) {
 						sendGameEnd();
 						break;
 					}
@@ -328,6 +332,10 @@ public abstract class Jeu extends Thread{
 		synchronized (lockPause) {
 			return pause;
 		}
+	}
+
+	public boolean isTimesUp(){
+		return false;
 	}
 
 	public void aff(){
