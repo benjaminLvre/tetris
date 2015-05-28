@@ -51,7 +51,13 @@ public class GameActivity extends Activity {
         receiver = new GameReceiver(this,tetrisView);
         mActivity = this;
 
-        Jeu.getJeu().startGame();
+        if(!Jeu.getJeu().isAlive()){
+            Jeu.getJeu().startGame();
+        }
+        else{
+            showPauseDialog();
+        }
+
     }
     /**
      * Lancer lors de la reouverture de l'activite. Le controleur des messages est reouvert
