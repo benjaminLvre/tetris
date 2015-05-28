@@ -1,5 +1,6 @@
 package com.polytech.stfu.jeu;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
  * @see Point
  */
 public class Grille {
+	private static final String TAG = Grille.class.getSimpleName();
 	/**
 	 * Matrice contenant les valeurs repr�sentant des cases de la grille du jeu
 	 */
@@ -109,18 +111,30 @@ public class Grille {
 			int fin = getTopLinePiece();
 			while (i >= fin) {
 				if (isFullLine(i)) {
+					Jeu.getJeu().pause();
 					for (int l = i; l > 0; l--) {
+						if(l==i){
+							for(int d=5, r=6;d>=0 && r<12;d--, r++){
+								Log.d(TAG,"d:"+d+"r:"+r);
+								plateau[l][d] = TypePiece.None;
+								plateau[l][r] = TypePiece.None;
+								Jeu.getJeu().sendGameStateChange();
+								try {
+									Thread.sleep(20);
+								} catch (InterruptedException e){}
+							}
+						}
 						plateau[l] = plateau[l - 1];
 						System.out.println(i+"  "+fin);
-						Jeu.getJeu().aff();
 					}
 					plateau[0] = new TypePiece[plateau[0].length];
 					for (int l = 0; l < plateau[0].length; l++) {
 						plateau[0][l] = TypePiece.None;
 					}
-					Jeu.getJeu().aff();
+
 					fin++;
 					cmp++;
+					Jeu.getJeu().restart();
 				} else {
 					i--;
 				}

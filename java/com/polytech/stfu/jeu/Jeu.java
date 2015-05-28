@@ -347,7 +347,7 @@ public abstract class Jeu extends Thread{
 	/**
 	 * Methode pour envoyer un evenement pour annoncer que l'etat du jeu a changer
 	 */
-	private void sendGameStateChange(){
+	public void sendGameStateChange(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
 		intent.putExtra("Action", mContext.getString(R.string.GAME_STATE_CHANGE));
