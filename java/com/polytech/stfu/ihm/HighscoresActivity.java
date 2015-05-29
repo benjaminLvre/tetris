@@ -68,5 +68,10 @@ public class HighscoresActivity extends Activity {
             tabScores[i].setText(String.valueOf(c.getScore()));
             i++;
         }
+        for(int j=i;j<5; j++){
+            tabNames[j].setText("");
+            tabScores[j].setText("");
+        }
+
     }
 }

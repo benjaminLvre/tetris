@@ -145,6 +145,7 @@ public class Grille {
 	 */
 	private boolean isValidPosition(Piece piece, Point[] testedPosition){
 		for(Point pTest : testedPosition){
+
 			if(!isInPlateau(pTest) || (!isEmptyCase(pTest) && !piece.isOn(pTest))){
 				return false;
 			}
