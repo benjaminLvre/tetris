@@ -206,15 +206,11 @@ public class Grille {
 	 * Methode attribuant une nouvelle piece courante
 	 * @param p La nouvelle piece
 	 */
-	protected boolean setNewPiece(Piece p){
+	protected void setNewPiece(Piece p){
 		piece = p;
-		if(isValidPosition(p.getPosition())){
-			return false;
-		}
 		synchronized (this) {
 			setPieceOnPlateau();
 		}
-		return true;
 	}
 	
 	/**
