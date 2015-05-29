@@ -310,6 +310,7 @@ public class ViewDesign {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_HORIZONTAL;
         params.bottomMargin = 10;
+        params.weight = 1;
 
         switch (themeRegisterValue){
             case "classique":
@@ -334,14 +335,14 @@ public class ViewDesign {
             case "polytech":
                 scrollViewHighscore.setBackgroundResource(R.drawable.background_polytech);
 
-                bClassique.setBackgroundResource(R.drawable.btn_polytech);
+                bClassique.setBackgroundResource(R.drawable.btn_polytech2);
                 bClassique.setLayoutParams(params);
                 bClassique.setTextColor(Color.BLACK);
                 bClassique.setTextSize(24.0f);
                 bClassique.setTypeface(null, Typeface.NORMAL);
                 bClassique.setPadding(10, 0, 0, 0);
 
-                bChrono.setBackgroundResource(R.drawable.btn_polytech);
+                bChrono.setBackgroundResource(R.drawable.btn_polytech2);
                 bChrono.setLayoutParams(params);
                 bChrono.setTextColor(Color.BLACK);
                 bChrono.setTextSize(24.0f);
