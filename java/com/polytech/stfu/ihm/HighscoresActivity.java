@@ -1,6 +1,7 @@
 package com.polytech.stfu.ihm;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,19 +11,21 @@ import com.polytech.stfu.jeu.Mode;
 import com.polytech.stfu.score.Couple;
 
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
  * Permet d'afficher l'activite Highscore sur l'ecran
- * @see ViewDesign
+ * @see com.polytech.stfu.score.Score
+ * @see com.polytech.stfu.score.Couple
  */
 public class HighscoresActivity extends Activity {
 
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activitï¿½
+     * et application du theme
+     * @param savedInstanceState    Etat de l'activite
+     * @see ViewDesign#changeHighscore(Activity) (Activity)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +35,18 @@ public class HighscoresActivity extends Activity {
 
         ViewDesign.changeHighscore(this);
     }
-
     /**
-     * Permet d'afficher les scores
+     * Permet d'afficher les scores.
      * @param view  Le bouton cliqué
+     * @see com.polytech.stfu.score.Score#getHighScoreList(Mode, Context)
+     * @see Couple#getPseudo() (String)
+     * @see Couple#getScore(int)
      */
     public void displayHighscores(View view) {
         SortedSet<Couple> highscores;
 
-        if(view.getId() == R.id.scoreClassique) {
-            highscores = getHighScoreList(Mode.CLASSIQUE,this);
-        } else {
-            highscores = getHighScoreList(Mode.CHRONO,this);
-        }
+        if(view.getId() == R.id.scoreClassique) {  highscores = getHighScoreList(Mode.CLASSIQUE,this);}
+        else {highscores = getHighScoreList(Mode.CHRONO,this);}
 
         TextView textName1 = (TextView)findViewById(R.id.name1);
         TextView textName2 = (TextView)findViewById(R.id.name2);

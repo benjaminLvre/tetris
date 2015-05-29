@@ -1,8 +1,8 @@
 package com.polytech.stfu.ihm;
 
-
 import android.app.AlertDialog;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +19,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.widget.TextView;
 
 import com.polytech.stfu.jeu.Jeu;
+import com.polytech.stfu.jeu.Mode;
 import com.polytech.stfu.score.Couple;
 import com.polytech.stfu.score.Score;
 
 import java.util.SortedSet;
-
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
@@ -33,8 +32,6 @@ import static com.polytech.stfu.score.Score.getHighScoreList;
  * @see TetrisView
  */
 public class GameActivity extends Activity {
-
-    private static final String TAG = GameActivity.class.getSimpleName();
 
     private GameReceiver receiver;
     private static GameActivity mActivity;
@@ -98,7 +95,6 @@ public class GameActivity extends Activity {
             showPauseDialog();
         }
     }
-
     /**
      * Clic sur le bouton home
      * Si le Thread de jeu n'est pas en pause celui ci est mis en pause est la boite
@@ -111,11 +107,11 @@ public class GameActivity extends Activity {
             showPauseDialog();
         }
     }
-
     /**
      * Permet de lancer le message GAME_RESTART a travers l'application pour
      * relancer le jeu.
-     *      */
+     *
+     */
     private void sendGameRestart(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
@@ -154,38 +150,36 @@ public class GameActivity extends Activity {
     }
     /**
      * Permet de lancer une boite de dialogue qui met le jeu en pause.
+     * @see GameActivity#sendGamePause()
+     * @see GameActivity#sendGameUnpause()
+     * @see GameActivity#sendGameRestart()
+     * @see GameActivity#sendGameEnd()
      */
     public static void showPauseDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(mActivity);
 
         adb.setTitle("Menu pause");
-
-        adb.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                mActivity.sendGameUnpause();
-            }
-        });
-
-        //On modifie l'icône de l'AlertDialog
         adb.setIcon(android.R.drawable.ic_dialog_alert);
 
         adb.setPositiveButton("Reprendre", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur le bouton reprendre on reprendra une partie
                 mActivity.sendGameUnpause();
             }
         });
         adb.setNeutralButton("Rejouer", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur le bouton rejouer on recommencera une partie
                 mActivity.sendGameRestart();
             }
         });
         adb.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur Retourner au menu on retourna a la page du menu principal
                 mActivity.sendGameEnd();
+            }
+        });
+        adb.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                mActivity.sendGameUnpause();
             }
         });
         adb.setOnKeyListener(new DialogInterface.OnKeyListener() {
@@ -195,17 +189,16 @@ public class GameActivity extends Activity {
                     mActivity.sendGamePause();
                     return false;
                 }
-                else {
-                    return true;
-                }
+                else { return true; }
             }
         });
-
         adb.show();
     }
     /**
      * Permet de lancer une boite de dialogue qui affiche les scores lors de l'arret
      * du jeu.
+     * @see Couple#getPseudo()
+     * @see Couple#getScore()
      */
     public static void showScoresDialog(){
         LayoutInflater factory = LayoutInflater.from(mActivity);
@@ -213,13 +206,11 @@ public class GameActivity extends Activity {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(mActivity);
 
-        //On affecte la vue personnalise que l'on a cree ? notre AlertDialog
         adb.setView(alertDialogView);
         adb.setCancelable(false);
         adb.setTitle("Tableau des scores");
-
-        //On modifie l'icone de l'AlertDialog
         adb.setIcon(android.R.drawable.ic_dialog_alert);
+
         SortedSet<Couple> highscores = getHighScoreList(Jeu.getJeu().getMode(), mActivity);
 
         TextView textName1 = (TextView)alertDialogView.findViewById(R.id.highscore_name1);
@@ -245,14 +236,14 @@ public class GameActivity extends Activity {
 
         //On cree un bouton "Rejouer" a notre AlertDialog et on lui affecte un evenement
         adb.setPositiveButton("Rejouer", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur rejouer une partie est relancee
                 mActivity.sendGameRestart();
             }
         });
         adb.setNeutralButton("Retourner au menu", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Lorsque l'on cliquera sur rejouer une partie est relancee
                 mActivity.finish();
             }
         });
@@ -267,6 +258,8 @@ public class GameActivity extends Activity {
     /**
      * Permet de lancer une boite de dialogue qui permet au joueur d'enregistrer
      * son score.
+     * @see Score#save(Mode, String, int, Context)
+     * @see GameActivity#showScoresDialog()
      */
     public static void showNewScoreDialog(){
         LayoutInflater factory = LayoutInflater.from(mActivity);
@@ -274,17 +267,11 @@ public class GameActivity extends Activity {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(mActivity);
 
-        //On affecte la vue personnalise que l'on a cree a notre AlertDialog
         adb.setView(alertDialogView);
         adb.setCancelable(false);
         adb.setTitle("Nouveau meilleur score");
-
-        //On modifie l'ic?ne de l'AlertDialog
         adb.setIcon(android.R.drawable.ic_dialog_alert);
 
-
-
-        //On affecte un bouton "Valider" a notre AlertDialog et on lui affecte un evenement
         adb.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
@@ -302,9 +289,7 @@ public class GameActivity extends Activity {
         final AlertDialog dialog = adb.create();
         dialog.show();
 
-        // Initially disable the button
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setEnabled(false);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 
         EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
         et.addTextChangedListener(new TextWatcher() {
@@ -320,17 +305,16 @@ public class GameActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Check if edittext is empty
                 if (TextUtils.isEmpty(s)) {
-                    // Disable ok button
-                    dialog.getButton(
-                            AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 } else {
-                    // Something into edit text. Enable the button.
-                    dialog.getButton(
-                            AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    if(s.length() <= 10) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    }
+                    else{
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    }
                 }
-
             }
         });
     }

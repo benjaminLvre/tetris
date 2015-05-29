@@ -23,10 +23,11 @@ import com.polytech.stfu.jeu.Vitesse;
  * @see ViewDesign
  */
 public class OptionsActivity extends Activity {
-
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activit�
+     * et application du theme
+     * @param savedInstanceState    Etat de l'activite
+     * @see ViewDesign#changeOptions(Activity)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,65 +37,35 @@ public class OptionsActivity extends Activity {
 
         ViewDesign.changeOptions(this);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ViewDesign.changeOptions(this);
-    }
-
     /**
-     * Modifie la variable concernant le theme de l'application dans le class Jeu
-     * @param view  Le radioButton s�lectionn�"
+     * Modifie le fichier de sauvegarde contenant le theme et applique les changements a
+     * la page lors du changement de theme
+     * @param view  Le radioButton selectionne
+     * @see ViewDesign#changeOptions(Activity)
      */
     public void changeTheme(View view){
-        //Toast.makeText(OptionsActivity.this, "Theme modifi�", Toast.LENGTH_SHORT).show();
         SharedPreferences scores = this.getSharedPreferences("Theme", 0);
         SharedPreferences.Editor editor = scores.edit();
-        ScrollView scrollView = (ScrollView)findViewById(R.id.themeOptions);
 
-        LinearLayout linearOptions1 = (LinearLayout)findViewById(R.id.linearOptions1);
-        LinearLayout linearOptions2 = (LinearLayout)findViewById(R.id.linearOptions2);
-        LinearLayout linearOptions3 = (LinearLayout)findViewById(R.id.linearOptions3);
-        LinearLayout linearOptions4 = (LinearLayout)findViewById(R.id.linearOptions4);
-        LinearLayout linearOptions5 = (LinearLayout)findViewById(R.id.linearOptions5);
         switch (view.getId()){
             case R.id.themePolytech :
-                scrollView.setBackgroundResource(R.drawable.background_polytech);
                 editor.putString("theme", "polytech");
                 editor.apply();
-                linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
-                linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
-                linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
-                linearOptions4.setBackgroundResource(R.drawable.fond_polytech);
-                linearOptions5.setBackgroundResource(R.drawable.fond_polytech);
                 break;
-            case R.id.themeWalkingDead : scrollView.setBackgroundResource(R.drawable.background_wd);
+            case R.id.themeWalkingDead :
                 editor.putString("theme", "walking_dead");
                 editor.apply();
-                linearOptions1.setBackgroundResource(R.drawable.fond_wd);
-                linearOptions2.setBackgroundResource(R.drawable.fond_wd);
-                linearOptions3.setBackgroundResource(R.drawable.fond_wd);
-                linearOptions4.setBackgroundResource(R.drawable.fond_wd);
-                linearOptions5.setBackgroundResource(R.drawable.fond_wd);
                 break;
             default:
-                scrollView.setBackgroundResource(R.drawable.background_classique);
                 editor.putString("theme", "classique");
                 editor.apply();
-                linearOptions1.setBackgroundResource(R.drawable.fond_classique);
-                linearOptions2.setBackgroundResource(R.drawable.fond_classique);
-                linearOptions3.setBackgroundResource(R.drawable.fond_classique);
-                linearOptions4.setBackgroundResource(R.drawable.fond_classique);
-                linearOptions5.setBackgroundResource(R.drawable.fond_classique);
                 break;
         }
-
-        // Jeu.THEME = view.getId();
+        ViewDesign.changeOptions(this);
     }
     /**
-     * Modifie la variable concernant le mode de l'application dans le class Jeu
-     * @param view  Le radioButton cliqu�
+     * Modifie le fichier de sauvegarde contenant le mode de jeu
+     * @param view  Le radioButton clique
      */
     public void changeMode(View view){
         SharedPreferences scores = this.getSharedPreferences("Mode", 0);
@@ -105,13 +76,11 @@ public class OptionsActivity extends Activity {
         }
         editor.apply();
     }
-
     /**
-     * Modifie la variable concernant la vitesse de l'application dans le class Jeu
-     * @param view  Le radioButton cliqu�
+     * Modifie le fichier de sauvegarde contenant la vitesse de jeu
+     * @param view  Le radioButton clique
      */
     public void changeVitesse(View view){
-        //Toast.makeText(OptionsActivity.this, "Vitesse modifi�e", Toast.LENGTH_SHORT).show();
         SharedPreferences scores = this.getSharedPreferences("Vitesse", 0);
         SharedPreferences.Editor editor = scores.edit();
         switch (view.getId()){
@@ -121,10 +90,9 @@ public class OptionsActivity extends Activity {
         }
         editor.apply();
     }
-
     /**
-     * Modifie la variable concernant l'acc�laration de l'application dans le class Jeu
-     * @param view  Le radioButton cliqu�
+     * Modifie le fichier de sauvegarde contenant l'acceleration du jeu
+     * @param view  Le radioButton clique
      */
     public void changeAcceleration(View view){
         SharedPreferences scores = this.getSharedPreferences("Acceleration", 0);
@@ -136,10 +104,12 @@ public class OptionsActivity extends Activity {
         }
         editor.apply();
     }
-
+    /**
+     * Permet d'ouvrir l'application de musique
+     * @param view Le bouton pour ouvrir l'application
+     */
     public void openMusic(View view){
         Intent musicApp = new Intent("android.intent.action.MUSIC_PLAYER");
         startActivity(musicApp);
     }
-
 }
