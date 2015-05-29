@@ -118,7 +118,7 @@ public class Grille {
 								plateau[l][r] = TypePiece.None;
 								Jeu.getJeu().sendGameStateChange();
 								try {
-									Thread.sleep(20);
+									Thread.sleep(40);
 								} catch (InterruptedException e){}
 							}
 						}
