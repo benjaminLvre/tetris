@@ -193,6 +193,10 @@ public abstract class Jeu extends Thread{
 						break;
 					}
 					piece = createFuturPiece();
+					if(piece == TypePiece.None){
+						sendGameEnd();
+						break;
+					}
 					if (acceleration.getVal() != 0)
 						intervalTime *= (1 - (0.01 * acceleration.getVal()/100));
 				}
@@ -290,7 +294,9 @@ public abstract class Jeu extends Thread{
 			newPiece = Piece.createPieceI(pointInitial);
 		}
 		piece = newPiece.getTypePiece();
-		grille.setNewPiece(newPiece);
+		if(!grille.setNewPiece(newPiece)){
+			return TypePiece.None;
+		}
 		return piece;
 	}
 	
