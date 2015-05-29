@@ -290,6 +290,12 @@ public class Grille {
 		return 0 <= p.getX() && p.getX() < plateau[0].length && 0 <= p.getY() && p.getY() < plateau.length;
 	}
 
+	public boolean pieceHasValidPosition(Piece p){
+		synchronized (this){
+			return isValidPosition(p.getPosition());
+		}
+	}
+
 	public TypePiece[][] getPlateau(){
 		return plateau;
 	}

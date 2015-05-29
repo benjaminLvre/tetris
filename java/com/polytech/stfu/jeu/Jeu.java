@@ -35,7 +35,9 @@ public abstract class Jeu extends Thread{
 	/**
 	 * Type de la piece courante
 	 */
-	protected TypePiece piece;
+	protected Piece piece;
+
+	protected Piece futurePiece;
 	/**
 	 * Intervale de temps entre deux chutes de la piece
 	 */
@@ -162,7 +164,7 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public TypePiece getTypeNextPiece(){
-		return piece;
+		return piece.getTypePiece();
 	}
 
 	/**
@@ -170,6 +172,8 @@ public abstract class Jeu extends Thread{
 	 */
 	public void run(){
 		piece = createFuturPiece();
+		futurePiece = createFuturPiece();
+		grille.setNewPiece(piece);
 		sendGameStateChange();
 		while(!fin){
 			if (isTimesUp()) {
@@ -188,15 +192,12 @@ public abstract class Jeu extends Thread{
 				} else {
 					int tmp = grille.removeLines();
 					updateScore(tmp);
-					if(isFinish()) {
+					if(isFinish() || grille.pieceHasValidPosition(futurePiece)) {
 						sendGameEnd();
 						break;
 					}
-					piece = createFuturPiece();
-					if(piece == TypePiece.None){
-						sendGameEnd();
-						break;
-					}
+					piece = futurePiece;
+					futurePiece = createFuturPiece();
 					if (acceleration.getVal() != 0)
 						intervalTime *= (1 - (0.01 * acceleration.getVal()/100));
 				}
@@ -264,7 +265,7 @@ public abstract class Jeu extends Thread{
 	 * Creation de la nouvelle piece courante et ajout de celle ci sur la grille
 	 * @return le type de la piece
 	 */
-	protected TypePiece createFuturPiece(){
+	protected Piece createFuturPiece(){
 		int type = (int)(Math.random()*7);
 		Point pointInitial = new Point(5,0);
 		Piece newPiece;
@@ -293,10 +294,6 @@ public abstract class Jeu extends Thread{
 		default:
 			newPiece = Piece.createPieceI(pointInitial);
 		}
-		piece = newPiece.getTypePiece();
-		if(!grille.setNewPiece(newPiece)){
-			return TypePiece.None;
-		}
 		return piece;
 	}
 	
@@ -323,7 +320,7 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public TypePiece getTypePiece(){
-		return piece;
+		return piece.getTypePiece();
 	}
 	
 	public Mode getMode(){
