@@ -28,10 +28,9 @@ import static com.polytech.stfu.score.Score.getHighScoreList;
  * Classe permettant de gerer le design des differentes activites selon le theme choisi
  */
 public class ViewDesign {
-
     /**
      * Permet de mettre en place le design du menu principal
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeMain(Activity pActivity){
 
