@@ -370,6 +370,6 @@ public abstract class Jeu extends Thread{
 	}
 
 	public float getDifficultCoeff(){
-		return (1+vitesse.getVal())*(1+acceleration.getVal())/400;
+		return (1+vitesse.getVal()/100)*(1+acceleration.getVal()/100)/4;
 	}
 }

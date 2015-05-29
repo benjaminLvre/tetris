@@ -15,7 +15,7 @@ public class Chrono extends Thread{
 		lockFin = new Object();
 		lockTemps = new Object();
 		lockPause = new Object();
-		lockTempsCourant = new Object(); 
+		lockTempsCourant = new Object();
 	}
 	
 	public void run(){
