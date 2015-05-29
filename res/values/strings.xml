@@ -26,7 +26,7 @@
         </string>
     <string name="chronoModeString">Mode Contre-la-montre</string>
         <string name="textInstructionsCLM">
-            En mode contre-la-montre, les règles sont relativement les mêmes sauf que le but est de résister le plus longtemps possible. Le temps en début de parti est de 60 secondes et il est possible de gagner du temps à chaque ligne réalisée.
+            En mode contre-la-montre, les règles sont relativement les mêmes sauf que le but est de résister le plus longtemps possible. Le temps en début de parti est de 90 secondes et il est possible de gagner du temps à chaque ligne réalisée.
         </string>
     <string name="howToPlay">Comment jouer ?</string>
         <string name="textInstructionsEvents">Pour déplacer une pièce il suffit de cliquer sur un des côtés de l\'écran, la pièce se déplacera du côté cliqué.
@@ -52,12 +52,18 @@
         <string name="musique">Musique</string>
         <string name="openMusique">Choisir une musique</string>
 
-
-    <string name="highscores">Top 5</string>
-    <string name="scoreClassique">Classique</string>
-    <string name="scoreChrono">Chrono</string>
-
     <string name="title_activity_highscores">HighscoresActivity</string>
+        <string name="highscores">Top 5</string>
+        <string name="scoreClassique">CLASSIQUE</string>
+        <string name="scoreChrono">CHRONO</string>
+        <string name="hashtag">#</string>
+        <string name="nomTitle">Pseudo</string>
+        <string name="scoreTitle">Score</string>
+        <string name="pos1">1</string>
+        <string name="pos2">2</string>
+        <string name="pos3">3</string>
+        <string name="pos4">4</string>
+        <string name="pos5">5</string>
 
     <string name="aboutbtn">\?</string>
     <string name="title_activity_about">AboutActivity</string>
@@ -75,6 +81,5 @@
         <string name="about2">
             Cette application s\'intègre dans le cadre d\'un Projet en Java à Polytech Nantes, encadré par M. Antoine PIGEAU.
         </string>
-
-
+    <string name="title_activity_splash_screen">SplashScreen</string>
 </resources>

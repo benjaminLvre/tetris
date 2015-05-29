@@ -111,16 +111,14 @@ public class Grille {
 			int fin = getTopLinePiece();
 			while (i >= fin) {
 				if (isFullLine(i)) {
-					Jeu.getJeu().pause();
 					for (int l = i; l > 0; l--) {
 						if(l==i){
 							for(int d=5, r=6;d>=0 && r<12;d--, r++){
-								Log.d(TAG,"d:"+d+"r:"+r);
 								plateau[l][d] = TypePiece.None;
 								plateau[l][r] = TypePiece.None;
 								Jeu.getJeu().sendGameStateChange();
 								try {
-									Thread.sleep(20);
+									Thread.sleep(40);
 								} catch (InterruptedException e){}
 							}
 						}
@@ -133,7 +131,6 @@ public class Grille {
 
 					fin++;
 					cmp++;
-					Jeu.getJeu().restart();
 				} else {
 					i--;
 				}
@@ -209,11 +206,15 @@ public class Grille {
 	 * Methode attribuant une nouvelle piece courante
 	 * @param p La nouvelle piece
 	 */
-	protected void setNewPiece(Piece p){
+	protected boolean setNewPiece(Piece p){
 		piece = p;
+		if(isValidPosition(p.getPosition())){
+			return false;
+		}
 		synchronized (this) {
 			setPieceOnPlateau();
 		}
+		return true;
 	}
 	
 	/**

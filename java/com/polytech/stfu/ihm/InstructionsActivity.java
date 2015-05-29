@@ -8,10 +8,11 @@ import android.view.WindowManager;
  * @see ViewDesign
  */
 public class InstructionsActivity extends Activity {
-
     /**
      * Mise en place des composants de l'interface lors de son ouverture
-     * @param savedInstanceState    Etat de l'activit�
+     * et application du theme
+     * @param savedInstanceState    Etat de l'activite
+     * @see ViewDesign#changeInstruction(Activity)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +21,4 @@ public class InstructionsActivity extends Activity {
         setContentView(R.layout.activity_page_instructions);
         ViewDesign.changeInstruction(this);
     }
-
 }

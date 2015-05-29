@@ -2,11 +2,7 @@ package com.polytech.stfu.score;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.polytech.stfu.jeu.Mode;
-
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,12 +15,11 @@ import java.util.TreeSet;
  *
  */
 public abstract class Score {
-    private static final String TAG = Score.class.getSimpleName();
-
     /**
 	 * Fonction pour obtenir l'ensemble des meilleurs scores d'un mode
 	 * @param mode Le mode de jeu voulu
 	 * @return L'ensemble des 5 meilleurs scores
+     * @see Couple
 	 */
 	public static SortedSet<Couple> getHighScoreList(Mode mode, Context context){
 		SortedSet<Couple> ret = new TreeSet<>();
@@ -39,8 +34,6 @@ public abstract class Score {
 		}
 		return ret;
 	}
-
-
     /**
      * Fonction pour tester si un score est dans les 5 meileurs du mode voulu
      * @param mode Le mode de jeu voulu
@@ -50,7 +43,6 @@ public abstract class Score {
         SharedPreferences scores = context.getSharedPreferences("Scores", 0);
         return score > scores.getInt(mode.getNom()+"score"+4, -1);
     }
-
     /**
      * Fonction pour sauvegarder un couple (pseudo, score) dans le mode voulu.
      * L'ordre des meilleurs scores est assure

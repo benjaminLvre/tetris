@@ -28,10 +28,9 @@ import static com.polytech.stfu.score.Score.getHighScoreList;
  * Classe permettant de gerer le design des differentes activites selon le theme choisi
  */
 public class ViewDesign {
-
     /**
      * Permet de mettre en place le design du menu principal
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeMain(Activity pActivity){
 
@@ -311,6 +310,7 @@ public class ViewDesign {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_HORIZONTAL;
         params.bottomMargin = 10;
+        params.weight = 1;
 
         switch (themeRegisterValue){
             case "classique":
@@ -335,19 +335,19 @@ public class ViewDesign {
             case "polytech":
                 scrollViewHighscore.setBackgroundResource(R.drawable.background_polytech);
 
-                bClassique.setBackgroundResource(R.drawable.btn_polytech);
+                bClassique.setBackgroundResource(R.drawable.btn_polytech2);
                 bClassique.setLayoutParams(params);
                 bClassique.setTextColor(Color.BLACK);
                 bClassique.setTextSize(24.0f);
                 bClassique.setTypeface(null, Typeface.NORMAL);
-                bClassique.setPadding(10, 0, 0, 0);
+                bClassique.setPadding(0, 0, 0, 0);
 
-                bChrono.setBackgroundResource(R.drawable.btn_polytech);
+                bChrono.setBackgroundResource(R.drawable.btn_polytech2);
                 bChrono.setLayoutParams(params);
                 bChrono.setTextColor(Color.BLACK);
                 bChrono.setTextSize(24.0f);
                 bChrono.setTypeface(null, Typeface.NORMAL);
-                bChrono.setPadding(10,0,0,0);
+                bChrono.setPadding(0,0,0,0);
 
                 tScore.setBackgroundResource(R.drawable.fond_polytech);
                 break;
@@ -356,14 +356,14 @@ public class ViewDesign {
                 bClassique.setBackgroundResource(R.drawable.btn_wd);
                 bClassique.setLayoutParams(params);
                 bClassique.setTextColor(Color.BLACK);
-                bClassique.setTextSize(30.0f);
+                bClassique.setTextSize(24.0f);
                 bClassique.setTypeface(null, Typeface.BOLD);
                 bClassique.setPadding(0, 0, 0, 0);
 
                 bChrono.setBackgroundResource(R.drawable.btn_wd);
                 bChrono.setLayoutParams(params);
                 bChrono.setTextColor(Color.BLACK);
-                bChrono.setTextSize(30.0f);
+                bChrono.setTextSize(24.0f);
                 bChrono.setTypeface(null, Typeface.BOLD);
                 bChrono.setPadding(0,0,0,0);
 
