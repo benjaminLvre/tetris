@@ -25,7 +25,7 @@ import java.util.SortedSet;
 import static com.polytech.stfu.score.Score.getHighScoreList;
 
 /**
- * Classe permettant de gerer le design des diff�rentes activit�s selon le theme choisi
+ * Classe permettant de gerer le design des differentes activites selon le theme choisi
  */
 public class ViewDesign {
 
@@ -44,7 +44,6 @@ public class ViewDesign {
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
-
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_HORIZONTAL;
@@ -156,11 +155,10 @@ public class ViewDesign {
                     bAbout.setBackgroundResource(R.drawable.btn_about);
                     bAbout.setTypeface(null, Typeface.NORMAL);
             }
-
     }
     /**
      * Permet de mettre en place le design de la page des options
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeOptions(Activity pActivity){
         ScrollView scrollViewOption = (ScrollView)pActivity.findViewById(R.id.themeOptions);
@@ -189,23 +187,19 @@ public class ViewDesign {
 
         SharedPreferences themeRegister = pActivity.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
-
         switch (themeRegisterValue){
             case "classique":
                 themeC.setChecked(true);
                 scrollViewOption.setBackgroundResource(R.drawable.background_classique);
-
                 linearOptions1.setBackgroundResource(R.drawable.fond_classique);
                 linearOptions2.setBackgroundResource(R.drawable.fond_classique);
                 linearOptions3.setBackgroundResource(R.drawable.fond_classique);
                 linearOptions4.setBackgroundResource(R.drawable.fond_classique);
                 linearOptions5.setBackgroundResource(R.drawable.fond_classique);
-
                 break;
             case "polytech":
                 themeP.setChecked(true);
                 scrollViewOption.setBackgroundResource(R.drawable.background_polytech);
-
                 linearOptions1.setBackgroundResource(R.drawable.fond_polytech);
                 linearOptions2.setBackgroundResource(R.drawable.fond_polytech);
                 linearOptions3.setBackgroundResource(R.drawable.fond_polytech);
@@ -215,7 +209,6 @@ public class ViewDesign {
             case "walking_dead":
                 themeWD.setChecked(true);
                 scrollViewOption.setBackgroundResource(R.drawable.background_wd);
-
                 linearOptions1.setBackgroundResource(R.drawable.fond_wd);
                 linearOptions2.setBackgroundResource(R.drawable.fond_wd);
                 linearOptions3.setBackgroundResource(R.drawable.fond_wd);
@@ -226,39 +219,31 @@ public class ViewDesign {
 
         SharedPreferences modeRegister = pActivity.getSharedPreferences("Mode", 0);
         String modeRegisterValue = modeRegister.getString("mode", null);
-
         switch (modeRegisterValue){
-            case "classique": modeClassique.setChecked(true);new JeuClassique(pActivity); break;
-            case "contre-la-montre": modeCLM.setChecked(true);new JeuChrono(pActivity);break;
+            case "classique": modeClassique.setChecked(true);break;
+            case "contre-la-montre": modeCLM.setChecked(true);break;
         }
         SharedPreferences vitesseRegister = pActivity.getSharedPreferences("Vitesse", 0);
         String vitesseRegisterValue = vitesseRegister.getString("vitesse", null);
-
         switch (vitesseRegisterValue){
-            case "FAIBLE": vit1.setChecked(true);
-                Jeu.getJeu().setVitesse(Vitesse.FAIBLE);break;
-            case "NORMALE": vit2.setChecked(true);
-                Jeu.getJeu().setVitesse(Vitesse.NORMALE);
-                break;
-            case "ELEVEE": vit3.setChecked(true);
-                Jeu.getJeu().setVitesse(Vitesse.ELEVEE);
-                break;
+            case "FAIBLE": vit1.setChecked(true);break;
+            case "NORMALE": vit2.setChecked(true);break;
+            case "ELEVEE": vit3.setChecked(true);break;
         }
-
         SharedPreferences accelerationRegister =pActivity.getSharedPreferences("Acceleration", 0);
         String accelerationRegisterValue = accelerationRegister.getString("acceleration", null);
 
         switch (accelerationRegisterValue){
-            case "NULLE": accel0.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.NULLE); break;
-            case "MODEREE": accel1.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.MODEREE);break;
-            case "FORTE": accel2.setChecked(true);Jeu.getJeu().setAcceleration(Acceleration.FORTE);break;
+            case "NULLE": accel0.setChecked(true);break;
+            case "MODEREE": accel1.setChecked(true);break;
+            case "FORTE": accel2.setChecked(true);break;
         }
 
 
     }
     /**
      * Permet de mettre en place le design de la page des instructions
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeInstruction(Activity pActivity){
         ScrollView scrollViewInstructions = (ScrollView)pActivity.findViewById(R.id.scrollIntruction);
@@ -294,7 +279,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page about
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeAbout(Activity pActivity){
         LinearLayout linearAbout = (LinearLayout)pActivity.findViewById(R.id.linearAbout);
@@ -311,7 +296,7 @@ public class ViewDesign {
     }
     /**
      * Permet de mettre en place le design de la page listant les meilleurs scores
-     * @param pActivity L'activit� a modifi�e
+     * @param pActivity L'activite a modifiee
      */
     public static void changeHighscore(Activity pActivity){
 

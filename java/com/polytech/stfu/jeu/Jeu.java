@@ -172,6 +172,10 @@ public abstract class Jeu extends Thread{
 		piece = createFuturPiece();
 		sendGameStateChange();
 		while(!fin){
+			if (isTimesUp()) {
+				sendGameEnd();
+				break;
+			}
 			try {
 				sleep(intervalTime);
 			} catch (InterruptedException e) {
@@ -184,7 +188,7 @@ public abstract class Jeu extends Thread{
 				} else {
 					int tmp = grille.removeLines();
 					updateScore(tmp);
-					if (isFinish()) {
+					if(isFinish()) {
 						sendGameEnd();
 						break;
 					}
@@ -330,6 +334,10 @@ public abstract class Jeu extends Thread{
 		}
 	}
 
+	public boolean isTimesUp(){
+		return false;
+	}
+
 	public void aff(){
 		Log.d(TAG, "grille : \n" + grille.toString());
 		//System.out.println(grille);
@@ -339,7 +347,7 @@ public abstract class Jeu extends Thread{
 	/**
 	 * Methode pour envoyer un evenement pour annoncer que l'etat du jeu a changer
 	 */
-	private void sendGameStateChange(){
+	public void sendGameStateChange(){
 		Intent intent = new Intent("TETRIS");
 		intent.putExtra("Source", "Jeu");
 		intent.putExtra("Action", mContext.getString(R.string.GAME_STATE_CHANGE));
