@@ -206,15 +206,11 @@ public class Grille {
 	 * Methode attribuant une nouvelle piece courante
 	 * @param p La nouvelle piece
 	 */
-	protected boolean setNewPiece(Piece p){
+	protected void setNewPiece(Piece p){
 		piece = p;
-		if(isValidPosition(p.getPosition())){
-			return false;
-		}
 		synchronized (this) {
 			setPieceOnPlateau();
 		}
-		return true;
 	}
 	
 	/**
@@ -288,6 +284,12 @@ public class Grille {
 	 */
 	private boolean isInPlateau(Point p){
 		return 0 <= p.getX() && p.getX() < plateau[0].length && 0 <= p.getY() && p.getY() < plateau.length;
+	}
+
+	public boolean pieceHasValidPosition(Piece p){
+		synchronized (this){
+			return isValidPosition(p.getPosition());
+		}
 	}
 
 	public TypePiece[][] getPlateau(){
