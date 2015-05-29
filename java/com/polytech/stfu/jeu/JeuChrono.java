@@ -80,16 +80,16 @@ public class JeuChrono extends Jeu {
 		synchronized (lockPause) {
 			switch(line){
 				case 1:
-					tempsLimite += 5;
+					tempsLimite += 6;
 					break;
 				case 2:
-					tempsLimite += 10;
-					break;
-				case 3:
 					tempsLimite += 15;
 					break;
+				case 3:
+					tempsLimite += 35;
+					break;
 				case 4:
-					tempsLimite += 60;
+					tempsLimite += 75;
 					break;
 				default:
 			}

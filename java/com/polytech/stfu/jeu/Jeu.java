@@ -368,4 +368,8 @@ public abstract class Jeu extends Thread{
 		intent.putExtra("Action", mContext.getString(R.string.GAME_END));
 		LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 	}
+
+	public float getDifficultCoeff(){
+		return (1+vitesse.getVal())*(1+acceleration.getVal())/400;
+	}
 }
