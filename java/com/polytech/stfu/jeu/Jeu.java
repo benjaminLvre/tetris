@@ -294,7 +294,7 @@ public abstract class Jeu extends Thread{
 		default:
 			newPiece = Piece.createPieceI(pointInitial);
 		}
-		return piece;
+		return newPiece;
 	}
 	
 	public abstract int getScore();
