@@ -77,6 +77,7 @@ public abstract class Jeu extends Thread{
 		pause = false;
 		lockPause = new Object();
 		lockMove = new Object();
+		futurePiece = createFuturPiece();
 
 		mContext = pContext;
 		fin = false;
@@ -171,7 +172,7 @@ public abstract class Jeu extends Thread{
 	 * Methode qui déroule la partie
 	 */
 	public void run(){
-		piece = createFuturPiece();
+		piece = futurePiece;
 		futurePiece = createFuturPiece();
 		grille.setNewPiece(piece);
 		sendGameStateChange();
