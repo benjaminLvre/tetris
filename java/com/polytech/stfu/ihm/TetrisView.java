@@ -137,20 +137,49 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             pCanvas.drawText("Temps restant : " + Jeu.getJeu().getTempsRestant(), 15.0f, 25.0f, this.scoreColor);
         }
 
+        SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
+        String themeRegisterValue = themeRegister.getString("theme", null);
 
         // Dessin prochaine piece
         rectNextPiece.set(verticalLargeLine*2,horizontalLargeLine*2,verticalLargeLine*10,horizontalLargeLine*6);
         TypePiece nextPiece = Jeu.getJeu().getTypeNextPiece();
-        switch (nextPiece){
-            case L : designNextPiece = getResources().getDrawable(R.drawable.next_piece_l);break;
-            case O: designNextPiece = getResources().getDrawable(R.drawable.next_piece_o);break;
-            case S:designNextPiece = getResources().getDrawable(R.drawable.next_piece_s);break;
-            case Z: designNextPiece = getResources().getDrawable(R.drawable.next_piece_z);break;
-            case T: designNextPiece = getResources().getDrawable(R.drawable.next_piece_t);break;
-            case J: designNextPiece = getResources().getDrawable(R.drawable.next_piece_j);break;
-            case I: designNextPiece = getResources().getDrawable(R.drawable.next_piece_i);break;
-            default:break;
+
+        switch(themeRegisterValue){
+            case "classique":
+                switch (nextPiece){
+                    case L : designNextPiece = getResources().getDrawable(R.drawable.next_piece_l);break;
+                    case O: designNextPiece = getResources().getDrawable(R.drawable.next_piece_o);break;
+                    case S:designNextPiece = getResources().getDrawable(R.drawable.next_piece_s);break;
+                    case Z: designNextPiece = getResources().getDrawable(R.drawable.next_piece_z);break;
+                    case T: designNextPiece = getResources().getDrawable(R.drawable.next_piece_t);break;
+                    case J: designNextPiece = getResources().getDrawable(R.drawable.next_piece_j);break;
+                    case I: designNextPiece = getResources().getDrawable(R.drawable.next_piece_i);break;
+                    default:break;
+                }break;
+            case "polytech":
+                switch (nextPiece){
+                    case L : designNextPiece = getResources().getDrawable(R.drawable.next_piece_l_polytech);break;
+                    case O: designNextPiece = getResources().getDrawable(R.drawable.next_piece_o_polytech);break;
+                    case S:designNextPiece = getResources().getDrawable(R.drawable.next_piece_s_polytech);break;
+                    case Z: designNextPiece = getResources().getDrawable(R.drawable.next_piece_z_polytech);break;
+                    case T: designNextPiece = getResources().getDrawable(R.drawable.next_piece_t_polytech);break;
+                    case J: designNextPiece = getResources().getDrawable(R.drawable.next_piece_j_polytech);break;
+                    case I: designNextPiece = getResources().getDrawable(R.drawable.next_piece_i_polytech);break;
+                    default:break;
+                }break;
+            case "walking_dead":
+                switch (nextPiece){
+                    case L : designNextPiece = getResources().getDrawable(R.drawable.next_piece_l_wd);break;
+                    case O: designNextPiece = getResources().getDrawable(R.drawable.next_piece_o_wd);break;
+                    case S:designNextPiece = getResources().getDrawable(R.drawable.next_piece_s_wd);break;
+                    case Z: designNextPiece = getResources().getDrawable(R.drawable.next_piece_z_wd);break;
+                    case T: designNextPiece = getResources().getDrawable(R.drawable.next_piece_t_wd);break;
+                    case J: designNextPiece = getResources().getDrawable(R.drawable.next_piece_j_wd);break;
+                    case I: designNextPiece = getResources().getDrawable(R.drawable.next_piece_i_wd);break;
+                    default:break;
+                }break;
         }
+
 
         designNextPiece.setBounds(rectNextPiece);
         designNextPiece.draw(pCanvas);
@@ -164,8 +193,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             pCanvas.drawLine(verticalLargeLine*(vl),horizontalLargeLine,verticalLargeLine*(vl), horizontalLargeLine*23, this.linePaint);
         }
 
-        SharedPreferences themeRegister = mContext.getSharedPreferences("Theme", 0);
-        String themeRegisterValue = themeRegister.getString("theme", null);
+
 
 
         // Dessine une case
@@ -207,17 +235,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                                 case I:  designCase = getResources().getDrawable(R.drawable.cube_polytech71);break;
                                 default:break;
                             }break;
-                        default:
-                            switch (Jeu.getJeu().getGrille()[li][col]){
-                                case L : designCase = getResources().getDrawable(R.drawable.orange_cube);break;
-                                case O: designCase = getResources().getDrawable(R.drawable.yellow_cube);break;
-                                case S:designCase = getResources().getDrawable(R.drawable.green_cube);break;
-                                case Z: designCase = getResources().getDrawable(R.drawable.red_cube);break;
-                                case T: designCase = getResources().getDrawable(R.drawable.purple_cube);break;
-                                case J: designCase = getResources().getDrawable(R.drawable.blue_cube);break;
-                                case I: designCase = getResources().getDrawable(R.drawable.turquoiz_cube);break;
-                                default:break;
-                            }
+                        default:break;
                     }
 
                     if(li == 0 && col == 0){

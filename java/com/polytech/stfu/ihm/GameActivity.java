@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -37,7 +40,10 @@ public class GameActivity extends Activity {
     private static GameActivity mActivity;
 
     /**
-     * Mise en place des composants de l'interface lors de son ouverture
+     * Mise en place des composants de l'interface lors de son ouverture.
+     * Lancement du Thread de jeu ou ouverture de la boite de dialogue de pause si une
+     * partie avait deja ete commmencee.
+     *
      * @param savedInstanceState    Etat de l'activite
      */
     @Override
@@ -60,7 +66,8 @@ public class GameActivity extends Activity {
 
     }
     /**
-     * Lancer lors de la reouverture de l'activite. Le controleur des messages est reouvert
+     * Lancer lors de la reouverture de l'activite.
+     * Le controleur des messages est reouvert.
      */
     @Override
     protected void onResume() {
@@ -68,7 +75,8 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
     /**
-     * Lancé lors de la mise en pause de l'activité. Le controleur des messages est fermé
+     * Lancé lors de la mise en pause de l'activité.
+     * Le controleur des messages est fermé.
      */
     @Override
     protected void onPause() {
@@ -76,7 +84,9 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
     /**
-     * Clic sur la bouton de retour
+     * Clic sur le bouton de retour.
+     * Si le jeu est en cours, met le Thread de jeu en pause et ouvre la boite
+     * de dialogue de pause sinon le Thread de jeu est relance.
      */
     @Override
     public void onBackPressed() {
@@ -89,6 +99,11 @@ public class GameActivity extends Activity {
         }
     }
 
+    /**
+     * Clic sur le bouton home
+     * Si le Thread de jeu n'est pas en pause celui ci est mis en pause est la boite
+     * de dialogue de pause est ouverte.
+     */
     @Override
     protected void onUserLeaveHint() {
         if(!Jeu.getJeu().isInPause()) {
@@ -98,8 +113,9 @@ public class GameActivity extends Activity {
     }
 
     /**
-     * Permet de lancer un message a travers l'application pour relancer une partie
-     */
+     * Permet de lancer le message GAME_RESTART a travers l'application pour
+     * relancer le jeu.
+     *      */
     private void sendGameRestart(){
         Intent intent = new Intent("TETRIS");
         intent.putExtra("Source", "Ihm");
@@ -107,7 +123,8 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
-     * Permet de lancer un message a travers l'application pour mettre une partie en pause
+     * Permet de lancer le message a GAME_PAUSE travers l'application pour
+     * mettre le jeu en pause.
      */
     protected void sendGamePause(){
         Intent intent = new Intent("TETRIS");
@@ -116,7 +133,8 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
-     * Permet de lancer un message a travers l'application pour reprendre une partie
+     * Permet de lancer le message GAME_UNPAUSE a travers l'application pour
+     * reprendre le jeu.
      */
     protected void sendGameUnpause(){
         Intent intent = new Intent("TETRIS");
@@ -125,7 +143,8 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
-     * Permet de lancer un message a travers l'application pour stopper une partie
+     * Permet de lancer le message GAME_END a travers l'application pour stopper
+     * le jeu.
      */
     protected void sendGameEnd(){
         Intent intent = new Intent("TETRIS");
@@ -134,7 +153,7 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
-     * Permet de lancer une boite de dialogue qui met le jeu en pause
+     * Permet de lancer une boite de dialogue qui met le jeu en pause.
      */
     public static void showPauseDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(mActivity);
@@ -185,7 +204,8 @@ public class GameActivity extends Activity {
         adb.show();
     }
     /**
-     * Permet de lancer une boite de dialogue qui affiche les scores en fin de partie
+     * Permet de lancer une boite de dialogue qui affiche les scores lors de l'arret
+     * du jeu.
      */
     public static void showScoresDialog(){
         LayoutInflater factory = LayoutInflater.from(mActivity);
@@ -245,7 +265,8 @@ public class GameActivity extends Activity {
         adb.show();
     }
     /**
-     * Permet de lancer une boite de dialogue qui permet au joueur d'enregistrer son score
+     * Permet de lancer une boite de dialogue qui permet au joueur d'enregistrer
+     * son score.
      */
     public static void showNewScoreDialog(){
         LayoutInflater factory = LayoutInflater.from(mActivity);
@@ -261,6 +282,8 @@ public class GameActivity extends Activity {
         //On modifie l'ic?ne de l'AlertDialog
         adb.setIcon(android.R.drawable.ic_dialog_alert);
 
+
+
         //On affecte un bouton "Valider" a notre AlertDialog et on lui affecte un evenement
         adb.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -275,7 +298,41 @@ public class GameActivity extends Activity {
                 return false;
             }
         });
-        adb.show();
+
+        final AlertDialog dialog = adb.create();
+        dialog.show();
+
+        // Initially disable the button
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setEnabled(false);
+
+        EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Check if edittext is empty
+                if (TextUtils.isEmpty(s)) {
+                    // Disable ok button
+                    dialog.getButton(
+                            AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                } else {
+                    // Something into edit text. Enable the button.
+                    dialog.getButton(
+                            AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+
+            }
+        });
     }
 
 }
