@@ -75,6 +75,10 @@
         <string name="about2">
             Cette application s\'intègre dans le cadre d\'un Projet en Java à Polytech Nantes, encadré par M. Antoine PIGEAU.
         </string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>
