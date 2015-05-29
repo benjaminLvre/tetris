@@ -138,18 +138,26 @@ public class Grille {
 		}
 		return cmp;
 	}
-	
+
 	/**
 	 * Methode testant une position de piece est libre
 	 * @param testedPosition La position a tester
 	 */
-	private boolean isValidPosition(Point[] testedPosition){
+	private boolean isValidPosition(Piece piece, Point[] testedPosition){
 		for(Point pTest : testedPosition){
 			if(!isInPlateau(pTest) || (!isEmptyCase(pTest) && !piece.isOn(pTest))){
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Methode testant une position de piece est libre
+	 * @param testedPosition La position a tester
+	 */
+	private boolean isValidPosition(Point[] testedPosition){
+		return isValidPosition(piece, testedPosition);
 	}
 	
 	/**
@@ -212,7 +220,7 @@ public class Grille {
 			setPieceOnPlateau();
 		}
 	}
-	
+
 	/**
 	 * Methode effectant une type de piece a une case de la grille
 	 * @param p La case concernee
@@ -288,7 +296,7 @@ public class Grille {
 
 	public boolean pieceHasValidPosition(Piece p){
 		synchronized (this){
-			return isValidPosition(p.getPosition());
+			return isValidPosition(p, p.getPosition());
 		}
 	}
 

@@ -199,6 +199,7 @@ public abstract class Jeu extends Thread{
 					piece = futurePiece;
 					grille.setNewPiece(piece);
 					futurePiece = createFuturPiece();
+					grille.setNewPiece(piece);
 					if (acceleration.getVal() != 0)
 						intervalTime *= (1 - (0.01 * acceleration.getVal()/100));
 				}
