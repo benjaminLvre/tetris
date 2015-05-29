@@ -40,7 +40,7 @@ public class HighscoresActivity extends Activity {
      * @param view  Le bouton cliqué
      * @see com.polytech.stfu.score.Score#getHighScoreList(Mode, Context)
      * @see Couple#getPseudo() (String)
-     * @see Couple#getScore(int)
+     * @see Couple#getScore()
      */
     public void displayHighscores(View view) {
         SortedSet<Couple> highscores;

@@ -2,6 +2,8 @@ package com.polytech.stfu.score;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.polytech.stfu.jeu.Mode;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -25,7 +27,9 @@ public abstract class Score {
 		SortedSet<Couple> ret = new TreeSet<>();
 		
 		SharedPreferences scores = context.getSharedPreferences("Scores", 0);
+        Log.d("","getNom : " +mode.getNom());
 		for(int i = 0; i<5; i++){
+
 			Couple tmp = new Couple(scores.getString(mode.getNom()+"pseudo"+i, null), scores.getInt(mode.getNom()+"score"+i, -1));
 			if(tmp.getScore() == -1){
 				break;
