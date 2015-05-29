@@ -67,7 +67,7 @@ public class GameActivity extends Activity {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
-    /**
+    /**e
      * Lancé lors de la mise en pause de l'activité. Le controleur des messages est fermé
      */
     @Override

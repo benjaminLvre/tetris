@@ -125,7 +125,6 @@ public class Grille {
 							}
 						}
 						plateau[l] = plateau[l - 1];
-						System.out.println(i+"  "+fin);
 					}
 					plateau[0] = new TypePiece[plateau[0].length];
 					for (int l = 0; l < plateau[0].length; l++) {
