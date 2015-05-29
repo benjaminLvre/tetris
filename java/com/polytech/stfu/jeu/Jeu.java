@@ -164,7 +164,7 @@ public abstract class Jeu extends Thread{
 	}
 	
 	public TypePiece getTypeNextPiece(){
-		return piece.getTypePiece();
+		return futurePiece.getTypePiece();
 	}
 
 	/**
@@ -192,11 +192,12 @@ public abstract class Jeu extends Thread{
 				} else {
 					int tmp = grille.removeLines();
 					updateScore(tmp);
-					if(isFinish() || grille.pieceHasValidPosition(futurePiece)) {
+					if(isFinish() || !grille.pieceHasValidPosition(futurePiece)) {
 						sendGameEnd();
 						break;
 					}
 					piece = futurePiece;
+					grille.setNewPiece(piece);
 					futurePiece = createFuturPiece();
 					grille.setNewPiece(piece);
 					if (acceleration.getVal() != 0)

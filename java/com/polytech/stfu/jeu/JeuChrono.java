@@ -23,7 +23,7 @@ public class JeuChrono extends Jeu {
 	public JeuChrono(Context pContext){
 		super(pContext, Mode.CHRONO);
 		chrono = new Chrono();
-		tempsLimite = 90;
+		tempsLimite = 60;
 		lockTempsLimite = new Object();
 	}
 
@@ -80,10 +80,10 @@ public class JeuChrono extends Jeu {
 		synchronized (lockPause) {
 			switch(line){
 				case 1:
-					tempsLimite += 2;
+					tempsLimite += 5;
 					break;
 				case 2:
-					tempsLimite += 5;
+					tempsLimite += 10;
 					break;
 				case 3:
 					tempsLimite += 15;

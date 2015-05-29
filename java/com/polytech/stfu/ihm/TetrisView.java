@@ -8,9 +8,12 @@ import android.graphics.Paint;
 
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.TypeMove;
@@ -42,6 +45,8 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
     private Rect cube;
     private Rect rectNextPiece;
+
+    static final int SWIPE_MIN_DISTANCE = 10;
 
     /**
      * Constructeur
@@ -292,4 +297,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
+        private class longPressThread extends Thread{
+            @Override
+            public void run() {
+                Jeu.getJeu().move(TypeMove.RIGHT);
+            }
+        }
 }
