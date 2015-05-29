@@ -52,12 +52,18 @@
         <string name="musique">Musique</string>
         <string name="openMusique">Choisir une musique</string>
 
-
-    <string name="highscores">Top 5</string>
-    <string name="scoreClassique">CLASSIQUE</string>
-    <string name="scoreChrono">CHRONO</string>
-
     <string name="title_activity_highscores">HighscoresActivity</string>
+        <string name="highscores">Top 5</string>
+        <string name="scoreClassique">CLASSIQUE</string>
+        <string name="scoreChrono">CHRONO</string>
+        <string name="hashtag">#</string>
+        <string name="nomTitle">Pseudo</string>
+        <string name="scoreTitle">Score</string>
+        <string name="pos1">1</string>
+        <string name="pos2">2</string>
+        <string name="pos3">3</string>
+        <string name="pos4">4</string>
+        <string name="pos5">5</string>
 
     <string name="aboutbtn">\?</string>
     <string name="title_activity_about">AboutActivity</string>

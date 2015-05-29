@@ -207,13 +207,13 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
                         }break;
                         case "polytech":
                             switch (Jeu.getJeu().getGrille()[li][col]){
-                                case L : designCase = getResources().getDrawable(R.drawable.cube_polytech11);break;
-                                case O: designCase = getResources().getDrawable(R.drawable.cube_polytech21);break;
-                                case S: designCase = getResources().getDrawable(R.drawable.cube_polytech31);break;
-                                case Z:  designCase = getResources().getDrawable(R.drawable.cube_polytech41);break;
-                                case T: designCase = getResources().getDrawable(R.drawable.cube_polytech51);break;
-                                case J:  designCase = getResources().getDrawable(R.drawable.cube_polytech61);break;
-                                case I:  designCase = getResources().getDrawable(R.drawable.cube_polytech71);break;
+                                case L : designCase = getResources().getDrawable(R.drawable.cube_polytech12);break;
+                                case O: designCase = getResources().getDrawable(R.drawable.cube_polytech22);break;
+                                case S: designCase = getResources().getDrawable(R.drawable.cube_polytech32);break;
+                                case Z:  designCase = getResources().getDrawable(R.drawable.cube_polytech42);break;
+                                case T: designCase = getResources().getDrawable(R.drawable.cube_polytech52);break;
+                                case J:  designCase = getResources().getDrawable(R.drawable.cube_polytech62);break;
+                                case I:  designCase = getResources().getDrawable(R.drawable.cube_polytech72);break;
                                 default:break;
                             }break;
                         default:break;
