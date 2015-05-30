@@ -27,6 +27,3 @@ public enum Vitesse{
 		return 0;
 	}
 }
-1.75	1
-2		2
-2.25	3

@@ -277,7 +277,9 @@ public class GameActivity extends Activity {
         adb.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
-                
+                int test= Jeu.getJeu().getScore();
+                float test2= Jeu.getJeu().getDifficultCoeff();
+
                 Score.save(Jeu.getJeu().getMode(), et.getText().toString(), (int)(Jeu.getJeu().getScore()*Jeu.getJeu().getDifficultCoeff() ), mActivity);
                 showScoresDialog();
             }

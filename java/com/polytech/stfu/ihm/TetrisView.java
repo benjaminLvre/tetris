@@ -8,12 +8,10 @@ import android.graphics.Paint;
 
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.GestureDetector;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import com.polytech.stfu.jeu.Jeu;
 import com.polytech.stfu.jeu.TypeMove;
@@ -26,27 +24,25 @@ import com.polytech.stfu.jeu.TypePiece;
 public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     // Holder
     final private SurfaceHolder mSurfaceHolder;
-
-    private Paint linePaint;
-    private Paint bgc;
-    private  Paint scoreBgc;
-    private Paint scoreColor;
+    private Context mContext;
+    private boolean created;
+    private Handler mHandler;
 
     final int  HORIZONTAL_LINES = 21;
     final int VERTICAL_LINES = 11;
 
-    private DrawingThread drawingThread;
-
-    private Context mContext;
-    private boolean created;
-
+    private Paint linePaint;
+    private Paint bgc;
+    private Paint scoreBgc;
+    private Paint scoreColor;
     private Drawable designCase;
     private Drawable designNextPiece;
-
     private Rect cube;
     private Rect rectNextPiece;
 
-    static final int SWIPE_MIN_DISTANCE = 10;
+    private DrawingThread drawingThread;
+
+    private boolean isPressure;
 
     /**
      * Constructeur
@@ -71,6 +67,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         linePaint.setColor(Color.LTGRAY);
 
         created = false;
+        isPressure = false;
     }
     /**
      * Lance quand la vue se creee.
@@ -242,6 +239,26 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         }
     }
     /**
+     * Thread de mouvement a droite
+     */
+    Runnable moveRight = new Runnable() {
+        public void run() {
+            Jeu.getJeu().move(TypeMove.RIGHT);
+            if(mHandler != null && isPressure)
+                mHandler.postDelayed(this, (500*Jeu.getJeu().getVitesse().getVal()/100));
+        }
+    };
+    /**
+     * Thread de mouvement a droite
+     */
+    Runnable moveLeft = new Runnable() {
+        public void run() {
+            Jeu.getJeu().move(TypeMove.LEFT);
+            if(mHandler != null && isPressure)
+                mHandler.postDelayed(this, (500*Jeu.getJeu().getVitesse().getVal()/100));
+        }
+    };
+    /**
      * Operation realisee lors du clic sur l'ecran de jeu.
      * L'endroit du clic agit sur la piece:
      * - 1/4 de l'ecran en largeur a gauche et 20/23 en hauteur en haut : la piece bouge a gauche
@@ -258,12 +275,35 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
         float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20){ Jeu.getJeu().move( TypeMove.LEFT);}
+            isPressure = true;
+            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20){
+                mHandler = new Handler();
+                mHandler.post(moveLeft);
+            }
             else if(event.getX() > quarter && event.getX() < 3*quarter && event.getY() < horizontalLargeLine* 20){ Jeu.getJeu().rotate(); }
-            else if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20){ Jeu.getJeu().move(TypeMove.RIGHT);}
+            else if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20){
+                mHandler = new Handler();
+                mHandler.post(moveRight);
+            }
             else{ Jeu.getJeu().down(); }
         }
-        return super.onTouchEvent(event);
+        if(event.getAction() == MotionEvent.ACTION_UP){
+            isPressure = false;
+            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20) {
+                if (mHandler != null) {
+                    mHandler.removeCallbacks(moveLeft);
+                    mHandler = null;
+                }
+            }
+            if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20) {
+                if (mHandler != null) {
+                    mHandler.removeCallbacks(moveRight);
+                    mHandler = null;
+                }
+            }
+
+        }
+        return true;
     }
     /**
      * Retourne le Thread de dessin
