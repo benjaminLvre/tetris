@@ -1,12 +1,9 @@
 package com.polytech.stfu.jeu;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Classe repr�sentant la grille du Tetris
+ * Classe representant la grille du Tetris
  *
  * Cette abstraction d'une grille de Tetris permet sa gestion simplifie en fournissant possibilite de personnalisation de dimension de grille et des manipulations securises des piece.
  *
@@ -16,9 +13,8 @@ import java.util.List;
  * @see Point
  */
 public class Grille {
-	private static final String TAG = Grille.class.getSimpleName();
 	/**
-	 * Matrice contenant les valeurs repr�sentant des cases de la grille du jeu
+	 * Matrice contenant les valeurs representant des cases de la grille du jeu
 	 */
 	private TypePiece[][] plateau;
 	/**

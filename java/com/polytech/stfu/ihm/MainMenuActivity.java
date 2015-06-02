@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -102,7 +101,6 @@ public class MainMenuActivity extends Activity {
      * Permet d'initialiser tous les fichiers de sauvegarde de l'application.
      */
     public void intialisationSharedFiles(){
-
         SharedPreferences themeRegister =this.getSharedPreferences("Theme", 0);
         String themeRegisterValue = themeRegister.getString("theme", null);
         SharedPreferences.Editor editor;

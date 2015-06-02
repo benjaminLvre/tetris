@@ -69,7 +69,6 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("TETRIS"));
     }
 
@@ -121,7 +120,7 @@ public class GameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
     /**
-     * Permet de lancer le message a GAME_PAUSE travers l'application pour
+     * Permet de lancer le message GAME_PAUSE a travers l'application pour
      * mettre le jeu en pause.
      */
     protected void sendGamePause(){
@@ -277,13 +276,11 @@ public class GameActivity extends Activity {
         adb.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
-                int test= Jeu.getJeu().getScore();
-                float test2= Jeu.getJeu().getDifficultCoeff();
-
                 Score.save(Jeu.getJeu().getMode(), et.getText().toString(), (int)(Jeu.getJeu().getScore()*Jeu.getJeu().getDifficultCoeff() ), mActivity);
                 showScoresDialog();
             }
         });
+        // bloquer le retour arriere
         adb.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
@@ -294,20 +291,22 @@ public class GameActivity extends Activity {
         final AlertDialog dialog = adb.create();
         dialog.show();
 
+        /**
+         *  Controle de la saisie :
+         *  - Pas de pseudo vide sinon bouton de validation desactive
+         *  - Pas de pseudo depassant 10 caracteres sinon bouton de validation desactive
+         */
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
         EditText et = (EditText) alertDialogView.findViewById(R.id.player_pseudo);
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
@@ -323,5 +322,4 @@ public class GameActivity extends Activity {
             }
         });
     }
-
 }

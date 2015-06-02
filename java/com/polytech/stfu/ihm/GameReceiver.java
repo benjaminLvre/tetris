@@ -45,12 +45,12 @@ public class GameReceiver extends BroadcastReceiver {
     }
 
     /**
-     * Fonction permettant de gerer les messages reçu :
-     * GAME_STATE_CHANGE LE plateau a changé
-     * GAME_END LA partie est finie
+     * Fonction permettant de gerer les messages reçus :
+     * GAME_STATE_CHANGE Le plateau a change
+     * GAME_END La partie est finie
      * GAME_PAUSE La partie est mise en pause
      * GAME_UNPAUSE La partie reprend
-     * GAME_RESTART L partie est recommencé
+     * GAME_RESTART La partie est recommencé
      * @param context   Le context du receiver
      * @param intent    Intent envoyé par l'événement
      */
@@ -64,42 +64,31 @@ public class GameReceiver extends BroadcastReceiver {
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_END))){
         	if(intent.getStringExtra("Source").equals("Jeu")){
-        		//Enlever les controles du Jeu
-        		//Afficher le menu d'enregistrement d'un score
                 if(isHighScore(Jeu.getJeu().getMode(), Jeu.getJeu().getScore(), mActivity)){
                     GameActivity.showNewScoreDialog();
                 }
-                else{
-                    GameActivity.showScoresDialog();
-                }
-                Jeu.getJeu().end();
+                else{ GameActivity.showScoresDialog(); }
         	}
         	else if(intent.getStringExtra("Source").equals("Ihm")){
                 if(isHighScore(Jeu.getJeu().getMode(), Jeu.getJeu().getScore(), mActivity)){
                     GameActivity.showNewScoreDialog();
                 }
-                else{
-                    GameActivity.showScoresDialog();
-                }
-                Jeu.getJeu().end();
-
+                else{ GameActivity.showScoresDialog(); }
         	}
+            Jeu.getJeu().end();
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_PAUSE))){
         	if(intent.getStringExtra("Source").equals("Ihm")){
-        		//Enlever les controles du Jeu
                 Jeu.getJeu().pause();
         	}
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_UNPAUSE))){
         	if(intent.getStringExtra("Source").equals("Ihm")){
-        		//Remettre les controles du Jeu
                 Jeu.getJeu().restart();
         	}
         }
         else if(intent.getStringExtra("Action").equals(mView.getResources().getString(R.string.GAME_RESTART))){
             if(intent.getStringExtra("Source").equals("Ihm")){
-                // Lancer une nouvelle partie
                 SharedPreferences modeRegister = mActivity.getSharedPreferences("Mode", 0);
                 String modeRegisterValue = modeRegister.getString("mode", "classique");
 

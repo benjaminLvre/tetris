@@ -154,11 +154,8 @@ public abstract class Jeu extends Thread{
 	public void down(){
 		synchronized (lockMove) {
 			while (grille.canMovePiece(TypeMove.DOWN)) {
-				try {
-					Thread.sleep(40);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				try { Thread.sleep(10);}
+				catch (InterruptedException e) { e.printStackTrace(); }
 				grille.movePiece(TypeMove.DOWN);
 			}
 		}

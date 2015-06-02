@@ -34,7 +34,6 @@ public class OptionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_options);
-
         ViewDesign.changeOptions(this);
     }
     /**

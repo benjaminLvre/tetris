@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -43,6 +44,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     private DrawingThread drawingThread;
 
     private boolean isPressure;
+    private float startY;
 
     /**
      * Constructeur
@@ -68,6 +70,7 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
 
         created = false;
         isPressure = false;
+        startY = 0.0f;
     }
     /**
      * Lance quand la vue se creee.
@@ -244,8 +247,11 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     Runnable moveRight = new Runnable() {
         public void run() {
             Jeu.getJeu().move(TypeMove.RIGHT);
-            if(mHandler != null && isPressure)
-                mHandler.postDelayed(this, (500*Jeu.getJeu().getVitesse().getVal()/100));
+            if(mHandler != null && isPressure){
+                double accel = (1 - (0.01 * Jeu.getJeu().getAcceleration().getVal()/100));
+                mHandler.postDelayed(this, (long)((500*Jeu.getJeu().getVitesse().getVal()/100)*accel));
+
+            }
         }
     };
     /**
@@ -254,8 +260,10 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
     Runnable moveLeft = new Runnable() {
         public void run() {
             Jeu.getJeu().move(TypeMove.LEFT);
-            if(mHandler != null && isPressure)
-                mHandler.postDelayed(this, (500*Jeu.getJeu().getVitesse().getVal()/100));
+            if(mHandler != null && isPressure){
+                double accel = (1 - (0.01 * Jeu.getJeu().getAcceleration().getVal()/100));
+                mHandler.postDelayed(this, (long)((500*Jeu.getJeu().getVitesse().getVal()/100)*accel));
+            }
         }
     };
     /**
@@ -264,44 +272,50 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
      * - 1/4 de l'ecran en largeur a gauche et 20/23 en hauteur en haut : la piece bouge a gauche
      * - 1/2 de l'ecran en largeur au centre et 20/23 en hauteur en haut: la piece subit une rotation
      * - 1/4 de l'ecran en largeur a droite et 20/23 en hauteur en haut: la piece bouge a droite
-     * - 3/23 en bas la piece chute
+     * - Si effet de glisser vertical lors du clic, alors la pie chute
      * @param event L'evenement
      * @return boolean
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int quarter = getWidth()/4;
-        float height = (float)getHeight();
-        float horizontalLargeLine = height / (float)(HORIZONTAL_LINES +2);
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             isPressure = true;
-            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20){
+            if(event.getX()< quarter){
+                // Lancement du thrad de mouvement à gauche
                 mHandler = new Handler();
                 mHandler.post(moveLeft);
             }
-            else if(event.getX() > quarter && event.getX() < 3*quarter && event.getY() < horizontalLargeLine* 20){ Jeu.getJeu().rotate(); }
-            else if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20){
+            else if(event.getX() > quarter && event.getX() < 3*quarter){startY = event.getY();}
+            else if(event.getX() > 3*quarter){
+                // Lancement du thrad de mouvement à droite
                 mHandler = new Handler();
                 mHandler.post(moveRight);
             }
-            else{ Jeu.getJeu().down(); }
         }
         if(event.getAction() == MotionEvent.ACTION_UP){
             isPressure = false;
-            if(event.getX()< quarter && event.getY() < horizontalLargeLine* 20) {
+            if(event.getX()< quarter) {
                 if (mHandler != null) {
+                    // Arret du Thread de mouvement à gauche
                     mHandler.removeCallbacks(moveLeft);
                     mHandler = null;
                 }
             }
-            if(event.getX() > 3*quarter && event.getY() < horizontalLargeLine* 20) {
+            if(event.getX() > quarter && event.getX() < 3*quarter){
+                // si pas de glisser alors la pièce subit une rotation
+                if(startY == event.getY()){ Jeu.getJeu().rotate();}
+                // sinon elle chute
+                else{ if(event.getY() - startY > 100.0f){ Jeu.getJeu().down(); } }
+            }
+            if(event.getX() > 3*quarter) {
                 if (mHandler != null) {
+                    // Arret du Thread de mouvement à droite
                     mHandler.removeCallbacks(moveRight);
                     mHandler = null;
                 }
             }
-
         }
         return true;
     }
@@ -337,10 +351,4 @@ public class TetrisView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
-        private class longPressThread extends Thread{
-            @Override
-            public void run() {
-                Jeu.getJeu().move(TypeMove.RIGHT);
-            }
-        }
 }
